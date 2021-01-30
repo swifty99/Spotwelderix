@@ -1,0 +1,5 @@
+(sym_lib_table
+  (lib (name Arduino_Spot_Welderparts)(type Legacy)(uri ${KIPRJMOD}/Arduino_Spot_Welderparts.lib)(options "")(descr ""))
+  (lib (name SamacSys_Parts)(type Legacy)(uri D:/dev/Kicad/LibLoaderMouser/SamacSys_Parts.lib)(options "")(descr ""))
+  (lib (name my_parts)(type Legacy)(uri D:/dev/Kicad/own_parts/my_parts.lib)(options "")(descr ""))
+)
