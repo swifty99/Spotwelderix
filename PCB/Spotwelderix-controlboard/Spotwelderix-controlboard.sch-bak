@@ -1053,10 +1053,10 @@ Connection ~ 8600 1250
 Wire Wire Line
 	8600 1250 8750 1250
 $Comp
-L Arduino_Spot_Welderparts:D D?
+L Arduino_Spot_Welderparts:D D2
 U 1 1 60173424
 P 9250 2600
-F 0 "D?" H 9250 2385 50  0000 C CNN
+F 0 "D2" H 9250 2385 50  0000 C CNN
 F 1 "D" H 9250 2476 50  0000 C CNN
 F 2 "Diode_SMD:D_1206_3216Metric" H 9250 2600 50  0001 C CNN
 F 3 "" H 9250 2600 50  0000 C CNN
@@ -1078,10 +1078,10 @@ Wire Wire Line
 Wire Wire Line
 	1200 4700 1400 4700
 $Comp
-L Device:C C?
+L Device:C C6
 U 1 1 6018E2B1
 P 1400 5050
-F 0 "C?" H 1515 5096 50  0000 L CNN
+F 0 "C6" H 1515 5096 50  0000 L CNN
 F 1 "10n" H 1515 5005 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0805_2012Metric" H 1438 4900 50  0001 C CNN
 F 3 "https://www.mouser.de/ProductDetail/Samsung-Electro-Mechanics/CL31A106KBHNNNE/?qs=sGAEpiMZZMuMW9TJLBQkXpvci%252BYHLlg21rnqFxf28Ww%3D" H 1400 5050 50  0001 C CNN
@@ -1089,10 +1089,10 @@ F 3 "https://www.mouser.de/ProductDetail/Samsung-Electro-Mechanics/CL31A106KBHNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L power:GND #PWR?
+L power:GND #PWR01
 U 1 1 6019341A
 P 1400 5300
-F 0 "#PWR?" H 1400 5050 50  0001 C CNN
+F 0 "#PWR01" H 1400 5050 50  0001 C CNN
 F 1 "GND" H 1405 5127 50  0000 C CNN
 F 2 "" H 1400 5300 50  0001 C CNN
 F 3 "" H 1400 5300 50  0001 C CNN
