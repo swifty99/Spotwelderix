@@ -1,3 +1,4 @@
 (fp_lib_table
   (lib (name SamacSys_Parts)(type KiCad)(uri D:/dev/Kicad/LibLoaderMouser/SamacSys_Parts.pretty)(options "")(descr ""))
+  (lib (name my_parts)(type KiCad)(uri D:/dev/Kicad/own_parts/my_parts.pretty)(options "")(descr ""))
 )
