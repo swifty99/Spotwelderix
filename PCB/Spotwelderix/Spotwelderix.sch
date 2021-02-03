@@ -265,8 +265,6 @@ Wire Wire Line
 Connection ~ 4300 5150
 Connection ~ 4300 5750
 Wire Wire Line
-	5350 5850 5350 5750
-Wire Wire Line
 	5350 5750 5350 5400
 Wire Wire Line
 	5350 4550 4850 4550
@@ -275,16 +273,14 @@ Connection ~ 4850 4550
 $Comp
 L power:GND #PWR0103
 U 1 1 6017872B
-P 5350 6350
-F 0 "#PWR0103" H 5350 6100 50  0001 C CNN
-F 1 "GND" H 5355 6177 50  0000 C CNN
-F 2 "" H 5350 6350 50  0001 C CNN
-F 3 "" H 5350 6350 50  0001 C CNN
-	1    5350 6350
+P 5350 6650
+F 0 "#PWR0103" H 5350 6400 50  0001 C CNN
+F 1 "GND" H 5355 6477 50  0000 C CNN
+F 2 "" H 5350 6650 50  0001 C CNN
+F 3 "" H 5350 6650 50  0001 C CNN
+	1    5350 6650
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	5350 6350 5350 6250
 Wire Wire Line
 	5150 3950 4850 3950
 Connection ~ 4850 3950
@@ -295,14 +291,6 @@ Wire Wire Line
 	4600 3950 4300 3950
 Wire Wire Line
 	4600 5150 4300 5150
-Text GLabel 5800 6150 2    50   Input ~ 0
-R_Schunt_L
-Text GLabel 5800 5950 2    50   Input ~ 0
-R_Schunt_H
-Wire Wire Line
-	5500 5950 5800 5950
-Wire Wire Line
-	5500 6150 5800 6150
 Text GLabel 1450 4800 0    50   Input ~ 0
 Gate
 Text GLabel 1450 3600 0    50   Input ~ 0
@@ -624,10 +612,6 @@ Wire Wire Line
 	4700 3150 4700 3300
 Text GLabel 1850 6800 0    50   Input ~ 0
 Dallas
-Text GLabel 2050 6200 0    50   Input ~ 0
-R_Schunt_L
-Text GLabel 2050 6300 0    50   Input ~ 0
-R_Schunt_H
 $Comp
 L power:GND #PWR0116
 U 1 1 601723B2
@@ -838,17 +822,6 @@ Wire Wire Line
 	10150 1700 10150 1800
 Wire Wire Line
 	3550 6700 4450 6700
-$Comp
-L Device:R_Shunt R1
-U 1 1 60151B31
-P 5350 6050
-F 0 "R1" H 5262 6096 50  0000 R CNN
-F 1 "R_Shunt" H 5262 6005 50  0000 R CNN
-F 2 "SamacSys_Parts:WSK12161L000FEA" V 5280 6050 50  0001 C CNN
-F 3 "https://www.mouser.de/ProductDetail/Vishay-Dale/WSK1216L5000FEA/?qs=OlC7AqGiEDlM2wGD42LFoQ%3D%3D" H 5350 6050 50  0001 C CNN
-	1    5350 6050
-	1    0    0    1   
-$EndComp
 Text GLabel 9600 4650 2    50   Input ~ 0
 Gate
 Text GLabel 9600 4850 2    50   Input ~ 0
@@ -1259,17 +1232,6 @@ F 3 "" H 6450 1550 50  0000 C CNN
 $EndComp
 Wire Wire Line
 	6450 1800 6450 1700
-$Comp
-L Transistor_BJT:BC807 Q9
-U 1 1 602F5021
-P 6850 2350
-F 0 "Q9" H 7041 2396 50  0000 L CNN
-F 1 "BC807" H 7041 2305 50  0000 L CNN
-F 2 "Package_TO_SOT_SMD:SOT-23" H 7050 2275 50  0001 L CIN
-F 3 "https://www.onsemi.com/pub/Collateral/BC808-D.pdf" H 6850 2350 50  0001 L CNN
-	1    6850 2350
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
 	6750 1350 6600 1350
 Wire Wire Line
@@ -1321,7 +1283,7 @@ F 3 "" H 6300 2350 50  0000 C CNN
 	0    -1   -1   0   
 $EndComp
 Wire Wire Line
-	6450 2350 6650 2350
+	6450 2350 6500 2350
 Connection ~ 6950 1800
 Wire Wire Line
 	6950 1800 6950 2150
@@ -1399,10 +1361,6 @@ Connection ~ 7450 1850
 Wire Wire Line
 	7450 1850 7450 1950
 Wire Wire Line
-	2350 6200 2050 6200
-Wire Wire Line
-	2050 6300 2350 6300
-Wire Wire Line
 	1400 6400 2350 6400
 Wire Wire Line
 	1850 6700 2350 6700
@@ -1413,12 +1371,12 @@ Wire Wire Line
 Wire Wire Line
 	2100 7100 2350 7100
 $Comp
-L Connector:Conn_01x10_Male P1
+L Connector:Conn_01x09_Male P1
 U 1 1 6015F832
 P 2550 6700
 F 0 "P1" H 2467 6125 50  0000 C CNN
 F 1 "CONN_01X09" H 2467 6216 50  0000 C CNN
-F 2 "Connector_JST:JST_XH_B10B-XH-A_1x10_P2.50mm_Vertical" H 2550 6700 50  0001 C CNN
+F 2 "Connector_JST:JST_XH_B9B-XH-A_1x09_P2.50mm_Vertical" H 2550 6700 50  0001 C CNN
 F 3 "" H 2550 6700 50  0000 C CNN
 	1    2550 6700
 	-1   0    0    1   
@@ -1466,14 +1424,255 @@ $EndComp
 Wire Wire Line
 	1350 7000 2350 7000
 $Comp
-L power:VCC #PWR?
+L power:VCC #PWR0104
 U 1 1 60724072
 P 8300 4100
-F 0 "#PWR?" H 8300 3950 50  0001 C CNN
+F 0 "#PWR0104" H 8300 3950 50  0001 C CNN
 F 1 "VCC" H 8315 4273 50  0000 C CNN
 F 2 "" H 8300 4100 50  0001 C CNN
 F 3 "" H 8300 4100 50  0001 C CNN
 	1    8300 4100
 	1    0    0    -1  
 $EndComp
+$Comp
+L SamacSys_Parts:INA210AIDCKR IC1
+U 1 1 60807F90
+P 8900 2900
+F 0 "IC1" H 9400 3165 50  0000 C CNN
+F 1 "INA213AIDCKR" H 9400 3074 50  0000 C CNN
+F 2 "SOT65P210X110-6N" H 9750 3000 50  0001 L CNN
+F 3 "http://www.ti.com/lit/gpn/INA210" H 9750 2900 50  0001 L CNN
+F 4 "26V, Bi-Directional, Zero-Drift, Low-/High-Side, Voltage Output Current Sense Amplifier" H 9750 2800 50  0001 L CNN "Description"
+F 5 "1.1" H 9750 2700 50  0001 L CNN "Height"
+F 6 "595-INA210AIDCKR" H 9750 2600 50  0001 L CNN "Mouser Part Number"
+F 7 "https://www.mouser.com/Search/Refine.aspx?Keyword=595-INA210AIDCKR" H 9750 2500 50  0001 L CNN "Mouser Price/Stock"
+F 8 "Texas Instruments" H 9750 2400 50  0001 L CNN "Manufacturer_Name"
+F 9 "INA210AIDCKR" H 9750 2300 50  0001 L CNN "Manufacturer_Part_Number"
+	1    8900 2900
+	1    0    0    -1  
+$EndComp
+$Comp
+L SamacSys_Parts:WSLP5931L1000FEA R1
+U 1 1 608158E3
+P 5350 5850
+F 0 "R1" V 5654 5938 50  0000 L CNN
+F 1 "100µ" V 5745 5938 50  0000 L CNN
+F 2 "Resistor_SMD:R_Shunt_Vishay_WSR2_WSR3" H 5900 5900 50  0001 L CNN
+F 3 "https://componentsearchengine.com/Datasheets/1/WSLP5931L1000FEA.pdf" H 5900 5800 50  0001 L CNN
+F 4 "Current Sense Resistors - SMD 0.0001 ohm 1%" H 5900 5700 50  0001 L CNN "Description"
+F 5 "1" H 5900 5600 50  0001 L CNN "Height"
+F 6 "71-WSLP3921L1000FEA " H 5900 5500 50  0001 L CNN "Mouser Part Number"
+F 7 "https://www.mouser.de/ProductDetail/Vishay-Dale/WSLP3921L1000FEA/?qs=TiOZkKH1s2S5b3T%252BuIp%2FVQ%3D%3D" H 5900 5400 50  0001 L CNN "Mouser Price/Stock"
+F 8 "Vishay" H 5900 5300 50  0001 L CNN "Manufacturer_Name"
+F 9 "WSLP5931L1000FEA" H 5900 5200 50  0001 L CNN "Manufacturer_Part_Number"
+	1    5350 5850
+	0    1    1    0   
+$EndComp
+Text GLabel 10400 2900 2    50   Input ~ 0
+R_Schunt_Stab
+$Comp
+L power:+5V #PWR0105
+U 1 1 608A8987
+P 8250 2450
+F 0 "#PWR0105" H 8250 2300 50  0001 C CNN
+F 1 "+5V" H 8265 2623 50  0000 C CNN
+F 2 "" H 8250 2450 50  0001 C CNN
+F 3 "" H 8250 2450 50  0001 C CNN
+	1    8250 2450
+	1    0    0    -1  
+$EndComp
+$Comp
+L Arduino_Spot_Welderparts:R R10
+U 1 1 608B5887
+P 8250 3200
+F 0 "R10" H 8320 3246 50  0000 L CNN
+F 1 "30" H 8320 3155 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" H 8320 3109 50  0001 L CNN
+F 3 "" H 8250 3200 50  0000 C CNN
+	1    8250 3200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8250 3550 8250 3450
+$Comp
+L Arduino_Spot_Welderparts:R R9
+U 1 1 608C1FB3
+P 8250 2750
+F 0 "R9" H 8320 2796 50  0000 L CNN
+F 1 "100" H 8320 2705 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" H 8320 2659 50  0001 L CNN
+F 3 "" H 8250 2750 50  0000 C CNN
+	1    8250 2750
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8250 2900 8250 2950
+$Comp
+L power:GND #PWR0114
+U 1 1 60919AB3
+P 8250 3550
+F 0 "#PWR0114" H 8250 3300 50  0001 C CNN
+F 1 "GND" H 8255 3377 50  0000 C CNN
+F 2 "" H 8250 3550 50  0001 C CNN
+F 3 "" H 8250 3550 50  0001 C CNN
+	1    8250 3550
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	8250 3450 8700 3450
+Wire Wire Line
+	8700 3450 8700 3000
+Wire Wire Line
+	8700 3000 8900 3000
+Connection ~ 8250 3450
+Wire Wire Line
+	8250 3450 8250 3350
+Wire Wire Line
+	8900 2900 8500 2900
+Wire Wire Line
+	8500 2900 8500 2950
+Wire Wire Line
+	8500 2950 8250 2950
+Connection ~ 8250 2950
+Wire Wire Line
+	8250 2950 8250 3050
+Wire Wire Line
+	8250 2450 8250 2600
+$Comp
+L power:+5V #PWR0125
+U 1 1 6094FD3D
+P 9000 3450
+F 0 "#PWR0125" H 9000 3300 50  0001 C CNN
+F 1 "+5V" H 9015 3623 50  0000 C CNN
+F 2 "" H 9000 3450 50  0001 C CNN
+F 3 "" H 9000 3450 50  0001 C CNN
+	1    9000 3450
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9000 3450 9000 3600
+Wire Wire Line
+	8900 3100 8900 3600
+Wire Wire Line
+	8900 3600 9000 3600
+$Comp
+L Reference_Voltage:LM4040DBZ-2.0 U2
+U 1 1 6096FDF3
+P 7950 3200
+F 0 "U2" V 7996 3112 50  0000 R CNN
+F 1 "LM4040DBZ-2.0" V 7905 3112 50  0000 R CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 7950 3000 50  0001 C CIN
+F 3 "http://www.ti.com/lit/ds/symlink/lm4040-n.pdf" H 7950 3200 50  0001 C CIN
+	1    7950 3200
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	7950 3050 7950 2950
+Wire Wire Line
+	7950 2950 8250 2950
+Wire Wire Line
+	7950 3350 7950 3450
+Wire Wire Line
+	7950 3450 8250 3450
+Text GLabel 2200 6300 0    50   Input ~ 0
+R_Schunt_Stab
+Wire Wire Line
+	2200 6300 2350 6300
+$Comp
+L Transistor_BJT:BC817 Q9
+U 1 1 609D5A97
+P 6850 2350
+F 0 "Q9" H 7041 2396 50  0000 L CNN
+F 1 "BC817" H 7041 2305 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 7050 2275 50  0001 L CIN
+F 3 "https://www.onsemi.com/pub/Collateral/BC818-D.pdf" H 6850 2350 50  0001 L CNN
+	1    6850 2350
+	1    0    0    -1  
+$EndComp
+$Comp
+L Arduino_Spot_Welderparts:R R2
+U 1 1 609D802A
+P 6500 2600
+F 0 "R2" H 6570 2646 50  0000 L CNN
+F 1 "10k" H 6570 2555 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" H 6570 2509 50  0001 L CNN
+F 3 "" H 6500 2600 50  0000 C CNN
+	1    6500 2600
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0126
+U 1 1 609D8030
+P 6500 2950
+F 0 "#PWR0126" H 6500 2700 50  0001 C CNN
+F 1 "GND" H 6505 2777 50  0000 C CNN
+F 2 "" H 6500 2950 50  0001 C CNN
+F 3 "" H 6500 2950 50  0001 C CNN
+	1    6500 2950
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	6500 2950 6500 2750
+Wire Wire Line
+	6500 2450 6500 2350
+Connection ~ 6500 2350
+Wire Wire Line
+	6500 2350 6650 2350
+Wire Wire Line
+	5350 6550 5350 6650
+$Comp
+L power:GND #PWR0127
+U 1 1 601F7C4E
+P 10750 3450
+F 0 "#PWR0127" H 10750 3200 50  0001 C CNN
+F 1 "GND" H 10755 3277 50  0000 C CNN
+F 2 "" H 10750 3450 50  0001 C CNN
+F 3 "" H 10750 3450 50  0001 C CNN
+	1    10750 3450
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	9900 3000 10000 3000
+Wire Wire Line
+	10000 3000 10000 3300
+Wire Wire Line
+	5350 5750 5350 5850
+Text GLabel 10750 3100 2    50   Input ~ 0
+FET_GND
+$Comp
+L Arduino_Spot_Welderparts:R R11
+U 1 1 602AB52D
+P 10400 3100
+F 0 "R11" H 10470 3146 50  0000 L CNN
+F 1 "30k" H 10470 3055 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" H 10470 3009 50  0001 L CNN
+F 3 "" H 10400 3100 50  0000 C CNN
+	1    10400 3100
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Arduino_Spot_Welderparts:R R12
+U 1 1 602B92D3
+P 10400 3300
+F 0 "R12" H 10470 3346 50  0000 L CNN
+F 1 "30k" H 10470 3255 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" H 10470 3209 50  0001 L CNN
+F 3 "" H 10400 3300 50  0000 C CNN
+	1    10400 3300
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	9900 3100 10250 3100
+Wire Wire Line
+	10550 3100 10750 3100
+Wire Wire Line
+	9900 2900 10400 2900
+Wire Wire Line
+	10000 3300 10250 3300
+Wire Wire Line
+	10550 3300 10750 3300
+Wire Wire Line
+	10750 3300 10750 3450
+Text Notes 9750 3450 0    50   ~ 0
+convert gain down to 20\n
 $EndSCHEMATC
