@@ -7,20 +7,20 @@
       "Application": "Pcbnew",
       "Version":     "(5.1.9)-1"
     },
-    "CreationDate":  "2021-02-05T08:05:51+01:00"
+    "CreationDate":  "2021-02-05T08:09:49+01:00"
   },
   "GeneralSpecs":
   {
     "ProjectId":
     {
-      "Name": "Spotwelderix",
-      "GUID": "53706f74-7765-46c6-9465-7269782e6b69",
-      "Revision": "rev?"
+      "Name": "Spotwelderix-controlboard",
+      "GUID": "53706f74-7765-46c6-9465-7269782d636f",
+      "Revision": "v01"
     },
     "Size":
     {
-      "X": 128.550,
-      "Y": 64.300
+      "X": 65.650,
+      "Y": 60.050
     },
     "LayerNumber": 2,
     "BoardThickness":  1.600
@@ -33,54 +33,54 @@
       "PadToTrack":  0.200,
       "TrackToTrack":  0.200,
       "MinLineWidth":  0.250,
-      "TrackToRegion":  0.200,
-      "RegionToRegion":  0.200
+      "TrackToRegion":  0.508,
+      "RegionToRegion":  0.508
     }
   ],
   "FilesAttributes":
   [
     {
-      "Path":  "Spotwelderix-F_Cu.gbr",
+      "Path":  "Spotwelderix-controlboard-F_Cu.gbr",
       "FileFunction":  "Copper,L1,Top",
       "FilePolarity":  "Positive"
     },
     {
-      "Path":  "Spotwelderix-B_Cu.gbr",
+      "Path":  "Spotwelderix-controlboard-B_Cu.gbr",
       "FileFunction":  "Copper,L2,Bot",
       "FilePolarity":  "Positive"
     },
     {
-      "Path":  "Spotwelderix-F_Paste.gbr",
+      "Path":  "Spotwelderix-controlboard-F_Paste.gbr",
       "FileFunction":  "SolderPaste,Top",
       "FilePolarity":  "Positive"
     },
     {
-      "Path":  "Spotwelderix-B_Paste.gbr",
+      "Path":  "Spotwelderix-controlboard-B_Paste.gbr",
       "FileFunction":  "SolderPaste,Bot",
       "FilePolarity":  "Positive"
     },
     {
-      "Path":  "Spotwelderix-F_SilkS.gbr",
+      "Path":  "Spotwelderix-controlboard-F_SilkS.gbr",
       "FileFunction":  "Legend,Top",
       "FilePolarity":  "Positive"
     },
     {
-      "Path":  "Spotwelderix-B_SilkS.gbr",
+      "Path":  "Spotwelderix-controlboard-B_SilkS.gbr",
       "FileFunction":  "Legend,Bot",
       "FilePolarity":  "Positive"
     },
     {
-      "Path":  "Spotwelderix-F_Mask.gbr",
+      "Path":  "Spotwelderix-controlboard-F_Mask.gbr",
       "FileFunction":  "SolderMask,Top",
       "FilePolarity":  "Negative"
     },
     {
-      "Path":  "Spotwelderix-B_Mask.gbr",
+      "Path":  "Spotwelderix-controlboard-B_Mask.gbr",
       "FileFunction":  "SolderMask,Bot",
       "FilePolarity":  "Negative"
     },
     {
-      "Path":  "Spotwelderix-Edge_Cuts.gbr",
+      "Path":  "Spotwelderix-controlboard-Edge_Cuts.gbr",
       "FileFunction":  "Profile",
       "FilePolarity":  "Positive"
     }
