@@ -1212,7 +1212,7 @@ U 1 1 60222F51
 P 6950 1450
 F 0 "Q10" V 7292 1450 50  0000 C CNN
 F 1 "FQP27P06" V 7201 1450 50  0000 C CNN
-F 2 "Package_TO_SOT_THT:TO-220-3_Horizontal_TabUp" H 7150 1375 50  0001 L CIN
+F 2 "Package_TO_SOT_THT:TO-220-3_Horizontal_TabDown" H 7150 1375 50  0001 L CIN
 F 3 "https://www.onsemi.com/pub/Collateral/FQP27P06-D.PDF" H 6950 1450 50  0001 L CNN
 	1    6950 1450
 	0    1    -1   0   
@@ -1240,7 +1240,7 @@ Wire Wire Line
 	6950 1800 6950 1650
 Wire Wire Line
 	6450 1800 6950 1800
-Text GLabel 7750 1850 2    50   Input ~ 0
+Text GLabel 7850 1850 2    50   Input ~ 0
 V_Batt
 $Comp
 L Connector:Conn_01x02_Male J1
@@ -1316,7 +1316,7 @@ L Arduino_Spot_Welderparts:R R7
 U 1 1 60565285
 P 7450 1650
 F 0 "R7" H 7520 1696 50  0000 L CNN
-F 1 "33k" H 7520 1605 50  0000 L CNN
+F 1 "15k" H 7520 1605 50  0000 L CNN
 F 2 "Resistor_SMD:R_0805_2012Metric" H 7520 1559 50  0001 L CNN
 F 3 "" H 7450 1650 50  0000 C CNN
 	1    7450 1650
@@ -1327,7 +1327,7 @@ L Arduino_Spot_Welderparts:R R8
 U 1 1 60572C73
 P 7450 2100
 F 0 "R8" H 7520 2146 50  0000 L CNN
-F 1 "10k" H 7520 2055 50  0000 L CNN
+F 1 "2.5k" H 7520 2055 50  0000 L CNN
 F 2 "Resistor_SMD:R_0805_2012Metric" H 7520 2009 50  0001 L CNN
 F 3 "" H 7450 2100 50  0000 C CNN
 	1    7450 2100
@@ -1352,7 +1352,7 @@ F 3 "" H 7450 2450 50  0001 C CNN
 	-1   0    0    -1  
 $EndComp
 Wire Wire Line
-	7450 2450 7450 2250
+	7450 2450 7450 2300
 Wire Wire Line
 	7150 1350 7450 1350
 Wire Wire Line
@@ -1437,18 +1437,18 @@ $EndComp
 $Comp
 L SamacSys_Parts:INA210AIDCKR IC1
 U 1 1 60807F90
-P 8900 2900
-F 0 "IC1" H 9400 3165 50  0000 C CNN
-F 1 "INA213AIDCKR" H 9400 3074 50  0000 C CNN
-F 2 "SOT65P210X110-6N" H 9750 3000 50  0001 L CNN
-F 3 "http://www.ti.com/lit/gpn/INA210" H 9750 2900 50  0001 L CNN
-F 4 "26V, Bi-Directional, Zero-Drift, Low-/High-Side, Voltage Output Current Sense Amplifier" H 9750 2800 50  0001 L CNN "Description"
-F 5 "1.1" H 9750 2700 50  0001 L CNN "Height"
-F 6 "595-INA210AIDCKR" H 9750 2600 50  0001 L CNN "Mouser Part Number"
-F 7 "https://www.mouser.com/Search/Refine.aspx?Keyword=595-INA210AIDCKR" H 9750 2500 50  0001 L CNN "Mouser Price/Stock"
-F 8 "Texas Instruments" H 9750 2400 50  0001 L CNN "Manufacturer_Name"
-F 9 "INA210AIDCKR" H 9750 2300 50  0001 L CNN "Manufacturer_Part_Number"
-	1    8900 2900
+P 9300 2900
+F 0 "IC1" H 9800 3165 50  0000 C CNN
+F 1 "INA213AIDCKR" H 9800 3074 50  0000 C CNN
+F 2 "SOT65P210X110-6N" H 10150 3000 50  0001 L CNN
+F 3 "http://www.ti.com/lit/gpn/INA210" H 10150 2900 50  0001 L CNN
+F 4 "26V, Bi-Directional, Zero-Drift, Low-/High-Side, Voltage Output Current Sense Amplifier" H 10150 2800 50  0001 L CNN "Description"
+F 5 "1.1" H 10150 2700 50  0001 L CNN "Height"
+F 6 "595-INA210AIDCKR" H 10150 2600 50  0001 L CNN "Mouser Part Number"
+F 7 "https://www.mouser.com/Search/Refine.aspx?Keyword=595-INA210AIDCKR" H 10150 2500 50  0001 L CNN "Mouser Price/Stock"
+F 8 "Texas Instruments" H 10150 2400 50  0001 L CNN "Manufacturer_Name"
+F 9 "INA210AIDCKR" H 10150 2300 50  0001 L CNN "Manufacturer_Part_Number"
+	1    9300 2900
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -1468,7 +1468,7 @@ F 9 "WSLP5931L1000FEA" H 5900 5200 50  0001 L CNN "Manufacturer_Part_Number"
 	1    5350 5850
 	0    1    1    0   
 $EndComp
-Text GLabel 10400 2900 2    50   Input ~ 0
+Text GLabel 10500 2300 2    50   Input ~ 0
 R_Schunt_Stab
 $Comp
 L power:+5V #PWR0105
@@ -1481,32 +1481,8 @@ F 3 "" H 8250 2450 50  0001 C CNN
 	1    8250 2450
 	1    0    0    -1  
 $EndComp
-$Comp
-L Arduino_Spot_Welderparts:R R10
-U 1 1 608B5887
-P 8250 3200
-F 0 "R10" H 8320 3246 50  0000 L CNN
-F 1 "30" H 8320 3155 50  0000 L CNN
-F 2 "Resistor_SMD:R_0805_2012Metric" H 8320 3109 50  0001 L CNN
-F 3 "" H 8250 3200 50  0000 C CNN
-	1    8250 3200
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
 	8250 3550 8250 3450
-$Comp
-L Arduino_Spot_Welderparts:R R9
-U 1 1 608C1FB3
-P 8250 2750
-F 0 "R9" H 8320 2796 50  0000 L CNN
-F 1 "100" H 8320 2705 50  0000 L CNN
-F 2 "Resistor_SMD:R_0805_2012Metric" H 8320 2659 50  0001 L CNN
-F 3 "" H 8250 2750 50  0000 C CNN
-	1    8250 2750
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	8250 2900 8250 2950
 $Comp
 L power:GND #PWR0114
 U 1 1 60919AB3
@@ -1519,61 +1495,24 @@ F 3 "" H 8250 3550 50  0001 C CNN
 	-1   0    0    -1  
 $EndComp
 Wire Wire Line
-	8250 3450 8700 3450
+	8250 3450 8750 3450
 Wire Wire Line
-	8700 3450 8700 3000
+	8850 3450 8850 3000
 Wire Wire Line
-	8700 3000 8900 3000
-Connection ~ 8250 3450
-Wire Wire Line
-	8250 3450 8250 3350
-Wire Wire Line
-	8900 2900 8500 2900
-Wire Wire Line
-	8500 2900 8500 2950
-Wire Wire Line
-	8500 2950 8250 2950
-Connection ~ 8250 2950
-Wire Wire Line
-	8250 2950 8250 3050
+	8850 3000 9100 3000
 Wire Wire Line
 	8250 2450 8250 2600
 $Comp
 L power:+5V #PWR0125
 U 1 1 6094FD3D
-P 9000 3450
-F 0 "#PWR0125" H 9000 3300 50  0001 C CNN
-F 1 "+5V" H 9015 3623 50  0000 C CNN
-F 2 "" H 9000 3450 50  0001 C CNN
-F 3 "" H 9000 3450 50  0001 C CNN
-	1    9000 3450
+P 9500 3500
+F 0 "#PWR0125" H 9500 3350 50  0001 C CNN
+F 1 "+5V" H 9515 3673 50  0000 C CNN
+F 2 "" H 9500 3500 50  0001 C CNN
+F 3 "" H 9500 3500 50  0001 C CNN
+	1    9500 3500
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	9000 3450 9000 3600
-Wire Wire Line
-	8900 3100 8900 3600
-Wire Wire Line
-	8900 3600 9000 3600
-$Comp
-L Reference_Voltage:LM4040DBZ-2.0 U2
-U 1 1 6096FDF3
-P 7950 3200
-F 0 "U2" V 7996 3112 50  0000 R CNN
-F 1 "LM4040DBZ-2.0" V 7905 3112 50  0000 R CNN
-F 2 "Package_TO_SOT_SMD:SOT-23" H 7950 3000 50  0001 C CIN
-F 3 "http://www.ti.com/lit/ds/symlink/lm4040-n.pdf" H 7950 3200 50  0001 C CIN
-	1    7950 3200
-	0    -1   -1   0   
-$EndComp
-Wire Wire Line
-	7950 3050 7950 2950
-Wire Wire Line
-	7950 2950 8250 2950
-Wire Wire Line
-	7950 3350 7950 3450
-Wire Wire Line
-	7950 3450 8250 3450
 Text GLabel 2200 6300 0    50   Input ~ 0
 R_Schunt_Stab
 Wire Wire Line
@@ -1620,59 +1559,177 @@ Wire Wire Line
 	6500 2350 6650 2350
 Wire Wire Line
 	5350 6550 5350 6650
-$Comp
-L power:GND #PWR0127
-U 1 1 601F7C4E
-P 10750 3450
-F 0 "#PWR0127" H 10750 3200 50  0001 C CNN
-F 1 "GND" H 10755 3277 50  0000 C CNN
-F 2 "" H 10750 3450 50  0001 C CNN
-F 3 "" H 10750 3450 50  0001 C CNN
-	1    10750 3450
-	-1   0    0    -1  
-$EndComp
-Wire Wire Line
-	9900 3000 10000 3000
-Wire Wire Line
-	10000 3000 10000 3300
 Wire Wire Line
 	5350 5750 5350 5850
-Text GLabel 10750 3100 2    50   Input ~ 0
+Text GLabel 10750 3500 2    50   Input ~ 0
 FET_GND
 $Comp
 L Arduino_Spot_Welderparts:R R11
 U 1 1 602AB52D
-P 10400 3100
-F 0 "R11" H 10470 3146 50  0000 L CNN
-F 1 "30k" H 10470 3055 50  0000 L CNN
-F 2 "Resistor_SMD:R_0805_2012Metric" H 10470 3009 50  0001 L CNN
-F 3 "" H 10400 3100 50  0000 C CNN
-	1    10400 3100
+P 10550 3500
+F 0 "R11" H 10620 3546 50  0000 L CNN
+F 1 "12" H 10620 3455 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" H 10620 3409 50  0001 L CNN
+F 3 "" H 10550 3500 50  0000 C CNN
+	1    10550 3500
 	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	10700 3500 10750 3500
+Text Notes 10550 2800 0    50   ~ 0
+6.5khz\n
+$Comp
+L Reference_Voltage:REF3020 U2
+U 1 1 61109A29
+P 8350 2900
+F 0 "U2" H 8121 2946 50  0000 R CNN
+F 1 "REF3020" H 8121 2855 50  0000 R CIN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 8350 2450 50  0001 C CIN
+F 3 "http://www.ti.com/lit/ds/symlink/ref3033.pdf" H 8450 2550 50  0001 C CIN
+	1    8350 2900
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C11
+U 1 1 6110A271
+P 8750 3200
+F 0 "C11" H 8550 3200 50  0000 L CNN
+F 1 "100n" H 8500 3100 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 8788 3050 50  0001 C CNN
+F 3 "https://www.mouser.de/ProductDetail/Samsung-Electro-Mechanics/CL31A106KBHNNNE/?qs=sGAEpiMZZMuMW9TJLBQkXpvci%252BYHLlg21rnqFxf28Ww%3D" H 8750 3200 50  0001 C CNN
+	1    8750 3200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8650 2900 8750 2900
+Wire Wire Line
+	8250 3200 8250 3450
+Connection ~ 8250 3450
+Wire Wire Line
+	8750 3050 8750 2900
+Connection ~ 8750 2900
+Wire Wire Line
+	8750 2900 9300 2900
+Wire Wire Line
+	8750 3350 8750 3450
+Connection ~ 8750 3450
+Wire Wire Line
+	8750 3450 8850 3450
+Wire Wire Line
+	10300 3100 10400 3100
+$Comp
+L power:GND #PWR0127
+U 1 1 601F7C4E
+P 11050 2600
+F 0 "#PWR0127" H 11050 2350 50  0001 C CNN
+F 1 "GND" H 11055 2427 50  0000 C CNN
+F 2 "" H 11050 2600 50  0001 C CNN
+F 3 "" H 11050 2600 50  0001 C CNN
+	1    11050 2600
+	-1   0    0    -1  
 $EndComp
 $Comp
 L Arduino_Spot_Welderparts:R R12
 U 1 1 602B92D3
-P 10400 3300
-F 0 "R12" H 10470 3346 50  0000 L CNN
-F 1 "30k" H 10470 3255 50  0000 L CNN
-F 2 "Resistor_SMD:R_0805_2012Metric" H 10470 3209 50  0001 L CNN
-F 3 "" H 10400 3300 50  0000 C CNN
-	1    10400 3300
+P 10650 2550
+F 0 "R12" H 10720 2596 50  0000 L CNN
+F 1 "12" H 10720 2505 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" H 10720 2459 50  0001 L CNN
+F 3 "" H 10650 2550 50  0000 C CNN
+	1    10650 2550
 	0    -1   -1   0   
 $EndComp
 Wire Wire Line
-	9900 3100 10250 3100
+	10800 2550 11050 2550
 Wire Wire Line
-	10550 3100 10750 3100
+	11050 2550 11050 2600
 Wire Wire Line
-	9900 2900 10400 2900
+	10500 2550 10400 2550
 Wire Wire Line
-	10000 3300 10250 3300
+	10400 2550 10400 2900
 Wire Wire Line
-	10550 3300 10750 3300
+	10400 3000 10300 3000
 Wire Wire Line
-	10750 3300 10750 3450
-Text Notes 9750 3450 0    50   ~ 0
-convert gain down to 20\n
+	10300 2900 10300 2300
+Wire Wire Line
+	10300 2300 10500 2300
+Wire Wire Line
+	9500 3500 9300 3500
+Wire Wire Line
+	9300 3500 9300 3400
+$Comp
+L Device:C C?
+U 1 1 61244ED9
+P 9100 3200
+F 0 "C?" H 8900 3200 50  0000 L CNN
+F 1 "100n" H 8850 3100 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 9138 3050 50  0001 C CNN
+F 3 "https://www.mouser.de/ProductDetail/Samsung-Electro-Mechanics/CL31A106KBHNNNE/?qs=sGAEpiMZZMuMW9TJLBQkXpvci%252BYHLlg21rnqFxf28Ww%3D" H 9100 3200 50  0001 C CNN
+	1    9100 3200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9100 3000 9100 3050
+Connection ~ 9100 3000
+Wire Wire Line
+	9100 3000 9300 3000
+Wire Wire Line
+	9300 3400 9100 3400
+Wire Wire Line
+	9100 3400 9100 3350
+Connection ~ 9300 3400
+Wire Wire Line
+	9300 3400 9300 3100
+$Comp
+L Device:C C?
+U 1 1 61271266
+P 10700 3050
+F 0 "C?" H 10815 3096 50  0000 L CNN
+F 1 "1µ" H 10815 3005 50  0000 L CNN
+F 2 "Capacitor_SMD:C_1206_3216Metric" H 10738 2900 50  0001 C CNN
+F 3 "https://www.mouser.de/ProductDetail/Samsung-Electro-Mechanics/CL31A106KBHNNNE/?qs=sGAEpiMZZMuMW9TJLBQkXpvci%252BYHLlg21rnqFxf28Ww%3D" H 10700 3050 50  0001 C CNN
+	1    10700 3050
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	10400 3500 10250 3500
+Wire Wire Line
+	10250 3500 10250 3250
+Wire Wire Line
+	10250 3250 10400 3250
+Wire Wire Line
+	10400 3250 10400 3200
+Wire Wire Line
+	10700 2900 10400 2900
+Connection ~ 10400 2900
+Wire Wire Line
+	10400 2900 10400 3000
+Wire Wire Line
+	10700 3200 10400 3200
+Connection ~ 10400 3200
+Wire Wire Line
+	10400 3200 10400 3100
+Text Notes 7700 1750 0    50   ~ 0
+6.5kHz\n20V MAX
+$Comp
+L Device:C C?
+U 1 1 612DDB56
+P 7750 2150
+F 0 "C?" H 7950 2150 50  0000 L CNN
+F 1 "10n" H 7850 2050 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 7788 2000 50  0001 C CNN
+F 3 "https://www.mouser.de/ProductDetail/Samsung-Electro-Mechanics/CL31A106KBHNNNE/?qs=sGAEpiMZZMuMW9TJLBQkXpvci%252BYHLlg21rnqFxf28Ww%3D" H 7750 2150 50  0001 C CNN
+	1    7750 2150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7750 2300 7450 2300
+Connection ~ 7450 2300
+Wire Wire Line
+	7450 2300 7450 2250
+Wire Wire Line
+	7750 2000 7750 1850
+Connection ~ 7750 1850
+Wire Wire Line
+	7750 1850 7850 1850
 $EndSCHEMATC
