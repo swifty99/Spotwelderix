@@ -1,0 +1,258 @@
+substitutions:
+  plug_name: spottest
+  
+
+esphome:
+  name: ${plug_name}
+  platform: ESP32
+  board: nodemcu-32s  
+  on_boot:
+    priority: 700 #switches available
+    then:
+      #- rtttl.play:
+      #    rtttl: "two short:d=4,o=5,b=100:16e6,16e6"
+      - switch.turn_on: power_on 
+
+      #- rtttl.play:
+      #    rtttl: "two short:d=4,o=5,b=100:16e6,16e6"
+      - number.set:
+          id: energy_target
+          value: 42.1
+
+  includes:
+    - my_welder.h
+
+wifi:
+  networks:
+  - ssid: BitPups
+    password: Schnittlauch
+  - ssid: "Bit4Me"
+    password: !secret wifi_pw_home 
+  
+  manual_ip:
+    # Set this to the IP of the ESP
+    static_ip: 192.168.42.86
+    # Set this to the IP address of the router. Often ends with .1
+    gateway: 192.168.42.1
+    # The subnet of the network. 255.255.255.0 works for most home networks.
+    subnet: 255.255.255.0  
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "${plug_name} Fallback Hotspot"
+    password: "Schnittlauch"
+
+captive_portal:
+
+
+
+logger:
+  level: DEBUG
+  logs:
+    adc: ERROR
+    sensor: INFO
+
+#api:
+
+ota:
+
+web_server:
+  port: 80
+
+time:
+  - platform: sntp
+    id: sntp_time
+
+dallas:
+  - pin: 13
+
+spi:
+  clk_pin: 17
+  mosi_pin: 16
+
+
+globals:
+  - id: my_global_energy_target
+    type: float
+    restore_value: no
+    initial_value: '31'
+
+
+  - id: my_global_weld_powerflow
+    type: int[30]
+    restore_value: no
+
+number:
+  - platform: template
+    id:  energy_target
+    min_value: 10
+    max_value: 100
+    step: 0.1
+    name: "Energy Target"
+
+
+
+sensor:
+
+  - platform: custom
+    lambda: |-
+      auto my_welder = new MyWelder();
+      App.register_component(my_welder);
+      return {my_welder};
+
+    sensors:
+      name: "My Custom Welder"
+
+
+# Extra sensor to keep track of plug uptime
+  - platform: uptime
+    name: '${plug_name}_Uptime'
+    unit_of_measurement: Tage
+    update_interval: 300s
+    filters:
+      - multiply: 0.000011574
+      
+  - platform: wifi_signal
+    name: "${plug_name}_WiFi_Signal"
+    update_interval: 60s
+
+
+  - platform: dallas
+    address: 0xDE0315A4D72BFF28
+    name: "PCB Temperature"
+    id: mytempsens
+
+  - platform: rotary_encoder
+    name: "Rotary Encoder"
+    pin_a: 36
+    pin_b: 39
+
+  - platform: adc
+    pin: 33
+    id: current
+    name: "current"
+    attenuation: 11db
+    update_interval: 30ms
+    unit_of_measurement: "A" 
+    filters:
+      - calibrate_linear:
+          # Map 0.0 (from sensor) to 0.0 (true value)
+          - 2.27 -> 0.0
+          - 2.32 -> 10.0
+      - sliding_window_moving_average:
+          window_size: 15
+          send_every: 15
+  - platform: adc
+    pin: 32
+    id: supply_volt
+    name: "Supply Voltage"
+    attenuation: 11db
+    update_interval: 1100ms
+    filters:
+      - multiply: 7.8    
+      - sliding_window_moving_average:
+          window_size: 15
+          send_every: 2
+  - platform: adc
+    pin: 34
+    id: batt_volt
+    name: "Battery Voltage"
+    attenuation: 11db
+    update_interval: 1200ms
+    filters:
+      - multiply: 5.5
+      - sliding_window_moving_average:
+          window_size: 15
+          send_every: 2
+  - platform: adc
+    pin: 35
+    id: probe_minus
+    name: "Probe ground volt"
+    attenuation: 11db
+    update_interval: 1300ms
+    filters:
+      - multiply: 7.8
+      - sliding_window_moving_average:
+          window_size: 15
+          send_every: 2
+
+
+binary_sensor:
+  - platform: gpio
+    id: pullup__
+    pin:
+      number: 13
+      mode: INPUT_PULLUP
+    filters:
+      - delayed_on: 100ms
+
+  - platform: gpio
+    id: pullup2__
+    pin:
+      number: 19
+      mode: INPUT_PULLUP
+    filters:
+      - delayed_on: 100ms
+
+  - platform: gpio
+    id: user_switch
+    name: "User Push"
+    pin:
+      number: 23
+      inverted: true
+      mode: INPUT_PULLUP
+          
+    filters:
+      - delayed_on: 100ms
+
+
+
+switch:
+  - platform: gpio
+    pin: 27
+    #inverted: True
+    id: fan
+    name: "Fan"  
+
+  - platform: gpio
+    pin: 22
+    #inverted: True
+    id: power_on
+    name: "Power"  
+
+
+  - platform: gpio
+    pin: 14
+    #inverted: True
+    id: weld
+    name: "Weld it!"  
+
+output:
+  - platform: ledc
+    pin: GPIO26
+    id: rtttl_out
+
+
+rtttl:
+  output: rtttl_out
+
+font:
+  - file: 'fonts/DosisSB.ttf'
+    id: dosis_sb_48
+    size: 48
+  - file: 'fonts/DosisSB.ttf'
+    id: dosis_sb_96
+    size: 88
+
+display:
+  - platform: waveshare_epaper
+    cs_pin: 5
+    dc_pin: 18
+    busy_pin: 21
+    reset_pin: 19
+    model: 1.54inv2
+    full_update_every: 5
+    rotation: 90
+    update_interval: 15 sec
+    lambda: |-
+      it.printf(it.get_width()/2, 20, id(dosis_sb_96), TextAlign::CENTER_HORIZONTAL, "%.1f°",  id(mytempsens).state );
