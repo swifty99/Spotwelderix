@@ -4,6 +4,9 @@ substitutions:
 
 esphome:
   name: ${plug_name}
+  project:
+    name: "kipping.spotwelderix"
+    version: "0.1.0"
   platform: ESP32
   board: nodemcu-32s  
   on_boot:
@@ -17,10 +20,22 @@ esphome:
       #    rtttl: "two short:d=4,o=5,b=100:16e6,16e6"
       - number.set:
           id: energy_target
-          value: 42.1
+          value: 42
+
+      # remove display dirt, bad workaround, shoulb be better
+      - delay: 2sec      
+      - component.update: my_display 
+      - delay: 100ms
+      - component.update: my_display 
+      - delay: 100ms
+      - component.update: my_display 
+      - delay: 100ms
+      - component.update: my_display 
+      - delay: 100ms
 
   includes:
     - my_welder.h
+
 
 wifi:
   networks:
@@ -73,14 +88,47 @@ spi:
 
 globals:
   - id: my_global_energy_target
-    type: float
+    type: unsigned int
     restore_value: no
     initial_value: '31'
+    
+  - id: my_weld_time
+    type: unsigned int
+    restore_value: no
+    initial_value: '42'
+
+  - id: my_weld_max_p
+    type: unsigned int
+    restore_value: no
+    initial_value: '1234'
+
+  - id: my_weld_count
+    type: unsigned int
+    restore_value: no
+    initial_value: '0'
+
+  - id: my_weld_energy
+    type: unsigned int
+    restore_value: no
+    initial_value: '123'
+
+  - id: my_weld_energy_target_intern
+    type: unsigned int
+    restore_value: no
+    initial_value: '123'
+
+  - id: my_weld_request
+    type: unsigned int
+    restore_value: no
+    initial_value: '0'
 
 
   - id: my_global_weld_powerflow
     type: int[30]
     restore_value: no
+
+
+  # UI vars
 
 number:
   - platform: template
@@ -89,19 +137,32 @@ number:
     max_value: 100
     step: 0.1
     name: "Energy Target"
+    on_value:
+      then:
+        #copy number to global to access it in my_welder.h
+        lambda:  id(my_weld_energy_target_intern) = id(energy_target).state;
+
+
+  - platform: template
+    id:  my_ui_update_rq
+    min_value: 0
+    max_value: 1
+    step: 1
+    name: "Update UI Now"   
+    on_value_range:
+      above: 0
+      then:
+        - component.update: my_display 
+        - number.set:
+            id: my_ui_update_rq
+            value: 0
+        - logger.log: update rq reset
 
 
 
 sensor:
 
-  - platform: custom
-    lambda: |-
-      auto my_welder = new MyWelder();
-      App.register_component(my_welder);
-      return {my_welder};
 
-    sensors:
-      name: "My Custom Welder"
 
 
 # Extra sensor to keep track of plug uptime
@@ -124,6 +185,7 @@ sensor:
 
   - platform: rotary_encoder
     name: "Rotary Encoder"
+    resolution: 2
     pin_a: 36
     pin_b: 39
 
@@ -132,7 +194,7 @@ sensor:
     id: current
     name: "current"
     attenuation: 11db
-    update_interval: 30ms
+    update_interval: 130ms
     unit_of_measurement: "A" 
     filters:
       - calibrate_linear:
@@ -142,6 +204,7 @@ sensor:
       - sliding_window_moving_average:
           window_size: 15
           send_every: 15
+
   - platform: adc
     pin: 32
     id: supply_volt
@@ -153,6 +216,7 @@ sensor:
       - sliding_window_moving_average:
           window_size: 15
           send_every: 2
+
   - platform: adc
     pin: 34
     id: batt_volt
@@ -164,6 +228,7 @@ sensor:
       - sliding_window_moving_average:
           window_size: 15
           send_every: 2
+
   - platform: adc
     pin: 35
     id: probe_minus
@@ -178,6 +243,25 @@ sensor:
 
 
 binary_sensor:
+
+  - platform: custom
+    lambda: |-
+      auto my_welder = new MyWelder();
+      App.register_component(my_welder);
+      return {my_welder};
+
+    binary_sensors:
+      name: "My Custom Weld Function"
+      id: my_custom_welder_ui_req
+      on_state:
+        then:
+          if: 
+            condition:
+              lambda: 'return id(my_custom_welder_ui_req).state > 0;'
+            then:
+              - component.update: my_display 
+              - logger.log: "update rq reset"
+
   - platform: gpio
     id: pullup__
     pin:
@@ -185,6 +269,19 @@ binary_sensor:
       mode: INPUT_PULLUP
     filters:
       - delayed_on: 100ms
+
+  - platform: gpio
+    id: foot_switch
+    name: "Foot switch"
+    pin:
+      number: 4
+      mode: INPUT_PULLUP
+      inverted: true
+    filters:
+      - delayed_on: 100ms   
+    on_press:
+      then:
+        lambda: id(my_weld_request) = 1;
 
   - platform: gpio
     id: pullup2__
@@ -208,11 +305,7 @@ binary_sensor:
 
 
 switch:
-  - platform: gpio
-    pin: 27
-    #inverted: True
-    id: fan
-    name: "Fan"  
+
 
   - platform: gpio
     pin: 22
@@ -222,10 +315,11 @@ switch:
 
 
   - platform: gpio
-    pin: 14
+    pin: 27
     #inverted: True
     id: weld
     name: "Weld it!"  
+      
 
 output:
   - platform: ledc
@@ -236,23 +330,46 @@ output:
 rtttl:
   output: rtttl_out
 
+
+
+  
 font:
   - file: 'fonts/DosisSB.ttf'
     id: dosis_sb_48
     size: 48
+  - file: 'fonts/DosisSB.ttf'
+    id: dosis_sb_20
+    size: 20
   - file: 'fonts/DosisSB.ttf'
     id: dosis_sb_96
     size: 88
 
 display:
   - platform: waveshare_epaper
+    id: my_display
     cs_pin: 5
     dc_pin: 18
     busy_pin: 21
     reset_pin: 19
     model: 1.54inv2
-    full_update_every: 5
+    #full_update_every: 5
     rotation: 90
     update_interval: 15 sec
     lambda: |-
-      it.printf(it.get_width()/2, 20, id(dosis_sb_96), TextAlign::CENTER_HORIZONTAL, "%.1f°",  id(mytempsens).state );
+      // api disc https://esphome.io/api/display__buffer_8h.html
+      // Topr Row_ Peek P and time  my_weld_time
+      it.printf(0, -4, id(dosis_sb_20),  "Peak: %dW",   id(my_weld_max_p));
+      it.printf(it.get_width(), -4, id(dosis_sb_20), TextAlign::TOP_RIGHT , "%d ms",   id(my_weld_time));
+
+      // show energy and target
+      it.printf(it.get_width()/2 +40, it.get_height()/2 +48, id(dosis_sb_48), TextAlign::BOTTOM_RIGHT , "%d",  id(my_weld_energy) );
+      it.printf(it.get_width()/2 + 48, it.get_height()/2 +48 -10, id(dosis_sb_20), TextAlign::BOTTOM_LEFT , "J");
+      
+      it.printf(it.get_width()/2 +20, it.get_height()/2 +40, id(dosis_sb_20), TextAlign::CENTER_HORIZONTAL  , "Target E: %.1f J",   id(energy_target).state);
+
+      // draw the power curve
+      
+      // bottom row Temp / Batt_
+      it.printf(0, it.get_height() - 20, id(dosis_sb_20),  "%.1f°C  %.1f V",  id(mytempsens).state,   id(batt_volt).state);
+      it.printf(it.get_width(), it.get_height() - 20, id(dosis_sb_20), TextAlign::RIGHT , "weld %d",   id(my_weld_count));
+      
