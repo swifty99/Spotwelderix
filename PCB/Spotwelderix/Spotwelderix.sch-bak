@@ -1675,4 +1675,41 @@ Wire Wire Line
 	7700 5750 8350 5750
 Wire Wire Line
 	6900 4600 6900 5650
+$Comp
+L power:GND #PWR0101
+U 1 1 61A575A8
+P 7700 3200
+F 0 "#PWR0101" H 7700 2950 50  0001 C CNN
+F 1 "GND" H 7705 3027 50  0000 C CNN
+F 2 "" H 7700 3200 50  0001 C CNN
+F 3 "" H 7700 3200 50  0001 C CNN
+	1    7700 3200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7700 3200 7700 3000
+Wire Wire Line
+	7700 3000 8100 3000
+Connection ~ 8100 3000
+$Comp
+L Connector:Conn_01x02_Male J?
+U 1 1 61B1CC3E
+P 10500 3150
+F 0 "J?" H 10472 3032 50  0000 R CNN
+F 1 "TestCurr" H 10472 3123 50  0000 R CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 10500 3150 50  0001 C CNN
+F 3 "~" H 10500 3150 50  0001 C CNN
+	1    10500 3150
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	10300 3050 10300 3000
+Wire Wire Line
+	10300 3000 9700 3000
+Connection ~ 9700 3000
+Wire Wire Line
+	10300 3150 10300 3300
+Wire Wire Line
+	10300 3300 9700 3300
+Connection ~ 9700 3300
 $EndSCHEMATC
