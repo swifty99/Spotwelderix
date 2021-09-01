@@ -5,8 +5,8 @@ $Descr A4 11693 8268
 encoding utf-8
 Sheet 1 1
 Title "Spotwelderix PowerPCB"
-Date "2021-01-29"
-Rev "v01"
+Date "2021-09-01"
+Rev "v02"
 Comp ""
 Comment1 ""
 Comment2 "mail: engineering at kippings.de"
@@ -304,12 +304,12 @@ Wire Wire Line
 $Comp
 L power:VCC #PWR0107
 U 1 1 6020C9F0
-P 8550 1250
-F 0 "#PWR0107" H 8550 1100 50  0001 C CNN
-F 1 "VCC" H 8565 1423 50  0000 C CNN
-F 2 "" H 8550 1250 50  0001 C CNN
-F 3 "" H 8550 1250 50  0001 C CNN
-	1    8550 1250
+P 7700 1250
+F 0 "#PWR0107" H 7700 1100 50  0001 C CNN
+F 1 "VCC" H 7715 1423 50  0000 C CNN
+F 2 "" H 7700 1250 50  0001 C CNN
+F 3 "" H 7700 1250 50  0001 C CNN
+	1    7700 1250
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -838,7 +838,7 @@ F 3 "" H 9950 5500 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	9950 5500 9950 5800
+	9950 5500 9950 5650
 $Comp
 L Device:C C12
 U 1 1 6068A466
@@ -900,40 +900,40 @@ Wire Wire Line
 $Comp
 L Arduino_Spot_Welderparts:CP C14
 U 1 1 602578D4
-P 8250 1700
-F 0 "C14" H 8368 1746 50  0000 L CNN
-F 1 "470µ" H 8368 1655 50  0000 L CNN
-F 2 "Capacitor_THT:CP_Radial_D10.0mm_P5.00mm" H 8368 1609 50  0001 L CNN
-F 3 "" H 8250 1700 50  0000 C CNN
-	1    8250 1700
+P 7600 1600
+F 0 "C14" H 7718 1646 50  0000 L CNN
+F 1 "470µ" H 7718 1555 50  0000 L CNN
+F 2 "Capacitor_THT:CP_Radial_D10.0mm_P5.00mm" H 7718 1509 50  0001 L CNN
+F 3 "" H 7600 1600 50  0000 C CNN
+	1    7600 1600
 	1    0    0    -1  
 $EndComp
 $Comp
 L Arduino_Spot_Welderparts:D D2
 U 1 1 60258D00
-P 7700 1350
-F 0 "D2" H 7700 1565 50  0000 C CNN
-F 1 "D" H 7700 1474 50  0000 C CNN
-F 2 "Diode_SMD:D_SMA_Handsoldering" H 7700 1350 50  0001 C CNN
-F 3 "https://www.mouser.de/ProductDetail/Micro-Commercial-Components-MCC/GS1ME-TP/?qs=J4%252BvTxtW28%2FOZo%2F57eqbIQ%3D%3D" H 7700 1350 50  0001 C CNN
-	1    7700 1350
+P 7350 1350
+F 0 "D2" H 7350 1565 50  0000 C CNN
+F 1 "D" H 7350 1474 50  0000 C CNN
+F 2 "Diode_SMD:D_SMA_Handsoldering" H 7350 1350 50  0001 C CNN
+F 3 "https://www.mouser.de/ProductDetail/Micro-Commercial-Components-MCC/GS1ME-TP/?qs=J4%252BvTxtW28%2FOZo%2F57eqbIQ%3D%3D" H 7350 1350 50  0001 C CNN
+	1    7350 1350
 	-1   0    0    -1  
 $EndComp
 $Comp
 L power:GND #PWR0108
 U 1 1 60264976
-P 8250 1950
-F 0 "#PWR0108" H 8250 1700 50  0001 C CNN
-F 1 "GND" H 8255 1777 50  0000 C CNN
-F 2 "" H 8250 1950 50  0001 C CNN
-F 3 "" H 8250 1950 50  0001 C CNN
-	1    8250 1950
+P 7600 1850
+F 0 "#PWR0108" H 7600 1600 50  0001 C CNN
+F 1 "GND" H 7605 1677 50  0000 C CNN
+F 2 "" H 7600 1850 50  0001 C CNN
+F 3 "" H 7600 1850 50  0001 C CNN
+	1    7600 1850
 	-1   0    0    -1  
 $EndComp
 Wire Wire Line
-	8250 1850 8250 1950
+	7600 1750 7600 1850
 Wire Wire Line
-	8550 1250 8550 1350
+	7700 1250 7700 1350
 $Comp
 L power:VCCQ #PWR0117
 U 1 1 6029C193
@@ -953,12 +953,12 @@ Wire Wire Line
 $Comp
 L power:PWR_FLAG #FLG0103
 U 1 1 602DF37D
-P 8800 1350
-F 0 "#FLG0103" H 8800 1425 50  0001 C CNN
-F 1 "PWR_FLAG" H 8800 1523 50  0000 C CNN
-F 2 "" H 8800 1350 50  0001 C CNN
-F 3 "~" H 8800 1350 50  0001 C CNN
-	1    8800 1350
+P 7950 1350
+F 0 "#FLG0103" H 7950 1425 50  0001 C CNN
+F 1 "PWR_FLAG" H 7950 1523 50  0000 C CNN
+F 2 "" H 7950 1350 50  0001 C CNN
+F 3 "~" H 7950 1350 50  0001 C CNN
+	1    7950 1350
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
@@ -992,7 +992,7 @@ F 3 "https://www.onsemi.com/pub/Collateral/FQP27P06-D.PDF" H 6950 1450 50  0001 
 	0    1    -1   0   
 $EndComp
 Wire Wire Line
-	8550 1350 8800 1350
+	7700 1350 7950 1350
 $Comp
 L Arduino_Spot_Welderparts:R R6
 U 1 1 602A498C
@@ -1014,7 +1014,7 @@ Wire Wire Line
 	6950 1800 6950 1650
 Wire Wire Line
 	6450 1800 6950 1800
-Text GLabel 7850 1850 2    50   Input ~ 0
+Text GLabel 10950 1500 2    50   Input ~ 0
 V_Batt
 $Comp
 L Connector:Conn_01x02_Male J1
@@ -1074,64 +1074,40 @@ F 3 "" H 6950 2750 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	6950 2550 6950 2750
-Connection ~ 8550 1350
-Wire Wire Line
-	8250 1550 8250 1350
-Connection ~ 8250 1350
-Wire Wire Line
-	8250 1350 8550 1350
 Connection ~ 6450 1350
-Wire Wire Line
-	7850 1350 8250 1350
 $Comp
 L Arduino_Spot_Welderparts:R R7
 U 1 1 60565285
-P 7450 1650
-F 0 "R7" H 7520 1696 50  0000 L CNN
-F 1 "15k" H 7520 1605 50  0000 L CNN
-F 2 "Resistor_SMD:R_0805_2012Metric" H 7520 1559 50  0001 L CNN
-F 3 "" H 7450 1650 50  0000 C CNN
-	1    7450 1650
+P 10300 1300
+F 0 "R7" H 10370 1346 50  0000 L CNN
+F 1 "15k" H 10370 1255 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" H 10370 1209 50  0001 L CNN
+F 3 "" H 10300 1300 50  0000 C CNN
+	1    10300 1300
 	1    0    0    -1  
 $EndComp
 $Comp
 L Arduino_Spot_Welderparts:R R8
 U 1 1 60572C73
-P 7450 2100
-F 0 "R8" H 7520 2146 50  0000 L CNN
-F 1 "2.5k" H 7520 2055 50  0000 L CNN
-F 2 "Resistor_SMD:R_0805_2012Metric" H 7520 2009 50  0001 L CNN
-F 3 "" H 7450 2100 50  0000 C CNN
-	1    7450 2100
+P 10300 1750
+F 0 "R8" H 10370 1796 50  0000 L CNN
+F 1 "2.5k" H 10370 1705 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" H 10370 1659 50  0001 L CNN
+F 3 "" H 10300 1750 50  0000 C CNN
+	1    10300 1750
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	7450 1500 7450 1350
-Connection ~ 7450 1350
-Wire Wire Line
-	7450 1350 7550 1350
-Wire Wire Line
-	7450 1800 7450 1850
 $Comp
 L power:GND #PWR07
 U 1 1 605A9A8D
-P 7450 2450
-F 0 "#PWR07" H 7450 2200 50  0001 C CNN
-F 1 "GND" H 7455 2277 50  0000 C CNN
-F 2 "" H 7450 2450 50  0001 C CNN
-F 3 "" H 7450 2450 50  0001 C CNN
-	1    7450 2450
+P 10300 2200
+F 0 "#PWR07" H 10300 1950 50  0001 C CNN
+F 1 "GND" H 10305 2027 50  0000 C CNN
+F 2 "" H 10300 2200 50  0001 C CNN
+F 3 "" H 10300 2200 50  0001 C CNN
+	1    10300 2200
 	-1   0    0    -1  
 $EndComp
-Wire Wire Line
-	7450 2450 7450 2300
-Wire Wire Line
-	7150 1350 7450 1350
-Wire Wire Line
-	7450 1850 7750 1850
-Connection ~ 7450 1850
-Wire Wire Line
-	7450 1850 7450 1950
 Wire Wire Line
 	1650 6600 2600 6600
 Wire Wire Line
@@ -1200,7 +1176,7 @@ F 9 "INA210AIDCKR" H 9150 2400 50  0001 L CNN "Manufacturer_Part_Number"
 	1    8300 3000
 	1    0    0    -1  
 $EndComp
-Text GLabel 9500 2400 2    50   Input ~ 0
+Text GLabel 10400 2700 2    50   Input ~ 0
 R_Schunt_Stab
 Text GLabel 2450 7000 0    50   Input ~ 0
 R_Schunt_Stab
@@ -1246,42 +1222,8 @@ Wire Wire Line
 Connection ~ 6500 2350
 Wire Wire Line
 	6500 2350 6650 2350
-$Comp
-L Arduino_Spot_Welderparts:R R11
-U 1 1 602AB52D
-P 9700 3600
-F 0 "R11" H 9770 3646 50  0000 L CNN
-F 1 "12" H 9770 3555 50  0000 L CNN
-F 2 "Resistor_SMD:R_0805_2012Metric" H 9770 3509 50  0001 L CNN
-F 3 "" H 9700 3600 50  0000 C CNN
-	1    9700 3600
-	0    -1   -1   0   
-$EndComp
-Text Notes 9550 2900 0    50   ~ 0
+Text Notes 9950 2900 0    50   ~ 0
 6.5khz\n
-Wire Wire Line
-	9300 3200 9400 3200
-$Comp
-L Arduino_Spot_Welderparts:R R12
-U 1 1 602B92D3
-P 9650 2650
-F 0 "R12" H 9720 2696 50  0000 L CNN
-F 1 "12" H 9720 2605 50  0000 L CNN
-F 2 "Resistor_SMD:R_0805_2012Metric" H 9720 2559 50  0001 L CNN
-F 3 "" H 9650 2650 50  0000 C CNN
-	1    9650 2650
-	0    -1   -1   0   
-$EndComp
-Wire Wire Line
-	9500 2650 9400 2650
-Wire Wire Line
-	9400 2650 9400 3000
-Wire Wire Line
-	9400 3100 9300 3100
-Wire Wire Line
-	9300 3000 9300 2400
-Wire Wire Line
-	9300 2400 9500 2400
 Wire Wire Line
 	8500 3600 8300 3600
 Wire Wire Line
@@ -1308,52 +1250,23 @@ Wire Wire Line
 Connection ~ 8300 3500
 Wire Wire Line
 	8300 3500 8300 3200
-$Comp
-L Device:C C17
-U 1 1 61271266
-P 9700 3150
-F 0 "C17" H 9815 3196 50  0000 L CNN
-F 1 "1µ" H 9815 3105 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 9738 3000 50  0001 C CNN
-F 3 "https://www.mouser.de/ProductDetail/Samsung-Electro-Mechanics/CL31A106KBHNNNE/?qs=sGAEpiMZZMuMW9TJLBQkXpvci%252BYHLlg21rnqFxf28Ww%3D" H 9700 3150 50  0001 C CNN
-	1    9700 3150
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	9550 3600 9400 3600
-Wire Wire Line
-	9700 3000 9400 3000
-Connection ~ 9400 3000
-Wire Wire Line
-	9400 3000 9400 3100
-Wire Wire Line
-	9700 3300 9400 3300
-Connection ~ 9400 3300
-Wire Wire Line
-	9400 3300 9400 3200
-Text Notes 7700 1750 0    50   ~ 0
+Text Notes 10800 1400 0    50   ~ 0
 6.5kHz\n20V MAX
 $Comp
 L Device:C C15
 U 1 1 612DDB56
-P 7750 2150
-F 0 "C15" H 7950 2150 50  0000 L CNN
-F 1 "10n" H 7850 2050 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 7788 2000 50  0001 C CNN
-F 3 "https://www.mouser.de/ProductDetail/Samsung-Electro-Mechanics/CL31A106KBHNNNE/?qs=sGAEpiMZZMuMW9TJLBQkXpvci%252BYHLlg21rnqFxf28Ww%3D" H 7750 2150 50  0001 C CNN
-	1    7750 2150
+P 10850 1800
+F 0 "C15" H 11050 1800 50  0000 L CNN
+F 1 "10n" H 10950 1700 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 10888 1650 50  0001 C CNN
+F 3 "https://www.mouser.de/ProductDetail/Samsung-Electro-Mechanics/CL31A106KBHNNNE/?qs=sGAEpiMZZMuMW9TJLBQkXpvci%252BYHLlg21rnqFxf28Ww%3D" H 10850 1800 50  0001 C CNN
+	1    10850 1800
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	7750 2300 7450 2300
-Connection ~ 7450 2300
+	10850 1650 10850 1500
 Wire Wire Line
-	7450 2300 7450 2250
-Wire Wire Line
-	7750 2000 7750 1850
-Connection ~ 7750 1850
-Wire Wire Line
-	7750 1850 7850 1850
+	10850 1500 10950 1500
 Wire Wire Line
 	2600 7100 2350 7100
 Connection ~ 2350 7100
@@ -1410,12 +1323,6 @@ Wire Wire Line
 Wire Wire Line
 	8100 3000 8100 3100
 Connection ~ 8100 3100
-Wire Wire Line
-	9400 3300 9400 3600
-NoConn ~ 8350 4550
-NoConn ~ 9500 4550
-NoConn ~ 9550 5650
-NoConn ~ 8450 5650
 Text GLabel 4500 1350 2    50   Input ~ 0
 ProbeADC
 $Comp
@@ -1547,18 +1454,18 @@ Wire Wire Line
 $Comp
 L power:+BATT #PWR0104
 U 1 1 6175778B
-P 10100 3550
-F 0 "#PWR0104" H 10100 3400 50  0001 C CNN
-F 1 "+BATT" H 10115 3723 50  0000 C CNN
-F 2 "" H 10100 3550 50  0001 C CNN
-F 3 "" H 10100 3550 50  0001 C CNN
-	1    10100 3550
+P 9800 3550
+F 0 "#PWR0104" H 9800 3400 50  0001 C CNN
+F 1 "+BATT" H 9815 3723 50  0000 C CNN
+F 2 "" H 9800 3550 50  0001 C CNN
+F 3 "" H 9800 3550 50  0001 C CNN
+	1    9800 3550
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	10100 3600 10100 3550
+	9800 3600 9800 3550
 Wire Wire Line
-	9850 3600 10100 3600
+	9550 3600 9800 3600
 $Comp
 L Connector_Generic:Conn_01x01 J2
 U 1 1 6177802F
@@ -1573,7 +1480,7 @@ $EndComp
 Wire Wire Line
 	6500 700  6350 700 
 Wire Wire Line
-	6350 700  6350 1350
+	6350 700  6350 900 
 Connection ~ 6350 1350
 Wire Wire Line
 	6350 1350 6450 1350
@@ -1582,18 +1489,14 @@ Wire Wire Line
 $Comp
 L power:VCCQ #PWR0109
 U 1 1 617B5D6F
-P 10450 2600
-F 0 "#PWR0109" H 10450 2450 50  0001 C CNN
-F 1 "VCCQ" H 10465 2773 50  0000 C CNN
-F 2 "" H 10450 2600 50  0001 C CNN
-F 3 "" H 10450 2600 50  0001 C CNN
-	1    10450 2600
+P 9550 3050
+F 0 "#PWR0109" H 9550 2900 50  0001 C CNN
+F 1 "VCCQ" H 9565 3223 50  0000 C CNN
+F 2 "" H 9550 3050 50  0001 C CNN
+F 3 "" H 9550 3050 50  0001 C CNN
+	1    9550 3050
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	10450 2650 10450 2600
-Wire Wire Line
-	9800 2650 10450 2650
 $Comp
 L power:GND #PWR0113
 U 1 1 61821A2D
@@ -1692,27 +1595,6 @@ Wire Wire Line
 	7700 3000 8100 3000
 Connection ~ 8100 3000
 $Comp
-L Connector:Conn_01x02_Male J5
-U 1 1 61B1CC3E
-P 10500 3150
-F 0 "J5" H 10472 3032 50  0000 R CNN
-F 1 "TestCurr" H 10472 3123 50  0000 R CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 10500 3150 50  0001 C CNN
-F 3 "~" H 10500 3150 50  0001 C CNN
-	1    10500 3150
-	-1   0    0    1   
-$EndComp
-Wire Wire Line
-	10300 3050 10300 3000
-Wire Wire Line
-	10300 3000 9700 3000
-Connection ~ 9700 3000
-Wire Wire Line
-	10300 3150 10300 3300
-Wire Wire Line
-	10300 3300 9700 3300
-Connection ~ 9700 3300
-$Comp
 L power:PWR_FLAG #FLG0101
 U 1 1 61B5E2BC
 P 5550 1250
@@ -1728,4 +1610,258 @@ Wire Wire Line
 Connection ~ 5550 1350
 Wire Wire Line
 	5550 1350 5750 1350
+Wire Wire Line
+	9550 3600 9550 3200
+Wire Wire Line
+	9300 3200 9550 3200
+Wire Wire Line
+	9300 3100 9550 3100
+Wire Wire Line
+	9550 3050 9550 3100
+$Comp
+L Device:C C17
+U 1 1 613C529A
+P 10250 3000
+F 0 "C17" H 10450 3000 50  0000 L CNN
+F 1 "470p" H 10350 2900 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 10288 2850 50  0001 C CNN
+F 3 "https://www.mouser.de/ProductDetail/Samsung-Electro-Mechanics/CL31A106KBHNNNE/?qs=sGAEpiMZZMuMW9TJLBQkXpvci%252BYHLlg21rnqFxf28Ww%3D" H 10250 3000 50  0001 C CNN
+	1    10250 3000
+	1    0    0    -1  
+$EndComp
+$Comp
+L Arduino_Spot_Welderparts:R R13
+U 1 1 613D44B4
+P 9900 2700
+F 0 "R13" H 9970 2746 50  0000 L CNN
+F 1 "47k" H 9970 2655 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" H 9970 2609 50  0001 L CNN
+F 3 "" H 9900 2700 50  0000 C CNN
+	1    9900 2700
+	0    -1   -1   0   
+$EndComp
+$Comp
+L power:GND #PWR013
+U 1 1 61410D5C
+P 10250 3300
+F 0 "#PWR013" H 10250 3050 50  0001 C CNN
+F 1 "GND" H 10255 3127 50  0000 C CNN
+F 2 "" H 10250 3300 50  0001 C CNN
+F 3 "" H 10250 3300 50  0001 C CNN
+	1    10250 3300
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9750 2700 9300 2700
+Wire Wire Line
+	9300 2700 9300 3000
+Wire Wire Line
+	10050 2700 10250 2700
+Wire Wire Line
+	10250 2850 10250 2700
+Connection ~ 10250 2700
+Wire Wire Line
+	10250 2700 10400 2700
+Wire Wire Line
+	10250 3300 10250 3150
+$Comp
+L Arduino_Spot_Welderparts:R R14
+U 1 1 6146B9DF
+P 10600 1500
+F 0 "R14" H 10670 1546 50  0000 L CNN
+F 1 "47k" H 10670 1455 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" H 10670 1409 50  0001 L CNN
+F 3 "" H 10600 1500 50  0000 C CNN
+	1    10600 1500
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Transistor_BJT:BC817 Q11
+U 1 1 6148B894
+P 9800 1750
+F 0 "Q11" H 9991 1796 50  0000 L CNN
+F 1 "BC817" H 9991 1705 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 10000 1675 50  0001 L CIN
+F 3 "https://www.onsemi.com/pub/Collateral/BC818-D.pdf" H 9800 1750 50  0001 L CNN
+	1    9800 1750
+	1    0    0    -1  
+$EndComp
+$Comp
+L Transistor_BJT:BC807 Q12
+U 1 1 6149C720
+P 9900 850
+F 0 "Q12" V 10228 850 50  0000 C CNN
+F 1 "BC807" V 10137 850 50  0000 C CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 10100 775 50  0001 L CIN
+F 3 "https://www.onsemi.com/pub/Collateral/BC808-D.pdf" H 9900 850 50  0001 L CNN
+	1    9900 850 
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	10300 1450 10300 1500
+Wire Wire Line
+	10300 1900 10300 2000
+Wire Wire Line
+	10750 1500 10850 1500
+Connection ~ 10850 1500
+Wire Wire Line
+	10450 1500 10300 1500
+Connection ~ 10300 1500
+Wire Wire Line
+	10300 1500 10300 1600
+Wire Wire Line
+	10850 1950 10850 2000
+Wire Wire Line
+	10850 2000 10300 2000
+Connection ~ 10300 2000
+Wire Wire Line
+	10300 2000 10300 2100
+$Comp
+L Arduino_Spot_Welderparts:R R10
+U 1 1 6150D2EE
+P 9350 1950
+F 0 "R10" H 9420 1996 50  0000 L CNN
+F 1 "470" H 9420 1905 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" H 9420 1859 50  0001 L CNN
+F 3 "" H 9350 1950 50  0000 C CNN
+	1    9350 1950
+	1    0    0    -1  
+$EndComp
+$Comp
+L Arduino_Spot_Welderparts:R R12
+U 1 1 6151CCE6
+P 9900 1300
+F 0 "R12" H 9970 1346 50  0000 L CNN
+F 1 "10k" H 9970 1255 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" H 9970 1209 50  0001 L CNN
+F 3 "" H 9900 1300 50  0000 C CNN
+	1    9900 1300
+	1    0    0    -1  
+$EndComp
+$Comp
+L Arduino_Spot_Welderparts:R R11
+U 1 1 6152C3FA
+P 9450 900
+F 0 "R11" H 9520 946 50  0000 L CNN
+F 1 "47k" H 9520 855 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" H 9520 809 50  0001 L CNN
+F 3 "" H 9450 900 50  0000 C CNN
+	1    9450 900 
+	1    0    0    -1  
+$EndComp
+$Comp
+L Arduino_Spot_Welderparts:R R4
+U 1 1 6153BF24
+P 9100 1750
+F 0 "R4" H 9170 1796 50  0000 L CNN
+F 1 "10k" H 9170 1705 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" H 9170 1659 50  0001 L CNN
+F 3 "" H 9100 1750 50  0000 C CNN
+	1    9100 1750
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	7150 1350 7200 1350
+Wire Wire Line
+	7500 1350 7600 1350
+Connection ~ 7700 1350
+Wire Wire Line
+	7600 1450 7600 1350
+Connection ~ 7600 1350
+Wire Wire Line
+	7600 1350 7700 1350
+Text GLabel 8800 1750 0    50   Input ~ 0
+EnablePower
+Wire Wire Line
+	10300 2100 9900 2100
+Wire Wire Line
+	9900 2100 9900 1950
+Connection ~ 10300 2100
+Wire Wire Line
+	10300 2100 10300 2200
+Wire Wire Line
+	9900 2100 9350 2100
+Connection ~ 9900 2100
+Wire Wire Line
+	9250 1750 9350 1750
+Wire Wire Line
+	9350 1800 9350 1750
+Connection ~ 9350 1750
+Wire Wire Line
+	9350 1750 9600 1750
+Wire Wire Line
+	8950 1750 8800 1750
+Wire Wire Line
+	10100 750  10300 750 
+Wire Wire Line
+	10300 750  10300 1150
+Wire Wire Line
+	9900 1050 9900 1100
+Wire Wire Line
+	9900 1450 9900 1550
+Wire Wire Line
+	9450 750  9700 750 
+Wire Wire Line
+	9900 1100 9450 1100
+Wire Wire Line
+	9450 1100 9450 1050
+Connection ~ 9900 1100
+Wire Wire Line
+	9900 1100 9900 1150
+Wire Wire Line
+	9450 750  7300 750 
+Wire Wire Line
+	7300 750  7300 900 
+Wire Wire Line
+	7300 900  6350 900 
+Connection ~ 9450 750 
+Connection ~ 6350 900 
+Wire Wire Line
+	6350 900  6350 1350
+Wire Wire Line
+	9550 5650 9950 5650
+Connection ~ 9950 5650
+Wire Wire Line
+	9950 5650 9950 5800
+Wire Wire Line
+	8450 5650 8450 5500
+Wire Wire Line
+	8450 5500 9950 5500
+Connection ~ 9950 5500
+Wire Wire Line
+	9500 4550 9900 4550
+Wire Wire Line
+	8350 4550 8350 4400
+Wire Wire Line
+	8350 4400 9900 4400
+Connection ~ 9900 4400
+$Comp
+L Device:C C18
+U 1 1 6176D148
+P 6700 2650
+F 0 "C18" H 6900 2650 50  0000 L CNN
+F 1 "470p" H 6800 2550 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 6738 2500 50  0001 C CNN
+F 3 "https://www.mouser.de/ProductDetail/Samsung-Electro-Mechanics/CL31A106KBHNNNE/?qs=sGAEpiMZZMuMW9TJLBQkXpvci%252BYHLlg21rnqFxf28Ww%3D" H 6700 2650 50  0001 C CNN
+	1    6700 2650
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR014
+U 1 1 6176D14E
+P 6700 2950
+F 0 "#PWR014" H 6700 2700 50  0001 C CNN
+F 1 "GND" H 6705 2777 50  0000 C CNN
+F 2 "" H 6700 2950 50  0001 C CNN
+F 3 "" H 6700 2950 50  0001 C CNN
+	1    6700 2950
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6700 2950 6700 2800
+Wire Wire Line
+	6700 2500 6700 2350
+Wire Wire Line
+	6700 2350 6650 2350
+Connection ~ 6650 2350
 $EndSCHEMATC

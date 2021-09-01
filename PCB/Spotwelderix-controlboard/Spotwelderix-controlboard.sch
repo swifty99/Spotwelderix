@@ -16,49 +16,49 @@ $EndDescr
 $Comp
 L Spotwelderix-controlboard-rescue:GND-power #PWR034
 U 1 1 60253474
-P 9850 2050
-F 0 "#PWR034" H 9850 1800 50  0001 C CNN
-F 1 "GND" H 9855 1877 50  0000 C CNN
-F 2 "" H 9850 2050 50  0001 C CNN
-F 3 "" H 9850 2050 50  0001 C CNN
-	1    9850 2050
+P 10050 2050
+F 0 "#PWR034" H 10050 1800 50  0001 C CNN
+F 1 "GND" H 10055 1877 50  0000 C CNN
+F 2 "" H 10050 2050 50  0001 C CNN
+F 3 "" H 10050 2050 50  0001 C CNN
+	1    10050 2050
 	1    0    0    -1  
 $EndComp
 $Comp
 L Spotwelderix-controlboard-rescue:+5V-power #PWR037
 U 1 1 60254EA9
-P 10850 1550
-F 0 "#PWR037" H 10850 1400 50  0001 C CNN
-F 1 "+5V" H 10865 1723 50  0000 C CNN
-F 2 "" H 10850 1550 50  0001 C CNN
-F 3 "" H 10850 1550 50  0001 C CNN
-	1    10850 1550
+P 11050 1550
+F 0 "#PWR037" H 11050 1400 50  0001 C CNN
+F 1 "+5V" H 11065 1723 50  0000 C CNN
+F 2 "" H 11050 1550 50  0001 C CNN
+F 3 "" H 11050 1550 50  0001 C CNN
+	1    11050 1550
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	10150 1600 10400 1600
+	10350 1600 10600 1600
 Wire Wire Line
-	9850 1900 9850 2050
+	10050 1900 10050 2050
 $Comp
 L Spotwelderix-controlboard-rescue:C-Device C9
 U 1 1 60257482
-P 10400 1800
-F 0 "C9" H 10515 1846 50  0000 L CNN
-F 1 "10µ" H 10515 1755 50  0000 L CNN
-F 2 "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder" H 10438 1650 50  0001 C CNN
-F 3 "https://www.mouser.de/ProductDetail/Samsung-Electro-Mechanics/CL31A106KBHNNNE/?qs=sGAEpiMZZMuMW9TJLBQkXpvci%252BYHLlg21rnqFxf28Ww%3D" H 10400 1800 50  0001 C CNN
-	1    10400 1800
+P 10600 1800
+F 0 "C9" H 10715 1846 50  0000 L CNN
+F 1 "10µ" H 10715 1755 50  0000 L CNN
+F 2 "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder" H 10638 1650 50  0001 C CNN
+F 3 "https://www.mouser.de/ProductDetail/Samsung-Electro-Mechanics/CL31A106KBHNNNE/?qs=sGAEpiMZZMuMW9TJLBQkXpvci%252BYHLlg21rnqFxf28Ww%3D" H 10600 1800 50  0001 C CNN
+	1    10600 1800
 	1    0    0    -1  
 $EndComp
 $Comp
 L Spotwelderix-controlboard-rescue:GND-power #PWR036
 U 1 1 6025D512
-P 10400 2100
-F 0 "#PWR036" H 10400 1850 50  0001 C CNN
-F 1 "GND" H 10405 1927 50  0000 C CNN
-F 2 "" H 10400 2100 50  0001 C CNN
-F 3 "" H 10400 2100 50  0001 C CNN
-	1    10400 2100
+P 10600 2100
+F 0 "#PWR036" H 10600 1850 50  0001 C CNN
+F 1 "GND" H 10605 1927 50  0000 C CNN
+F 2 "" H 10600 2100 50  0001 C CNN
+F 3 "" H 10600 2100 50  0001 C CNN
+	1    10600 2100
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -90,32 +90,21 @@ Wire Wire Line
 $Comp
 L Spotwelderix-controlboard-rescue:LM7805_TO220-Regulator_Linear U2
 U 1 1 602540EA
-P 9850 1600
-F 0 "U2" H 9850 1842 50  0000 C CNN
-F 1 "LM7805M_TO263" H 9850 1751 50  0000 C CNN
-F 2 "Package_TO_SOT_SMD:TO-263-3_TabPin2" H 9850 1825 50  0001 C CIN
-F 3 "https://www.onsemi.cn/PowerSolutions/document/MC7800-D.PDF" H 9850 1550 50  0001 C CNN
-	1    9850 1600
+P 10050 1600
+F 0 "U2" H 10050 1842 50  0000 C CNN
+F 1 "LM7805M_TO263" H 10050 1751 50  0000 C CNN
+F 2 "Package_TO_SOT_SMD:TO-252-2" H 10050 1825 50  0001 C CIN
+F 3 "https://www.onsemi.cn/PowerSolutions/document/MC7800-D.PDF" H 10050 1550 50  0001 C CNN
+	1    10050 1600
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	10400 1650 10400 1600
+	10600 1650 10600 1600
 Wire Wire Line
-	10850 1600 10400 1600
-Connection ~ 10400 1600
+	11050 1600 10600 1600
+Connection ~ 10600 1600
 Wire Wire Line
-	10850 1600 10850 1550
-$Comp
-L Arduino_Spot_Welderparts:R R12
-U 1 1 603BCFB2
-P 6400 1700
-F 0 "R12" H 6470 1746 50  0000 L CNN
-F 1 "15k" H 6470 1655 50  0000 L CNN
-F 2 "Resistor_SMD:R_0805_2012Metric" V 6330 1700 50  0001 C CNN
-F 3 "" H 6400 1700 50  0000 C CNN
-	1    6400 1700
-	1    0    0    -1  
-$EndComp
+	11050 1600 11050 1550
 $Comp
 L Arduino_Spot_Welderparts:R R13
 U 1 1 603BE2C9
@@ -219,7 +208,7 @@ Wire Wire Line
 	3300 2800 3300 2950
 Text GLabel 1850 4900 0    50   Input ~ 0
 Dallas
-Text GLabel 800  5150 0    50   Input ~ 0
+Text GLabel 1050 5100 0    50   Input ~ 0
 Gate_logic
 Wire Wire Line
 	2150 4900 1850 4900
@@ -419,7 +408,7 @@ U 1 1 6029091A
 P 5300 4400
 F 0 "P1" H 5217 3825 50  0000 C CNN
 F 1 "Display" H 5217 3916 50  0000 C CNN
-F 2 "Connector_JST:JST_XH_S8B-XH-A_1x08_P2.50mm_Horizontal" H 5300 4400 50  0001 C CNN
+F 2 "Connector_JST:JST_XH_B8B-XH-A_1x08_P2.50mm_Vertical" H 5300 4400 50  0001 C CNN
 F 3 "" H 5300 4400 50  0000 C CNN
 	1    5300 4400
 	1    0    0    1   
@@ -548,7 +537,7 @@ Connection ~ 3050 5800
 Wire Wire Line
 	3050 5800 3050 5900
 Wire Wire Line
-	10400 1950 10400 2100
+	10600 1950 10600 2100
 $Comp
 L Spotwelderix-controlboard-rescue:MountingHole-Mechanical H1
 U 1 1 60212773
@@ -598,30 +587,29 @@ Wire Wire Line
 $Comp
 L Spotwelderix-controlboard-rescue:C-Device C2
 U 1 1 6018E2B1
-P 1450 5300
-F 0 "C2" H 1565 5346 50  0000 L CNN
-F 1 "10n" H 1565 5255 50  0000 L CNN
-F 2 "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder" H 1488 5150 50  0001 C CNN
-F 3 "https://www.mouser.de/ProductDetail/Samsung-Electro-Mechanics/CL31A106KBHNNNE/?qs=sGAEpiMZZMuMW9TJLBQkXpvci%252BYHLlg21rnqFxf28Ww%3D" H 1450 5300 50  0001 C CNN
-	1    1450 5300
+P 1300 5400
+F 0 "C2" H 1415 5446 50  0000 L CNN
+F 1 "10n" H 1415 5355 50  0000 L CNN
+F 2 "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder" H 1338 5250 50  0001 C CNN
+F 3 "https://www.mouser.de/ProductDetail/Samsung-Electro-Mechanics/CL31A106KBHNNNE/?qs=sGAEpiMZZMuMW9TJLBQkXpvci%252BYHLlg21rnqFxf28Ww%3D" H 1300 5400 50  0001 C CNN
+	1    1300 5400
 	1    0    0    -1  
 $EndComp
 $Comp
 L Spotwelderix-controlboard-rescue:GND-power #PWR03
 U 1 1 6019341A
-P 1450 5550
-F 0 "#PWR03" H 1450 5300 50  0001 C CNN
-F 1 "GND" H 1455 5377 50  0000 C CNN
-F 2 "" H 1450 5550 50  0001 C CNN
-F 3 "" H 1450 5550 50  0001 C CNN
-	1    1450 5550
+P 1300 5650
+F 0 "#PWR03" H 1300 5400 50  0001 C CNN
+F 1 "GND" H 1305 5477 50  0000 C CNN
+F 2 "" H 1300 5650 50  0001 C CNN
+F 3 "" H 1300 5650 50  0001 C CNN
+	1    1300 5650
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	1450 5450 1450 5550
-Text GLabel 5950 2100 0    50   Input ~ 0
+	1300 5550 1300 5650
+Text GLabel 5450 2200 0    50   Input ~ 0
 VCC_ADC
-Connection ~ 6400 2100
 Wire Wire Line
 	1750 3600 2150 3600
 Wire Wire Line
@@ -744,7 +732,7 @@ Text GLabel 10300 3050 2    50   Input ~ 0
 FAN_GND
 Wire Wire Line
 	10300 3050 10150 3050
-Text Label 9400 1600 0    50   ~ 0
+Text Label 9600 1600 0    50   ~ 0
 LM7805_in
 NoConn ~ 4100 4750
 NoConn ~ 4100 4950
@@ -767,8 +755,6 @@ Wire Wire Line
 Connection ~ 1400 1550
 Wire Wire Line
 	1400 1550 1500 1550
-Wire Wire Line
-	6400 2100 6400 2350
 $Comp
 L Spotwelderix-controlboard-rescue:NodeMCU32-my_parts U1
 U 1 1 601881C3
@@ -891,7 +877,7 @@ U 1 1 603862AC
 P 7600 2800
 F 0 "J2" H 7708 3181 50  0000 C CNN
 F 1 "ChargerPower" H 7708 3090 50  0000 C CNN
-F 2 "Connector_JST:JST_XH_S5B-XH-A_1x05_P2.50mm_Horizontal" H 7600 2800 50  0001 C CNN
+F 2 "Connector_JST:JST_XH_B5B-XH-A_1x05_P2.50mm_Vertical" H 7600 2800 50  0001 C CNN
 F 3 "~" H 7600 2800 50  0001 C CNN
 	1    7600 2800
 	1    0    0    -1  
@@ -970,14 +956,10 @@ F 3 "" H 9250 1100 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	9300 1600 9550 1600
-Wire Wire Line
 	9250 1100 9250 1300
 Connection ~ 9250 1300
 Wire Wire Line
 	8500 5250 8950 5250
-Wire Wire Line
-	6400 1850 6400 2100
 Text GLabel 6800 1000 0    50   Input ~ 0
 ExtPower
 Text GLabel 6150 1950 0    50   Input ~ 0
@@ -1055,29 +1037,19 @@ Wire Wire Line
 	5000 6850 5150 6850
 Wire Wire Line
 	6150 1950 6850 1950
-Wire Wire Line
-	5950 2100 6150 2100
 $Comp
 L Spotwelderix-controlboard-rescue:C-Device C6
 U 1 1 61115154
-P 6150 2450
-F 0 "C6" H 5950 2500 50  0000 L CNN
-F 1 "10n" H 5900 2350 50  0000 L CNN
-F 2 "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder" H 6188 2300 50  0001 C CNN
-F 3 "https://www.mouser.de/ProductDetail/Samsung-Electro-Mechanics/CL31A106KBHNNNE/?qs=sGAEpiMZZMuMW9TJLBQkXpvci%252BYHLlg21rnqFxf28Ww%3D" H 6150 2450 50  0001 C CNN
-	1    6150 2450
+P 5650 2450
+F 0 "C6" H 5450 2500 50  0000 L CNN
+F 1 "470p" H 5400 2350 50  0000 L CNN
+F 2 "Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder" H 5688 2300 50  0001 C CNN
+F 3 "https://www.mouser.de/ProductDetail/Samsung-Electro-Mechanics/CL31A106KBHNNNE/?qs=sGAEpiMZZMuMW9TJLBQkXpvci%252BYHLlg21rnqFxf28Ww%3D" H 5650 2450 50  0001 C CNN
+	1    5650 2450
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	6150 2300 6150 2100
-Connection ~ 6150 2100
-Wire Wire Line
-	6150 2100 6400 2100
-Wire Wire Line
-	6150 2600 6150 2700
-Wire Wire Line
-	6150 2700 6400 2700
-Connection ~ 6400 2700
+	5650 2600 5650 2700
 Text Notes 5950 2900 0    50   ~ 0
 6.5 kHz
 Wire Wire Line
@@ -1169,27 +1141,16 @@ Connection ~ 8950 4850
 $Comp
 L Arduino_Spot_Welderparts:R R2
 U 1 1 6139E65D
-P 900 4850
-F 0 "R2" H 970 4896 50  0000 L CNN
-F 1 "100" H 970 4805 50  0000 L CNN
-F 2 "Resistor_SMD:R_0805_2012Metric" H 970 4759 50  0001 L CNN
-F 3 "" H 900 4850 50  0001 C CNN
-	1    900  4850
+P 1300 4850
+F 0 "R2" H 1370 4896 50  0000 L CNN
+F 1 "100" H 1370 4805 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" H 1370 4759 50  0001 L CNN
+F 3 "" H 1300 4850 50  0001 C CNN
+	1    1300 4850
 	-1   0    0    1   
 $EndComp
 Wire Wire Line
-	1450 4600 1450 5150
-Wire Wire Line
-	1450 4600 2150 4600
-Connection ~ 1450 4600
-Wire Wire Line
-	800  5150 900  5150
-Wire Wire Line
-	900  5150 900  5000
-Wire Wire Line
 	1300 4700 1300 4600
-Wire Wire Line
-	1300 4600 1450 4600
 $Comp
 L Spotwelderix-controlboard-rescue:GND-power #PWR038
 U 1 1 613E03ED
@@ -1442,8 +1403,56 @@ Wire Wire Line
 Connection ~ 3800 1150
 Wire Wire Line
 	3800 1150 3700 1150
-Wire Wire Line
-	900  4700 1300 4700
 Text GLabel 8550 4750 0    50   Input ~ 0
 ProbeADC
+$Comp
+L Arduino_Spot_Welderparts:R R12
+U 1 1 603BCFB2
+P 6400 1700
+F 0 "R12" H 6470 1746 50  0000 L CNN
+F 1 "15k" H 6470 1655 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" V 6330 1700 50  0001 C CNN
+F 3 "" H 6400 1700 50  0000 C CNN
+	1    6400 1700
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1300 4600 2150 4600
+Wire Wire Line
+	1300 5250 1300 5100
+Wire Wire Line
+	1050 5100 1300 5100
+Connection ~ 1300 5100
+Wire Wire Line
+	1300 5100 1300 5000
+Wire Wire Line
+	6400 1850 6400 2200
+Wire Wire Line
+	5650 2700 6400 2700
+Connection ~ 6400 2700
+$Comp
+L Arduino_Spot_Welderparts:R R10
+U 1 1 6146F107
+P 6000 2200
+F 0 "R10" H 6070 2246 50  0000 L CNN
+F 1 "47k" H 6070 2155 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" H 6070 2109 50  0001 L CNN
+F 3 "" H 6000 2200 50  0001 C CNN
+	1    6000 2200
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	6150 2200 6400 2200
+Connection ~ 6400 2200
+Wire Wire Line
+	6400 2200 6400 2350
+Wire Wire Line
+	5450 2200 5650 2200
+Wire Wire Line
+	5650 2300 5650 2200
+Connection ~ 5650 2200
+Wire Wire Line
+	5650 2200 5850 2200
+Wire Wire Line
+	9300 1600 9750 1600
 $EndSCHEMATC
