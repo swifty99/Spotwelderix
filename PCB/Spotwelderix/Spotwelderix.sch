@@ -1022,7 +1022,7 @@ U 1 1 603BDDDD
 P 5700 1800
 F 0 "J1" H 5808 1981 50  0000 C CNN
 F 1 "OnOffTast" H 5808 1890 50  0000 C CNN
-F 2 "Connector_JST:JST_XH_B2B-XH-A_1x02_P2.50mm_Vertical" H 5700 1800 50  0001 C CNN
+F 2 "Connector_JST:JST_XH_S2B-XH-A_1x02_P2.50mm_Horizontal" H 5700 1800 50  0001 C CNN
 F 3 "~" H 5700 1800 50  0001 C CNN
 	1    5700 1800
 	1    0    0    -1  
@@ -1323,7 +1323,7 @@ Wire Wire Line
 Wire Wire Line
 	8100 3000 8100 3100
 Connection ~ 8100 3100
-Text GLabel 4500 1350 2    50   Input ~ 0
+Text GLabel 4650 1350 2    50   Input ~ 0
 ProbeADC
 $Comp
 L Arduino_Spot_Welderparts:R R1
@@ -1347,8 +1347,6 @@ F 3 "" H 3900 1600 50  0000 C CNN
 	1    3900 1600
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	3900 1300 3900 1350
 $Comp
 L power:GND #PWR010
 U 1 1 616258C4
@@ -1362,34 +1360,22 @@ F 3 "" H 3900 1950 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	3900 1950 3900 1800
-Wire Wire Line
-	3900 1350 4200 1350
-Connection ~ 3900 1350
-Wire Wire Line
-	3900 1350 3900 1450
-Text Notes 4150 1250 0    50   ~ 0
+Text Notes 4300 1200 0    50   ~ 0
 6.5kHz\n20V MAX
 $Comp
 L Device:C C11
 U 1 1 616258CF
-P 4200 1650
-F 0 "C11" H 4400 1650 50  0000 L CNN
-F 1 "10n" H 4300 1550 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 4238 1500 50  0001 C CNN
-F 3 "https://www.mouser.de/ProductDetail/Samsung-Electro-Mechanics/CL31A106KBHNNNE/?qs=sGAEpiMZZMuMW9TJLBQkXpvci%252BYHLlg21rnqFxf28Ww%3D" H 4200 1650 50  0001 C CNN
-	1    4200 1650
+P 4450 1650
+F 0 "C11" H 4650 1650 50  0000 L CNN
+F 1 "10n" H 4550 1550 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric_Pad1.18x1.45mm_HandSolder" H 4488 1500 50  0001 C CNN
+F 3 "https://www.mouser.de/ProductDetail/Samsung-Electro-Mechanics/CL31A106KBHNNNE/?qs=sGAEpiMZZMuMW9TJLBQkXpvci%252BYHLlg21rnqFxf28Ww%3D" H 4450 1650 50  0001 C CNN
+	1    4450 1650
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	4200 1800 3900 1800
 Connection ~ 3900 1800
 Wire Wire Line
 	3900 1800 3900 1750
-Wire Wire Line
-	4200 1500 4200 1350
-Connection ~ 4200 1350
-Wire Wire Line
-	4200 1350 4500 1350
 Text GLabel 3750 950  0    50   Input ~ 0
 Probe-
 Wire Wire Line
@@ -1864,4 +1850,31 @@ Wire Wire Line
 Wire Wire Line
 	6700 2350 6650 2350
 Connection ~ 6650 2350
+$Comp
+L Arduino_Spot_Welderparts:R R15
+U 1 1 6184EC9C
+P 4150 1350
+F 0 "R15" H 4220 1396 50  0000 L CNN
+F 1 "47k" H 4220 1305 50  0000 L CNN
+F 2 "Resistor_SMD:R_0805_2012Metric" H 4220 1259 50  0001 L CNN
+F 3 "" H 4150 1350 50  0000 C CNN
+	1    4150 1350
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	3900 1300 3900 1350
+Wire Wire Line
+	4000 1350 3900 1350
+Connection ~ 3900 1350
+Wire Wire Line
+	3900 1350 3900 1450
+Wire Wire Line
+	4300 1350 4450 1350
+Wire Wire Line
+	4450 1500 4450 1350
+Connection ~ 4450 1350
+Wire Wire Line
+	4450 1350 4650 1350
+Wire Wire Line
+	3900 1800 4450 1800
 $EndSCHEMATC

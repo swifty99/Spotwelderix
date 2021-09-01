@@ -1613,17 +1613,11 @@ Wire Wire Line
 Wire Wire Line
 	9550 3600 9550 3200
 Wire Wire Line
-	9550 3200 9600 3200
-Wire Wire Line
 	9300 3200 9550 3200
-Connection ~ 9550 3200
 Wire Wire Line
 	9300 3100 9550 3100
 Wire Wire Line
 	9550 3050 9550 3100
-Connection ~ 9550 3100
-Wire Wire Line
-	9550 3100 9600 3100
 $Comp
 L Device:C C17
 U 1 1 613C529A
