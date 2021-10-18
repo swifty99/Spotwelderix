@@ -2,14 +2,14 @@
 <export version="D">
   <design>
     <source>D:\engineering\1-Projekte\Welder\Spotwelderix\PCB\Spotwelderix-controlboard\Spotwelderix-controlboard.sch</source>
-    <date>28/07/2021 10:19:31</date>
+    <date>20/09/2021 11:27:49</date>
     <tool>Eeschema (5.1.9)-1</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
         <title>Spotwelderix Controlboard</title>
         <company/>
-        <rev>v01</rev>
-        <date>2021-01-29</date>
+        <rev>v02</rev>
+        <date>2021-09-01</date>
         <source>Spotwelderix-controlboard.sch</source>
         <comment number="1" value=""/>
         <comment number="2" value="mail: engineering at kippings.de"/>
@@ -19,39 +19,32 @@
     </sheet>
   </design>
   <components>
-    <comp ref="C5">
+    <comp ref="C9">
       <value>10µ</value>
-      <footprint>Capacitor_SMD:C_1206_3216Metric</footprint>
+      <footprint>Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder</footprint>
       <datasheet>https://www.mouser.de/ProductDetail/Samsung-Electro-Mechanics/CL31A106KBHNNNE/?qs=sGAEpiMZZMuMW9TJLBQkXpvci%252BYHLlg21rnqFxf28Ww%3D</datasheet>
-      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <libsource lib="Spotwelderix-controlboard-rescue" part="C-Device" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>60257482</tstamp>
     </comp>
-    <comp ref="C4">
+    <comp ref="C8">
       <value>470µ</value>
       <footprint>Capacitor_THT:CP_Radial_D10.0mm_P5.00mm</footprint>
       <datasheet>~</datasheet>
-      <libsource lib="Device" part="CP" description="Polarized capacitor"/>
+      <libsource lib="Spotwelderix-controlboard-rescue" part="CP-Device" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>60145EA0</tstamp>
     </comp>
-    <comp ref="U3">
+    <comp ref="U2">
       <value>LM7805M_TO263</value>
-      <footprint>Package_TO_SOT_SMD:TO-263-3_TabPin2</footprint>
+      <footprint>Package_TO_SOT_SMD:TO-252-2</footprint>
       <datasheet>https://www.onsemi.cn/PowerSolutions/document/MC7800-D.PDF</datasheet>
-      <libsource lib="Regulator_Linear" part="LM7805_TO220" description="Positive 1A 35V Linear Regulator, Fixed Output 5V, TO-220"/>
+      <libsource lib="Spotwelderix-controlboard-rescue" part="LM7805_TO220-Regulator_Linear" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>602540EA</tstamp>
     </comp>
-    <comp ref="R8">
-      <value>33k</value>
-      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
-      <libsource lib="Arduino_Spot_Welderparts" part="R" description=""/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>603BCFB2</tstamp>
-    </comp>
-    <comp ref="R9">
-      <value>10k</value>
+    <comp ref="R13">
+      <value>2.5k</value>
       <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <libsource lib="Arduino_Spot_Welderparts" part="R" description=""/>
       <sheetpath names="/" tstamps="/"/>
@@ -65,20 +58,6 @@
       <sheetpath names="/" tstamps="/"/>
       <tstamp>601ABE31</tstamp>
     </comp>
-    <comp ref="R6">
-      <value>33k</value>
-      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
-      <libsource lib="Arduino_Spot_Welderparts" part="R" description=""/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>601B227D</tstamp>
-    </comp>
-    <comp ref="R7">
-      <value>10k</value>
-      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
-      <libsource lib="Arduino_Spot_Welderparts" part="R" description=""/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>601B2283</tstamp>
-    </comp>
     <comp ref="J3">
       <value>ExtPwr_FAn</value>
       <footprint>Connector_JST:JST_XH_B4B-XH-A_1x04_P2.50mm_Vertical</footprint>
@@ -87,7 +66,7 @@
       <sheetpath names="/" tstamps="/"/>
       <tstamp>601C4BB3</tstamp>
     </comp>
-    <comp ref="R3">
+    <comp ref="R5">
       <value>100</value>
       <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <libsource lib="Arduino_Spot_Welderparts" part="R" description=""/>
@@ -98,26 +77,26 @@
       <value>100p</value>
       <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
       <datasheet>https://www.mouser.de/ProductDetail/Samsung-Electro-Mechanics/CL31A106KBHNNNE/?qs=sGAEpiMZZMuMW9TJLBQkXpvci%252BYHLlg21rnqFxf28Ww%3D</datasheet>
-      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <libsource lib="Spotwelderix-controlboard-rescue" part="C-Device" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>601E4B47</tstamp>
     </comp>
-    <comp ref="R2">
+    <comp ref="R6">
       <value>100</value>
       <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <libsource lib="Arduino_Spot_Welderparts" part="R" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>601F2B03</tstamp>
     </comp>
-    <comp ref="C2">
+    <comp ref="C4">
       <value>100p</value>
       <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
       <datasheet>https://www.mouser.de/ProductDetail/Samsung-Electro-Mechanics/CL31A106KBHNNNE/?qs=sGAEpiMZZMuMW9TJLBQkXpvci%252BYHLlg21rnqFxf28Ww%3D</datasheet>
-      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <libsource lib="Spotwelderix-controlboard-rescue" part="C-Device" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>601F2B09</tstamp>
     </comp>
-    <comp ref="R1">
+    <comp ref="R4">
       <value>100</value>
       <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <libsource lib="Arduino_Spot_Welderparts" part="R" description=""/>
@@ -128,13 +107,13 @@
       <value>100p</value>
       <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
       <datasheet>https://www.mouser.de/ProductDetail/Samsung-Electro-Mechanics/CL31A106KBHNNNE/?qs=sGAEpiMZZMuMW9TJLBQkXpvci%252BYHLlg21rnqFxf28Ww%3D</datasheet>
-      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <libsource lib="Spotwelderix-controlboard-rescue" part="C-Device" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>6020E37E</tstamp>
     </comp>
     <comp ref="P1">
       <value>Display</value>
-      <footprint>Connector_JST:JST_XH_S8B-XH-A_1x08_P2.50mm_Horizontal</footprint>
+      <footprint>Connector_JST:JST_XH_B8B-XH-A_1x08_P2.50mm_Vertical</footprint>
       <libsource lib="Arduino_Spot_Welderparts" part="CONN_01X08" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>6029091A</tstamp>
@@ -143,7 +122,7 @@
       <value>Buzzer</value>
       <footprint>Buzzer_Beeper:Buzzer_15x7.5RM7.6</footprint>
       <datasheet>~</datasheet>
-      <libsource lib="Device" part="Buzzer" description="Buzzer, polarized"/>
+      <libsource lib="Spotwelderix-controlboard-rescue" part="Buzzer-Device" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>6031033A</tstamp>
     </comp>
@@ -151,7 +130,7 @@
       <value>MountingHole</value>
       <footprint>MountingHole:MountingHole_3.2mm_M3_DIN965_Pad_TopBottom</footprint>
       <datasheet>~</datasheet>
-      <libsource lib="Mechanical" part="MountingHole" description="Mounting Hole without connection"/>
+      <libsource lib="Spotwelderix-controlboard-rescue" part="MountingHole-Mechanical" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>60212773</tstamp>
     </comp>
@@ -159,7 +138,7 @@
       <value>MountingHole</value>
       <footprint>MountingHole:MountingHole_3.2mm_M3_DIN965_Pad_TopBottom</footprint>
       <datasheet>~</datasheet>
-      <libsource lib="Mechanical" part="MountingHole" description="Mounting Hole without connection"/>
+      <libsource lib="Spotwelderix-controlboard-rescue" part="MountingHole-Mechanical" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>602345BB</tstamp>
     </comp>
@@ -167,7 +146,7 @@
       <value>MountingHole</value>
       <footprint>MountingHole:MountingHole_3.2mm_M3_DIN965_Pad_TopBottom</footprint>
       <datasheet>~</datasheet>
-      <libsource lib="Mechanical" part="MountingHole" description="Mounting Hole without connection"/>
+      <libsource lib="Spotwelderix-controlboard-rescue" part="MountingHole-Mechanical" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>60238BE0</tstamp>
     </comp>
@@ -175,29 +154,29 @@
       <value>MountingHole</value>
       <footprint>MountingHole:MountingHole_3.2mm_M3_DIN965_Pad_TopBottom</footprint>
       <datasheet>~</datasheet>
-      <libsource lib="Mechanical" part="MountingHole" description="Mounting Hole without connection"/>
+      <libsource lib="Spotwelderix-controlboard-rescue" part="MountingHole-Mechanical" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>6023D34D</tstamp>
     </comp>
-    <comp ref="C6">
+    <comp ref="C2">
       <value>10n</value>
-      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
+      <footprint>Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder</footprint>
       <datasheet>https://www.mouser.de/ProductDetail/Samsung-Electro-Mechanics/CL31A106KBHNNNE/?qs=sGAEpiMZZMuMW9TJLBQkXpvci%252BYHLlg21rnqFxf28Ww%3D</datasheet>
-      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <libsource lib="Spotwelderix-controlboard-rescue" part="C-Device" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>6018E2B1</tstamp>
     </comp>
-    <comp ref="J2">
+    <comp ref="J1">
       <value>LEDs</value>
       <footprint>Connector_JST:JST_XH_B3B-XH-A_1x03_P2.50mm_Vertical</footprint>
       <datasheet>~</datasheet>
-      <libsource lib="Connector" part="Conn_01x03_Male" description="Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <libsource lib="Spotwelderix-controlboard-rescue" part="Conn_01x03_Male-Connector" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>6018AA6E</tstamp>
     </comp>
-    <comp ref="D3">
+    <comp ref="D1">
       <value>D</value>
-      <footprint>Diode_SMD:D_SMA</footprint>
+      <footprint>Diode_SMD:D_SMA_Handsoldering</footprint>
       <libsource lib="Arduino_Spot_Welderparts" part="D" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>60237118</tstamp>
@@ -212,19 +191,19 @@
     <comp ref="P2">
       <value>CONN_01X08</value>
       <footprint>Connector_JST:JST_XH_B9B-XH-A_1x09_P2.50mm_Vertical</footprint>
-      <libsource lib="Connector" part="Conn_01x09_Male" description="Generic connector, single row, 01x09, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <libsource lib="Spotwelderix-controlboard-rescue" part="Conn_01x09_Male-Connector" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>6015F832</tstamp>
     </comp>
     <comp ref="D2">
       <value>D</value>
-      <footprint>Diode_SMD:D_SMA</footprint>
+      <footprint>Diode_SMD:D_SMA_Handsoldering</footprint>
       <libsource lib="Arduino_Spot_Welderparts" part="D" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>60173424</tstamp>
     </comp>
-    <comp ref="R14">
-      <value>100</value>
+    <comp ref="R17">
+      <value>10k</value>
       <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <libsource lib="Arduino_Spot_Welderparts" part="R" description=""/>
       <sheetpath names="/" tstamps="/"/>
@@ -232,57 +211,150 @@
     </comp>
     <comp ref="C7">
       <value>100p</value>
-      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
+      <footprint>Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder</footprint>
       <datasheet>https://www.mouser.de/ProductDetail/Samsung-Electro-Mechanics/CL31A106KBHNNNE/?qs=sGAEpiMZZMuMW9TJLBQkXpvci%252BYHLlg21rnqFxf28Ww%3D</datasheet>
-      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <libsource lib="Spotwelderix-controlboard-rescue" part="C-Device" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>60368C71</tstamp>
     </comp>
-    <comp ref="J1">
+    <comp ref="J2">
       <value>ChargerPower</value>
-      <footprint>Connector_JST:JST_XH_S5B-XH-A_1x05_P2.50mm_Horizontal</footprint>
+      <footprint>Connector_JST:JST_XH_B5B-XH-A_1x05_P2.50mm_Vertical</footprint>
       <datasheet>~</datasheet>
-      <libsource lib="Connector" part="Conn_01x05_Male" description="Generic connector, single row, 01x05, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <libsource lib="Spotwelderix-controlboard-rescue" part="Conn_01x05_Male-Connector" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>603862AC</tstamp>
-    </comp>
-    <comp ref="Q5">
-      <value>AO3400A</value>
-      <footprint>Package_TO_SOT_SMD:SOT-23</footprint>
-      <datasheet>http://www.aosmd.com/pdfs/datasheet/AO3400A.pdf</datasheet>
-      <libsource lib="Transistor_FET" part="AO3400A" description="30V Vds, 5.7A Id, N-Channel MOSFET, SOT-23"/>
-      <sheetpath names="/" tstamps="/"/>
-      <tstamp>6039FCEE</tstamp>
     </comp>
     <comp ref="Q1">
       <value>AO3400A</value>
       <footprint>Package_TO_SOT_SMD:SOT-23</footprint>
       <datasheet>http://www.aosmd.com/pdfs/datasheet/AO3400A.pdf</datasheet>
-      <libsource lib="Transistor_FET" part="AO3400A" description="30V Vds, 5.7A Id, N-Channel MOSFET, SOT-23"/>
+      <libsource lib="Spotwelderix-controlboard-rescue" part="AO3400A-Transistor_FET" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>603B9BB1</tstamp>
     </comp>
-    <comp ref="R12">
-      <value>10k</value>
+    <comp ref="R15">
+      <value>2.5k</value>
       <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <libsource lib="Arduino_Spot_Welderparts" part="R" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>6031924B</tstamp>
     </comp>
-    <comp ref="R11">
-      <value>33k</value>
+    <comp ref="R14">
+      <value>15k</value>
       <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
       <libsource lib="Arduino_Spot_Welderparts" part="R" description=""/>
       <sheetpath names="/" tstamps="/"/>
       <tstamp>60319245</tstamp>
     </comp>
+    <comp ref="Q3">
+      <value>AO3400A</value>
+      <footprint>Package_TO_SOT_SMD:SOT-23</footprint>
+      <datasheet>http://www.aosmd.com/pdfs/datasheet/AO3400A.pdf</datasheet>
+      <libsource lib="Spotwelderix-controlboard-rescue" part="AO3400A-Transistor_FET" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>604F3499</tstamp>
+    </comp>
+    <comp ref="R19">
+      <value>10k</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
+      <libsource lib="Arduino_Spot_Welderparts" part="R" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>610D316C</tstamp>
+    </comp>
+    <comp ref="C6">
+      <value>470p</value>
+      <footprint>Capacitor_SMD:C_1206_3216Metric_Pad1.33x1.80mm_HandSolder</footprint>
+      <datasheet>https://www.mouser.de/ProductDetail/Samsung-Electro-Mechanics/CL31A106KBHNNNE/?qs=sGAEpiMZZMuMW9TJLBQkXpvci%252BYHLlg21rnqFxf28Ww%3D</datasheet>
+      <libsource lib="Spotwelderix-controlboard-rescue" part="C-Device" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61115154</tstamp>
+    </comp>
+    <comp ref="J4">
+      <value>Testpin</value>
+      <footprint>Connector_PinHeader_2.54mm:PinHeader_1x09_P2.54mm_Vertical</footprint>
+      <datasheet>~</datasheet>
+      <libsource lib="Connector" part="Conn_01x09_Female" description="Generic connector, single row, 01x09, script generated (kicad-library-utils/schlib/autogen/connector/)"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61345D7A</tstamp>
+    </comp>
+    <comp ref="R2">
+      <value>100</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
+      <libsource lib="Arduino_Spot_Welderparts" part="R" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>6139E65D</tstamp>
+    </comp>
+    <comp ref="R16">
+      <value>10k</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
+      <libsource lib="Arduino_Spot_Welderparts" part="R" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>614015C6</tstamp>
+    </comp>
     <comp ref="Q2">
       <value>AO3400A</value>
       <footprint>Package_TO_SOT_SMD:SOT-23</footprint>
       <datasheet>http://www.aosmd.com/pdfs/datasheet/AO3400A.pdf</datasheet>
-      <libsource lib="Transistor_FET" part="AO3400A" description="30V Vds, 5.7A Id, N-Channel MOSFET, SOT-23"/>
+      <libsource lib="Spotwelderix-controlboard-rescue" part="AO3400A-Transistor_FET" description=""/>
       <sheetpath names="/" tstamps="/"/>
-      <tstamp>604F3499</tstamp>
+      <tstamp>6039FCEE</tstamp>
+    </comp>
+    <comp ref="R18">
+      <value>10k</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
+      <libsource lib="Arduino_Spot_Welderparts" part="R" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61422306</tstamp>
+    </comp>
+    <comp ref="R1">
+      <value>2.5k</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
+      <libsource lib="Arduino_Spot_Welderparts" part="R" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61445267</tstamp>
+    </comp>
+    <comp ref="R9">
+      <value>2.5k</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
+      <libsource lib="Arduino_Spot_Welderparts" part="R" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61460762</tstamp>
+    </comp>
+    <comp ref="R8">
+      <value>2.5k</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
+      <libsource lib="Arduino_Spot_Welderparts" part="R" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61472BD1</tstamp>
+    </comp>
+    <comp ref="R7">
+      <value>2.5k</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
+      <libsource lib="Arduino_Spot_Welderparts" part="R" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>6147C938</tstamp>
+    </comp>
+    <comp ref="R3">
+      <value>2.5k</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
+      <libsource lib="Arduino_Spot_Welderparts" part="R" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>61487F1D</tstamp>
+    </comp>
+    <comp ref="R12">
+      <value>15k</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
+      <libsource lib="Arduino_Spot_Welderparts" part="R" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>603BCFB2</tstamp>
+    </comp>
+    <comp ref="R10">
+      <value>47k</value>
+      <footprint>Resistor_SMD:R_0805_2012Metric</footprint>
+      <libsource lib="Arduino_Spot_Welderparts" part="R" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>6146F107</tstamp>
     </comp>
   </components>
   <libparts>
@@ -374,41 +446,7 @@
         <pin num="2" name="~" type="passive"/>
       </pins>
     </libpart>
-    <libpart lib="Connector" part="Conn_01x03_Male">
-      <description>Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)</description>
-      <docs>~</docs>
-      <footprints>
-        <fp>Connector*:*_1x??_*</fp>
-      </footprints>
-      <fields>
-        <field name="Reference">J</field>
-        <field name="Value">Conn_01x03_Male</field>
-      </fields>
-      <pins>
-        <pin num="1" name="Pin_1" type="passive"/>
-        <pin num="2" name="Pin_2" type="passive"/>
-        <pin num="3" name="Pin_3" type="passive"/>
-      </pins>
-    </libpart>
-    <libpart lib="Connector" part="Conn_01x05_Male">
-      <description>Generic connector, single row, 01x05, script generated (kicad-library-utils/schlib/autogen/connector/)</description>
-      <docs>~</docs>
-      <footprints>
-        <fp>Connector*:*_1x??_*</fp>
-      </footprints>
-      <fields>
-        <field name="Reference">J</field>
-        <field name="Value">Conn_01x05_Male</field>
-      </fields>
-      <pins>
-        <pin num="1" name="Pin_1" type="passive"/>
-        <pin num="2" name="Pin_2" type="passive"/>
-        <pin num="3" name="Pin_3" type="passive"/>
-        <pin num="4" name="Pin_4" type="passive"/>
-        <pin num="5" name="Pin_5" type="passive"/>
-      </pins>
-    </libpart>
-    <libpart lib="Connector" part="Conn_01x09_Male">
+    <libpart lib="Connector" part="Conn_01x09_Female">
       <description>Generic connector, single row, 01x09, script generated (kicad-library-utils/schlib/autogen/connector/)</description>
       <docs>~</docs>
       <footprints>
@@ -416,7 +454,7 @@
       </footprints>
       <fields>
         <field name="Reference">J</field>
-        <field name="Value">Conn_01x09_Male</field>
+        <field name="Value">Conn_01x09_Female</field>
       </fields>
       <pins>
         <pin num="1" name="Pin_1" type="passive"/>
@@ -430,101 +468,117 @@
         <pin num="9" name="Pin_9" type="passive"/>
       </pins>
     </libpart>
-    <libpart lib="Device" part="Buzzer">
-      <description>Buzzer, polarized</description>
-      <docs>~</docs>
+    <libpart lib="Spotwelderix-controlboard-rescue" part="AO3400A-Transistor_FET">
+      <footprints>
+        <fp>SOT?23*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">Q</field>
+        <field name="Value">AO3400A-Transistor_FET</field>
+        <field name="Footprint">Package_TO_SOT_SMD:SOT-23</field>
+      </fields>
+      <pins>
+        <pin num="1" name="G" type="input"/>
+        <pin num="2" name="S" type="passive"/>
+        <pin num="3" name="D" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Spotwelderix-controlboard-rescue" part="Buzzer-Device">
       <footprints>
         <fp>*Buzzer*</fp>
       </footprints>
       <fields>
         <field name="Reference">BZ</field>
-        <field name="Value">Buzzer</field>
+        <field name="Value">Buzzer-Device</field>
       </fields>
       <pins>
         <pin num="1" name="-" type="passive"/>
         <pin num="2" name="+" type="passive"/>
       </pins>
     </libpart>
-    <libpart lib="Device" part="C">
-      <description>Unpolarized capacitor</description>
-      <docs>~</docs>
+    <libpart lib="Spotwelderix-controlboard-rescue" part="C-Device">
       <footprints>
         <fp>C_*</fp>
       </footprints>
       <fields>
         <field name="Reference">C</field>
-        <field name="Value">C</field>
+        <field name="Value">C-Device</field>
       </fields>
       <pins>
         <pin num="1" name="~" type="passive"/>
         <pin num="2" name="~" type="passive"/>
       </pins>
     </libpart>
-    <libpart lib="Device" part="CP">
-      <description>Polarized capacitor</description>
-      <docs>~</docs>
+    <libpart lib="Spotwelderix-controlboard-rescue" part="CP-Device">
       <footprints>
         <fp>CP_*</fp>
       </footprints>
       <fields>
         <field name="Reference">C</field>
-        <field name="Value">CP</field>
+        <field name="Value">CP-Device</field>
       </fields>
       <pins>
         <pin num="1" name="~" type="passive"/>
         <pin num="2" name="~" type="passive"/>
       </pins>
     </libpart>
-    <libpart lib="Mechanical" part="MountingHole">
-      <description>Mounting Hole without connection</description>
-      <docs>~</docs>
+    <libpart lib="Spotwelderix-controlboard-rescue" part="Conn_01x03_Male-Connector">
       <footprints>
-        <fp>MountingHole*</fp>
+        <fp>Connector*:*_1x??_*</fp>
       </footprints>
       <fields>
-        <field name="Reference">H</field>
-        <field name="Value">MountingHole</field>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_01x03_Male-Connector</field>
       </fields>
+      <pins>
+        <pin num="1" name="Pin_1" type="passive"/>
+        <pin num="2" name="Pin_2" type="passive"/>
+        <pin num="3" name="Pin_3" type="passive"/>
+      </pins>
     </libpart>
-    <libpart lib="Regulator_Linear" part="LM7805_TO220">
-      <aliases>
-        <alias>LM7806_TO220</alias>
-        <alias>LM7808_TO220</alias>
-        <alias>LM7809_TO220</alias>
-        <alias>LM7810_TO220</alias>
-        <alias>LM7812_TO220</alias>
-        <alias>LM7815_TO220</alias>
-        <alias>LM7818_TO220</alias>
-        <alias>LM7824_TO220</alias>
-        <alias>LM78M05_TO220</alias>
-        <alias>SPX2920U-3.3_TO220</alias>
-        <alias>SPX2920U-5.0_TO220</alias>
-        <alias>LF15_TO220</alias>
-        <alias>LF18_TO220</alias>
-        <alias>LF25_TO220</alias>
-        <alias>LF33_TO220</alias>
-        <alias>LF50_TO220</alias>
-        <alias>LF60_TO220</alias>
-        <alias>LF80_TO220</alias>
-        <alias>LF85_TO220</alias>
-        <alias>LF120_TO220</alias>
-        <alias>LF47_TO220</alias>
-        <alias>LF90_TO220</alias>
-        <alias>LM341T-05_TO220</alias>
-        <alias>LM341T-12_TO220</alias>
-        <alias>LM341T-15_TO220</alias>
-        <alias>LM2937xT</alias>
-        <alias>LM2931-3.3_TO220</alias>
-        <alias>LM2931-5.0_TO220</alias>
-      </aliases>
-      <description>Positive 1A 35V Linear Regulator, Fixed Output 5V, TO-220</description>
-      <docs>https://www.onsemi.cn/PowerSolutions/document/MC7800-D.PDF</docs>
+    <libpart lib="Spotwelderix-controlboard-rescue" part="Conn_01x05_Male-Connector">
+      <footprints>
+        <fp>Connector*:*_1x??_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_01x05_Male-Connector</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Pin_1" type="passive"/>
+        <pin num="2" name="Pin_2" type="passive"/>
+        <pin num="3" name="Pin_3" type="passive"/>
+        <pin num="4" name="Pin_4" type="passive"/>
+        <pin num="5" name="Pin_5" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Spotwelderix-controlboard-rescue" part="Conn_01x09_Male-Connector">
+      <footprints>
+        <fp>Connector*:*_1x??_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_01x09_Male-Connector</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Pin_1" type="passive"/>
+        <pin num="2" name="Pin_2" type="passive"/>
+        <pin num="3" name="Pin_3" type="passive"/>
+        <pin num="4" name="Pin_4" type="passive"/>
+        <pin num="5" name="Pin_5" type="passive"/>
+        <pin num="6" name="Pin_6" type="passive"/>
+        <pin num="7" name="Pin_7" type="passive"/>
+        <pin num="8" name="Pin_8" type="passive"/>
+        <pin num="9" name="Pin_9" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Spotwelderix-controlboard-rescue" part="LM7805_TO220-Regulator_Linear">
       <footprints>
         <fp>TO?220*</fp>
       </footprints>
       <fields>
         <field name="Reference">U</field>
-        <field name="Value">LM7805_TO220</field>
+        <field name="Value">LM7805_TO220-Regulator_Linear</field>
         <field name="Footprint">Package_TO_SOT_THT:TO-220-3_Vertical</field>
       </fields>
       <pins>
@@ -532,6 +586,15 @@
         <pin num="2" name="GND" type="power_in"/>
         <pin num="3" name="VO" type="power_out"/>
       </pins>
+    </libpart>
+    <libpart lib="Spotwelderix-controlboard-rescue" part="MountingHole-Mechanical">
+      <footprints>
+        <fp>MountingHole*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">H</field>
+        <field name="Value">MountingHole-Mechanical</field>
+      </fields>
     </libpart>
     <libpart lib="Spotwelderix-controlboard-rescue" part="NodeMCU32-my_parts">
       <fields>
@@ -556,7 +619,7 @@
         <pin num="15" name="13,GPIO13" type="BiDi"/>
         <pin num="16" name="D2,GPIO9,FLASH" type="BiDi"/>
         <pin num="17" name="D3,GPIO10,FLASH" type="BiDi"/>
-        <pin num="18" name="GND" type="power_in"/>
+        <pin num="18" name="CMD" type="NotConnected"/>
         <pin num="19" name="5V" type="power_in"/>
         <pin num="20" name="CLK" type="BiDi"/>
         <pin num="21" name="SD0" type="BiDi"/>
@@ -579,87 +642,6 @@
         <pin num="38" name="GND" type="power_in"/>
       </pins>
     </libpart>
-    <libpart lib="Transistor_FET" part="BSS138">
-      <aliases>
-        <alias>2N7002</alias>
-        <alias>2N7002E</alias>
-        <alias>2N7002H</alias>
-        <alias>2N7002K</alias>
-        <alias>BS170F</alias>
-        <alias>BS870</alias>
-        <alias>BSN20</alias>
-        <alias>BSS123</alias>
-        <alias>BSS127S</alias>
-        <alias>DMG2302U</alias>
-        <alias>DMG3402L</alias>
-        <alias>DMG3404L</alias>
-        <alias>DMG3406L</alias>
-        <alias>DMG3414U</alias>
-        <alias>DMG3418L</alias>
-        <alias>DMN10H220L</alias>
-        <alias>DMN10H700S</alias>
-        <alias>DMN13H750S</alias>
-        <alias>DMN2041L</alias>
-        <alias>DMN2050L</alias>
-        <alias>DMN2056U</alias>
-        <alias>DMN2058U</alias>
-        <alias>DMN2075U</alias>
-        <alias>DMN2230U</alias>
-        <alias>DMN24H11DS</alias>
-        <alias>DMN24H3D5L</alias>
-        <alias>DMN3042L</alias>
-        <alias>DMN3051L</alias>
-        <alias>DMN30H4D0L</alias>
-        <alias>DMN3110S</alias>
-        <alias>DMN3150L</alias>
-        <alias>DMN3300U</alias>
-        <alias>DMN3404L</alias>
-        <alias>DMN6075S</alias>
-        <alias>DMN6140L</alias>
-        <alias>DMN67D7L</alias>
-        <alias>DMN67D8L</alias>
-        <alias>MMBF170</alias>
-        <alias>VN10LF</alias>
-        <alias>ZVN3306F</alias>
-        <alias>ZVN3310F</alias>
-        <alias>ZVN3320F</alias>
-        <alias>ZVN4106F</alias>
-        <alias>ZXM61N02F</alias>
-        <alias>ZXM61N03F</alias>
-        <alias>ZXMN10A07F</alias>
-        <alias>ZXMN2A01F</alias>
-        <alias>ZXMN2A14F</alias>
-        <alias>ZXMN2B01F</alias>
-        <alias>ZXMN2B14FH</alias>
-        <alias>ZXMN2F30FH</alias>
-        <alias>ZXMN2F34FH</alias>
-        <alias>ZXMN3A01F</alias>
-        <alias>ZXMN3A14F</alias>
-        <alias>ZXMN3B01F</alias>
-        <alias>ZXMN3B14F</alias>
-        <alias>ZXMN3F30FH</alias>
-        <alias>ZXMN6A07F</alias>
-        <alias>IRLML0030</alias>
-        <alias>IRLML2060</alias>
-        <alias>TSM2302CX</alias>
-        <alias>AO3400A</alias>
-      </aliases>
-      <description>50V Vds, 0.22A Id, N-Channel MOSFET, SOT-23</description>
-      <docs>https://www.onsemi.com/pub/Collateral/BSS138-D.PDF</docs>
-      <footprints>
-        <fp>SOT?23*</fp>
-      </footprints>
-      <fields>
-        <field name="Reference">Q</field>
-        <field name="Value">BSS138</field>
-        <field name="Footprint">Package_TO_SOT_SMD:SOT-23</field>
-      </fields>
-      <pins>
-        <pin num="1" name="G" type="input"/>
-        <pin num="2" name="S" type="passive"/>
-        <pin num="3" name="D" type="passive"/>
-      </pins>
-    </libpart>
   </libparts>
   <libraries>
     <library logical="Arduino_Spot_Welderparts">
@@ -668,240 +650,259 @@
     <library logical="Connector">
       <uri>C:\Program Files\KiCad\share\kicad\library/Connector.lib</uri>
     </library>
-    <library logical="Device">
-      <uri>C:\Program Files\KiCad\share\kicad\library/Device.lib</uri>
-    </library>
-    <library logical="Mechanical">
-      <uri>C:\Program Files\KiCad\share\kicad\library/Mechanical.lib</uri>
-    </library>
-    <library logical="Regulator_Linear">
-      <uri>C:\Program Files\KiCad\share\kicad\library/Regulator_Linear.lib</uri>
-    </library>
     <library logical="Spotwelderix-controlboard-rescue">
       <uri>D:\engineering\1-Projekte\Welder\Spotwelderix\PCB\Spotwelderix-controlboard/Spotwelderix-controlboard-rescue.lib</uri>
     </library>
-    <library logical="Transistor_FET">
-      <uri>C:\Program Files\KiCad\share\kicad\library/Transistor_FET.lib</uri>
-    </library>
   </libraries>
   <nets>
-    <net code="1" name="Dallas">
-      <node ref="U1" pin="15"/>
-      <node ref="P2" pin="4"/>
-    </net>
-    <net code="2" name="Net-(U1-Pad25)">
-      <node ref="U1" pin="25"/>
-    </net>
-    <net code="3" name="Net-(U1-Pad23)">
-      <node ref="U1" pin="23"/>
-    </net>
-    <net code="4" name="Net-(U1-Pad22)">
-      <node ref="U1" pin="22"/>
-    </net>
-    <net code="5" name="Net-(U1-Pad21)">
-      <node ref="U1" pin="21"/>
-    </net>
-    <net code="6" name="Net-(U1-Pad20)">
-      <node ref="U1" pin="20"/>
-    </net>
-    <net code="7" name="Net-(U1-Pad2)">
-      <node ref="U1" pin="2"/>
-    </net>
-    <net code="8" name="GND">
+    <net code="1" name="GND">
+      <node ref="U1" pin="38"/>
+      <node ref="P1" pin="2"/>
+      <node ref="C1" pin="2"/>
+      <node ref="C3" pin="2"/>
+      <node ref="P2" pin="1"/>
+      <node ref="R13" pin="2"/>
+      <node ref="U2" pin="2"/>
+      <node ref="C8" pin="2"/>
+      <node ref="C9" pin="2"/>
+      <node ref="R16" pin="2"/>
+      <node ref="J4" pin="9"/>
+      <node ref="R18" pin="2"/>
+      <node ref="Q2" pin="2"/>
       <node ref="J3" pin="2"/>
       <node ref="C7" pin="2"/>
-      <node ref="C6" pin="2"/>
-      <node ref="R7" pin="2"/>
-      <node ref="ENC1" pin="S1"/>
-      <node ref="ENC1" pin="C"/>
-      <node ref="Q1" pin="2"/>
-      <node ref="Q5" pin="2"/>
-      <node ref="Q2" pin="2"/>
-      <node ref="R12" pin="2"/>
-      <node ref="P1" pin="2"/>
-      <node ref="P2" pin="1"/>
-      <node ref="J1" pin="2"/>
-      <node ref="C5" pin="2"/>
-      <node ref="C4" pin="2"/>
-      <node ref="R9" pin="2"/>
-      <node ref="C3" pin="2"/>
-      <node ref="J2" pin="2"/>
-      <node ref="U3" pin="2"/>
-      <node ref="U1" pin="14"/>
-      <node ref="U1" pin="38"/>
-      <node ref="C2" pin="1"/>
-      <node ref="U1" pin="18"/>
-      <node ref="C1" pin="2"/>
-    </net>
-    <net code="9" name="Net-(U1-Pad17)">
-      <node ref="U1" pin="17"/>
-    </net>
-    <net code="10" name="Net-(U1-Pad16)">
-      <node ref="U1" pin="16"/>
-    </net>
-    <net code="11" name="FootSwitch">
-      <node ref="U1" pin="26"/>
-      <node ref="C7" pin="1"/>
-      <node ref="R14" pin="1"/>
-    </net>
-    <net code="12" name="BUZZ">
-      <node ref="Q2" pin="1"/>
-      <node ref="U1" pin="10"/>
-    </net>
-    <net code="13" name="+3V3">
-      <node ref="P1" pin="1"/>
-      <node ref="U1" pin="1"/>
-    </net>
-    <net code="14" name="Net-(ENC1-PadS2)">
-      <node ref="ENC1" pin="S2"/>
-      <node ref="R1" pin="2"/>
-    </net>
-    <net code="15" name="EnableSupply">
-      <node ref="P2" pin="7"/>
-      <node ref="U1" pin="36"/>
-    </net>
-    <net code="16" name="Shuntvoltage">
-      <node ref="U1" pin="8"/>
-      <node ref="P2" pin="9"/>
-    </net>
-    <net code="17" name="Net-(U1-Pad35)">
-      <node ref="U1" pin="35"/>
-    </net>
-    <net code="18" name="Net-(U1-Pad34)">
-      <node ref="U1" pin="34"/>
-    </net>
-    <net code="19" name="Net-(U1-Pad32)">
-      <node ref="U1" pin="32"/>
-    </net>
-    <net code="20" name="VCC">
-      <node ref="J3" pin="3"/>
-      <node ref="D3" pin="1"/>
-      <node ref="D2" pin="1"/>
-      <node ref="R8" pin="1"/>
-      <node ref="U3" pin="1"/>
       <node ref="C4" pin="1"/>
-      <node ref="P2" pin="2"/>
+      <node ref="J2" pin="2"/>
+      <node ref="Q1" pin="2"/>
+      <node ref="J1" pin="2"/>
+      <node ref="C2" pin="2"/>
+      <node ref="C6" pin="2"/>
+      <node ref="Q3" pin="2"/>
+      <node ref="R19" pin="2"/>
+      <node ref="ENC1" pin="C"/>
+      <node ref="R15" pin="2"/>
+      <node ref="ENC1" pin="S1"/>
+      <node ref="U1" pin="14"/>
     </net>
-    <net code="21" name="ExtPower">
-      <node ref="R11" pin="1"/>
-      <node ref="J1" pin="3"/>
-      <node ref="D3" pin="2"/>
+    <net code="2" name="ExtPower">
       <node ref="J3" pin="1"/>
-    </net>
-    <net code="22" name="LED">
-      <node ref="U1" pin="13"/>
+      <node ref="R14" pin="1"/>
+      <node ref="D1" pin="2"/>
       <node ref="J2" pin="3"/>
     </net>
-    <net code="23" name="Net-(ENC1-PadA)">
-      <node ref="ENC1" pin="A"/>
-      <node ref="R2" pin="2"/>
+    <net code="3" name="ExtPWRADC">
+      <node ref="R14" pin="2"/>
+      <node ref="R15" pin="1"/>
+      <node ref="U1" pin="9"/>
     </net>
-    <net code="24" name="Net-(ENC1-PadB)">
-      <node ref="R3" pin="2"/>
-      <node ref="ENC1" pin="B"/>
+    <net code="4" name="Net-(J2-Pad5)">
+      <node ref="J2" pin="5"/>
     </net>
-    <net code="25" name="FAN_GND">
-      <node ref="Q5" pin="3"/>
-      <node ref="D2" pin="2"/>
-      <node ref="J3" pin="4"/>
+    <net code="5" name="Net-(J2-Pad1)">
+      <node ref="J2" pin="1"/>
+      <node ref="R17" pin="2"/>
     </net>
-    <net code="26" name="ChargerEna">
+    <net code="6" name="Net-(J2-Pad4)">
+      <node ref="J2" pin="4"/>
+      <node ref="Q1" pin="3"/>
+    </net>
+    <net code="7" name="ChargerEna">
       <node ref="U1" pin="24"/>
+      <node ref="R16" pin="1"/>
       <node ref="Q1" pin="1"/>
     </net>
-    <net code="27" name="Net-(J1-Pad5)">
-      <node ref="J1" pin="5"/>
-    </net>
-    <net code="28" name="Net-(J1-Pad1)">
-      <node ref="R14" pin="2"/>
-      <node ref="J1" pin="1"/>
-    </net>
-    <net code="29" name="Net-(J1-Pad4)">
-      <node ref="Q1" pin="3"/>
-      <node ref="J1" pin="4"/>
-    </net>
-    <net code="30" name="FAN">
-      <node ref="Q5" pin="1"/>
-      <node ref="U1" pin="11"/>
-    </net>
-    <net code="31" name="Net-(BZ1-Pad2)">
+    <net code="8" name="FAN_GND">
+      <node ref="J3" pin="4"/>
       <node ref="Q2" pin="3"/>
+      <node ref="D2" pin="2"/>
+    </net>
+    <net code="9" name="FAN">
+      <node ref="R18" pin="1"/>
+      <node ref="Q2" pin="1"/>
+      <node ref="U1" pin="12"/>
+    </net>
+    <net code="10" name="Net-(BZ1-Pad2)">
+      <node ref="Q3" pin="3"/>
       <node ref="BZ1" pin="2"/>
     </net>
-    <net code="32" name="ExtPWRADC">
-      <node ref="R11" pin="2"/>
-      <node ref="U1" pin="9"/>
-      <node ref="R12" pin="1"/>
+    <net code="11" name="EnableSupply">
+      <node ref="J4" pin="6"/>
+      <node ref="P2" pin="4"/>
+      <node ref="U1" pin="36"/>
     </net>
-    <net code="33" name="Vbat_ADC">
-      <node ref="P2" pin="6"/>
-      <node ref="U1" pin="5"/>
+    <net code="12" name="Shuntvoltage">
+      <node ref="U1" pin="8"/>
+      <node ref="J4" pin="8"/>
+      <node ref="P2" pin="2"/>
     </net>
-    <net code="34" name="VCC_ADC">
+    <net code="13" name="VCC_ADC">
+      <node ref="R10" pin="1"/>
+      <node ref="C6" pin="1"/>
       <node ref="U1" pin="7"/>
-      <node ref="R9" pin="1"/>
-      <node ref="R8" pin="2"/>
     </net>
-    <net code="35" name="ProbeADC">
-      <node ref="R7" pin="1"/>
-      <node ref="R6" pin="2"/>
+    <net code="14" name="ProbeADC">
       <node ref="U1" pin="6"/>
+      <node ref="J4" pin="2"/>
+      <node ref="P2" pin="8"/>
     </net>
-    <net code="36" name="Probe">
-      <node ref="R6" pin="1"/>
+    <net code="15" name="Vbat_ADC">
+      <node ref="P2" pin="3"/>
+      <node ref="U1" pin="5"/>
+      <node ref="J4" pin="7"/>
+    </net>
+    <net code="16" name="Net-(U1-Pad35)">
+      <node ref="U1" pin="35"/>
+    </net>
+    <net code="17" name="FootSwitch">
+      <node ref="R17" pin="1"/>
+      <node ref="C7" pin="1"/>
+      <node ref="U1" pin="26"/>
+    </net>
+    <net code="18" name="+3V3">
+      <node ref="U1" pin="1"/>
+      <node ref="P1" pin="1"/>
+      <node ref="P2" pin="6"/>
+      <node ref="R1" pin="2"/>
+      <node ref="R7" pin="2"/>
+      <node ref="R9" pin="2"/>
+      <node ref="R8" pin="2"/>
+      <node ref="J4" pin="4"/>
+      <node ref="R3" pin="2"/>
+    </net>
+    <net code="19" name="Gate_logic">
+      <node ref="R2" pin="1"/>
+      <node ref="J4" pin="5"/>
+      <node ref="C2" pin="1"/>
       <node ref="P2" pin="5"/>
     </net>
-    <net code="37" name="UI_RotEnc_B">
-      <node ref="U1" pin="3"/>
-      <node ref="C3" pin="1"/>
-      <node ref="R3" pin="1"/>
+    <net code="20" name="Net-(R10-Pad2)">
+      <node ref="R13" pin="1"/>
+      <node ref="R10" pin="2"/>
+      <node ref="R12" pin="2"/>
     </net>
-    <net code="38" name="UI_RotEnc_A">
-      <node ref="C2" pin="2"/>
-      <node ref="U1" pin="4"/>
-      <node ref="R2" pin="1"/>
+    <net code="21" name="Net-(R2-Pad2)">
+      <node ref="U1" pin="11"/>
+      <node ref="R2" pin="2"/>
     </net>
-    <net code="39" name="UI_RotEnc_Push">
-      <node ref="U1" pin="37"/>
-      <node ref="C1" pin="1"/>
+    <net code="22" name="Net-(ENC1-PadB)">
+      <node ref="ENC1" pin="B"/>
+      <node ref="R5" pin="2"/>
+    </net>
+    <net code="23" name="Dallas">
+      <node ref="U1" pin="15"/>
+      <node ref="J4" pin="3"/>
+      <node ref="P2" pin="7"/>
       <node ref="R1" pin="1"/>
     </net>
-    <net code="40" name="+5V">
-      <node ref="P2" pin="8"/>
-      <node ref="U1" pin="19"/>
-      <node ref="BZ1" pin="1"/>
-      <node ref="J2" pin="1"/>
-      <node ref="U3" pin="3"/>
-      <node ref="C5" pin="1"/>
+    <net code="24" name="Net-(U1-Pad34)">
+      <node ref="U1" pin="34"/>
     </net>
-    <net code="41" name="Gate_logic">
-      <node ref="U1" pin="12"/>
-      <node ref="P2" pin="3"/>
-      <node ref="C6" pin="1"/>
+    <net code="25" name="UI_RotEnc_A">
+      <node ref="C4" pin="2"/>
+      <node ref="R8" pin="1"/>
+      <node ref="U1" pin="4"/>
+      <node ref="R6" pin="1"/>
     </net>
-    <net code="42" name="Net-(P1-Pad6)">
+    <net code="26" name="UI_RotEnc_B">
+      <node ref="R7" pin="1"/>
+      <node ref="R5" pin="1"/>
+      <node ref="C3" pin="1"/>
+      <node ref="U1" pin="3"/>
+    </net>
+    <net code="27" name="Net-(P1-Pad7)">
+      <node ref="R9" pin="1"/>
+      <node ref="P1" pin="7"/>
+      <node ref="U1" pin="31"/>
+    </net>
+    <net code="28" name="Net-(P1-Pad4)">
+      <node ref="U1" pin="28"/>
+      <node ref="P1" pin="4"/>
+    </net>
+    <net code="29" name="Net-(P1-Pad5)">
+      <node ref="P1" pin="5"/>
+      <node ref="U1" pin="29"/>
+    </net>
+    <net code="30" name="Net-(P1-Pad6)">
       <node ref="U1" pin="30"/>
       <node ref="P1" pin="6"/>
     </net>
-    <net code="43" name="Net-(P1-Pad5)">
-      <node ref="U1" pin="29"/>
-      <node ref="P1" pin="5"/>
-    </net>
-    <net code="44" name="Net-(P1-Pad4)">
-      <node ref="P1" pin="4"/>
-      <node ref="U1" pin="28"/>
-    </net>
-    <net code="45" name="Net-(P1-Pad3)">
-      <node ref="U1" pin="27"/>
-      <node ref="P1" pin="3"/>
-    </net>
-    <net code="46" name="Net-(P1-Pad7)">
-      <node ref="U1" pin="31"/>
-      <node ref="P1" pin="7"/>
-    </net>
-    <net code="47" name="Net-(P1-Pad8)">
-      <node ref="U1" pin="33"/>
+    <net code="31" name="Net-(P1-Pad8)">
       <node ref="P1" pin="8"/>
+      <node ref="U1" pin="33"/>
+    </net>
+    <net code="32" name="Net-(P1-Pad3)">
+      <node ref="P1" pin="3"/>
+      <node ref="U1" pin="27"/>
+    </net>
+    <net code="33" name="UI_RotEnc_Push">
+      <node ref="C1" pin="1"/>
+      <node ref="R4" pin="1"/>
+      <node ref="R3" pin="1"/>
+      <node ref="U1" pin="37"/>
+    </net>
+    <net code="34" name="+5V">
+      <node ref="U1" pin="19"/>
+      <node ref="J1" pin="1"/>
+      <node ref="U2" pin="3"/>
+      <node ref="C9" pin="1"/>
+      <node ref="BZ1" pin="1"/>
+    </net>
+    <net code="35" name="Net-(ENC1-PadS2)">
+      <node ref="R4" pin="2"/>
+      <node ref="ENC1" pin="S2"/>
+    </net>
+    <net code="36" name="Net-(ENC1-PadA)">
+      <node ref="R6" pin="2"/>
+      <node ref="ENC1" pin="A"/>
+    </net>
+    <net code="38" name="Net-(U1-Pad23)">
+      <node ref="U1" pin="23"/>
+    </net>
+    <net code="39" name="Net-(U1-Pad25)">
+      <node ref="U1" pin="25"/>
+    </net>
+    <net code="40" name="VCC">
+      <node ref="U2" pin="1"/>
+      <node ref="C8" pin="1"/>
+      <node ref="P2" pin="9"/>
+      <node ref="J3" pin="3"/>
+      <node ref="D1" pin="1"/>
+      <node ref="R12" pin="1"/>
+      <node ref="D2" pin="1"/>
+      <node ref="J4" pin="1"/>
+    </net>
+    <net code="41" name="LED">
+      <node ref="U1" pin="13"/>
+      <node ref="J1" pin="3"/>
+    </net>
+    <net code="42" name="Net-(U1-Pad2)">
+      <node ref="U1" pin="2"/>
+    </net>
+    <net code="43" name="Net-(U1-Pad32)">
+      <node ref="U1" pin="32"/>
+    </net>
+    <net code="44" name="Net-(U1-Pad22)">
+      <node ref="U1" pin="22"/>
+    </net>
+    <net code="45" name="Net-(U1-Pad21)">
+      <node ref="U1" pin="21"/>
+    </net>
+    <net code="46" name="Net-(U1-Pad20)">
+      <node ref="U1" pin="20"/>
+    </net>
+    <net code="47" name="Net-(U1-Pad18)">
+      <node ref="U1" pin="18"/>
+    </net>
+    <net code="48" name="Net-(U1-Pad17)">
+      <node ref="U1" pin="17"/>
+    </net>
+    <net code="49" name="Net-(U1-Pad16)">
+      <node ref="U1" pin="16"/>
+    </net>
+    <net code="50" name="BUZZ">
+      <node ref="Q3" pin="1"/>
+      <node ref="R19" pin="1"/>
+      <node ref="U1" pin="10"/>
     </net>
   </nets>
 </export>
