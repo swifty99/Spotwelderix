@@ -3,6 +3,8 @@ substitutions:
   ADCa_CHANNEL_CURR:  "5"
   ADC_CHANNEL_PROBE_PLUS: "6"
   ADC_CHANNEL_PROBE_NEG:  "7"
+  # these are the channels on direct HW access. see ESP32 data sheet.
+  # this SW does not use HAL for ADC and Gate IO. These add intolerable delays.
   
 esphome:
   name: ${plug_name}
@@ -17,6 +19,9 @@ esphome:
       #- rtttl.play:
       #    rtttl: "two short:d=4,o=5,b=100:16e6,16e6"
       - switch.turn_on: power_on 
+      - delay: 0.1sec    
+      #- switch.turn_off: disp_reset
+      
 
       #- rtttl.play:
       #    rtttl: "two short:d=4,o=5,b=100:16e6,16e6"
@@ -25,7 +30,12 @@ esphome:
           value: 42
 
       # remove display dirt, bad workaround, shoulb be better
-      - delay: 2sec      
+      - delay: 0.2sec    
+      #- switch.turn_on: disp_reset
+      
+      - delay: 2sec    
+      - lambda:  id(my_preweld_time_usec) = id(my_preweld_time_usec_number).state;  
+      - lambda: id(my_preweldpause_time_usec) = id(my_preweldpause_time_usec_number).state;
       - component.update: my_display 
       - delay: 100ms
       - component.update: my_display 
@@ -106,7 +116,7 @@ globals:
   - id: my_preweld_time_usec
     type: unsigned int
     restore_value: no
-    initial_value: '800'
+    initial_value: '1000'
 
   - id: my_preweldpause_time_usec
     type: unsigned int
@@ -124,6 +134,14 @@ globals:
     restore_value: yes   
 
   - id: my_weld_voltref_adj_10v
+    type: int
+    restore_value: yes
+
+  - id: my_weld_currref_adj_1a
+    type: int
+    restore_value: yes   
+
+  - id: my_weld_currref_adj_10a
     type: int
     restore_value: yes
 
@@ -174,9 +192,11 @@ number:
   - platform: template
     id:  my_preweld_time_usec_number
     min_value: 0
-    max_value: 2500
+    max_value: 25000
     step: 250
     optimistic: true
+    
+    restore_value: yes   
     name: "µsec preweld time"
     on_value:
       then:
@@ -188,9 +208,11 @@ number:
   - platform: template
     id:  my_preweldpause_time_usec_number
     min_value: 0
-    max_value: 2500
+    max_value: 25000
     step: 250
     optimistic: true
+    
+    restore_value: yes   
     name: "µsec preweld pause time"
     on_value:
       then:
@@ -252,21 +274,7 @@ sensor:
     pin_a: 36
     pin_b: 39
 
-  - platform: adc
-    pin: 33
-    id: current
-    name: "current"
-    attenuation: 11db
-    update_interval: 130ms
-    unit_of_measurement: "A" 
-    filters:
-      #- calibrate_linear:
-          # Map 0.0 (from sensor) to 0.0 (true value)
-       #   - 0 -> 0.0
-       #   - 2.32 -> 100.0
-      - sliding_window_moving_average:
-          window_size: 3
-          send_every: 2
+
 
   - platform: adc
     pin: 32
@@ -281,6 +289,32 @@ sensor:
       - sliding_window_moving_average:
           window_size: 4
           send_every: 2
+
+
+
+  - platform: adc
+    pin: 35
+    id: probe_minus
+    name: "Probe ground volt"
+    attenuation: 11db
+    update_interval: 200ms
+    filters:
+      - multiply: 7.8
+      - sliding_window_moving_average:
+          window_size: 3
+          send_every: 2
+
+# configured only to set attenuation
+  - platform: adc
+    pin: 34
+    id: battadc
+    attenuation: 11db
+  - platform: adc
+    pin: 33
+    id: curradc
+    attenuation: 11db
+
+  
 
 
   - platform: template
@@ -305,19 +339,31 @@ sensor:
       
     update_interval: 2s
 
+  - platform: template
+    id: current
+    name: "current"
+    lambda: |-
+
+      float raw_adc_avg = (float) ( adc1_get_raw((adc1_channel_t)  ${ADCa_CHANNEL_CURR} ) 
+      + adc1_get_raw((adc1_channel_t)  ${ADCa_CHANNEL_CURR} ) 
+      + adc1_get_raw((adc1_channel_t)  ${ADCa_CHANNEL_CURR} ) )/3;
+      
+      float p1 = 0;
+      float p2 = 10;
+      if (id(my_weld_currref_adj_10a)  == 0){
+        ESP_LOGE("custom", "Invalid calibration of Battery Current" );
+        return 0;}
+      
+      float slope = (p2 - p1) / (id(my_weld_currref_adj_10a) )  ;
+      float offset = 0 * slope;
+      //ESP_LOGI("custom", "slope I: %f , offset: %f",  slope, offset );
+
+      return raw_adc_avg * slope + offset;
+      
+    update_interval: 2s
 
 
-  - platform: adc
-    pin: 35
-    id: probe_minus
-    name: "Probe ground volt"
-    attenuation: 11db
-    update_interval: 200ms
-    filters:
-      - multiply: 7.8
-      - sliding_window_moving_average:
-          window_size: 3
-          send_every: 2
+
 
 
 binary_sensor:
@@ -384,7 +430,7 @@ binary_sensor:
 
 switch:
 
-  # Example configuration entry
+  # Calibration "buttons to adjust ADC values"
   - platform: template
     name: "Spannung auf 1V gesetzt"
     id: calibrate_volt_1v
@@ -401,8 +447,6 @@ switch:
           id: calibrate_volt_1v
           state: OFF      
 
-
-        # Example configuration entry
   - platform: template
     name: "Spannung auf 10V gesetzt"
     id: calibrate_volt_10v
@@ -412,12 +456,46 @@ switch:
           id(my_weld_voltref_adj_10v) = ( adc1_get_raw((adc1_channel_t)   ${ADC_CHANNEL_PROBE_PLUS} ) 
           + adc1_get_raw((adc1_channel_t)   ${ADC_CHANNEL_PROBE_PLUS} ) 
           +adc1_get_raw((adc1_channel_t)   ${ADC_CHANNEL_PROBE_PLUS} ) )/3;
-          ESP_LOGI("custom", "Raw ADC voltage 10V set to: %d",  id(my_weld_voltref_adj_10v) );
+          ESP_LOGW("custom", "Raw ADC voltage 10V set to: %d",  id(my_weld_voltref_adj_10v) );
 
       - switch.turn_off: calibrate_volt_10v
       - switch.template.publish:
           id: calibrate_volt_10v
           state: OFF
+
+
+
+
+  - platform: template
+    name: "Current set to 10A"
+    id: calibrate_amps_10a
+    optimistic: true
+    turn_on_action:
+      - lambda: |-
+          // reconfigure ADC to get more accurate 10A reading
+          adc1_config_channel_atten((adc1_channel_t) ${ADCa_CHANNEL_CURR}, (adc_atten_t) 0);
+          id(my_weld_currref_adj_10a) = ( adc1_get_raw((adc1_channel_t)   ${ADCa_CHANNEL_CURR} ) 
+          + adc1_get_raw((adc1_channel_t)   ${ADCa_CHANNEL_CURR} ) 
+          +adc1_get_raw((adc1_channel_t)   ${ADCa_CHANNEL_CURR} ) )/3/3.55;  // compensate lower attenuation
+          adc1_config_channel_atten((adc1_channel_t) ${ADCa_CHANNEL_CURR}, (adc_atten_t) 3);
+          ESP_LOGW("custom", "Raw ADC current 10A set to: %d",  id(my_weld_currref_adj_10a) );
+
+      - delay: 1s
+      - switch.turn_off: calibrate_amps_10a
+      - switch.template.publish:
+          id: calibrate_amps_10a
+          state: OFF
+
+
+
+
+
+
+
+  - platform: gpio
+    pin: 19
+    #inverted: True
+    id: disp_reset
 
 
   - platform: gpio
@@ -486,3 +564,5 @@ display:
       it.printf(0, it.get_height() - 20, id(dosis_sb_20),  "%.1f°C  %.1f V",  id(mytempsens).state,   id(batt_volt).state);
       it.printf(it.get_width(), it.get_height() - 20, id(dosis_sb_20), TextAlign::RIGHT , "weld %d",   id(my_weld_count));
       
+
+
