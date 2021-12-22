@@ -33,7 +33,7 @@ esphome:
       - delay: 0.2sec    
       #- switch.turn_on: disp_reset
       
-      - delay: 2sec    
+      - delay: 20sec    
       - lambda:  id(my_preweld_time_usec) = id(my_preweld_time_usec_number).state;  
       - lambda: id(my_preweldpause_time_usec) = id(my_preweldpause_time_usec_number).state;
       - component.update: my_display 
@@ -84,12 +84,17 @@ api:
 
 ota:
 
+
 web_server:
   port: 80
 
 time:
-  - platform: sntp
+  - platform: homeassistant
+  #- platform: sntp
     id: sntp_time
+    # servers:
+    #   - 0.de.pool.ntp.org
+    #   - 3.de.pool.ntp.org
 
 dallas:
   - pin: 13
@@ -111,7 +116,7 @@ globals:
   - id: my_weld_time
     type: unsigned int
     restore_value: no
-    initial_value: '43'
+    initial_value: '42'
 
   - id: my_preweld_time_usec
     type: unsigned int
@@ -156,9 +161,9 @@ globals:
     initial_value: '123'
 
   - id: my_weld_energy_target_intern
-    type: unsigned int
+    type: float
     restore_value: no
-    initial_value: '123'
+    initial_value: '1'
 
   - id: my_weld_request
     type: unsigned int
@@ -175,11 +180,12 @@ globals:
 
 number:
 
+
         
   - platform: template
     id:  energy_target
-    min_value: 10
-    max_value: 100
+    min_value: 0.1
+    max_value: 20
     step: 0.1
     optimistic: true
     name: "Energy Target"
@@ -407,13 +413,13 @@ binary_sensor:
       then:
         lambda: id(my_weld_request) = 1;
 
-  - platform: gpio
-    id: pullup2__
-    pin:
-      number: 19
-      mode: INPUT_PULLUP
-    filters:
-      - delayed_on: 100ms
+  # - platform: gpio
+  #   id: pullup2__
+  #   pin:
+  #     number: 19
+  #     mode: INPUT_PULLUP
+  #   filters:
+  #     - delayed_on: 100ms
 
   - platform: gpio
     id: user_switch
@@ -492,10 +498,11 @@ switch:
 
 
 
-  - platform: gpio
-    pin: 19
-    #inverted: True
-    id: disp_reset
+  # - platform: gpio
+  #   pin: 19
+  #   #inverted: True
+  #   id: reset_dos
+  #   name: "rest disp"  
 
 
   - platform: gpio
@@ -533,7 +540,10 @@ font:
     size: 20
   - file: 'fonts/DosisSB.ttf'
     id: dosis_sb_96
-    size: 88
+    size: 92
+  - file: 'fonts/DosisSB.ttf'
+    id: dosis_sb_72
+    size: 72
 
 display:
   - platform: waveshare_epaper
@@ -543,9 +553,9 @@ display:
     busy_pin: 21
     reset_pin: 19
     model: 1.54inv2
-    #full_update_every: 5
+    full_update_every: 5
     rotation: 90
-    update_interval: 15 sec
+    update_interval: 30 sec
     lambda: |-
       // api disc https://esphome.io/api/display__buffer_8h.html
       // Topr Row_ Peek P and time  my_weld_time
@@ -563,6 +573,7 @@ display:
       // bottom row Temp / Batt_
       it.printf(0, it.get_height() - 20, id(dosis_sb_20),  "%.1f°C  %.1f V",  id(mytempsens).state,   id(batt_volt).state);
       it.printf(it.get_width(), it.get_height() - 20, id(dosis_sb_20), TextAlign::RIGHT , "weld %d",   id(my_weld_count));
-      
+  
+  
 
 

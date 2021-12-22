@@ -2,7 +2,7 @@
 
 
 #include "esphome/core/component.h"
-#include "esphome/core/esphal.h"
+//#include "esphome/core/esphal.h"
 #include "esphome/core/defines.h"
 #include "esphome/components/sensor/sensor.h"
 #include "esphome/components/voltage_sampler/voltage_sampler.h"
@@ -27,12 +27,13 @@ class MyWelder : public PollingComponent, public BinarySensor  {
 
     const int coutPreWeldLoop = 100;
 
-    uint32_t time_usec_preweld, time_usec_pause, time_use_weld, time_usec_start;
+    uint32_t time_usec_preweld, time_usec_pause, time_use_weld, time_usec_start, time_weldstep;
 
 
     int raw_curr[coutPreWeldLoop]; 
     int raw_Uplus[coutPreWeldLoop]; 
     int raw_Uneg[coutPreWeldLoop]; 
+    uint16_t rawEnergy[coutPreWeldLoop]; 
 
     bool state = false;
     if (my_weld_request->value() == 1)
@@ -79,6 +80,7 @@ class MyWelder : public PollingComponent, public BinarySensor  {
 
         raw_curr[sampleCount] = adc1_get_raw((adc1_channel_t)  ADC_CHANNEL_CURR);
         raw_Uplus[sampleCount] = adc1_get_raw((adc1_channel_t)  ADC_CHANNEL_PROBE_PLUS );
+        rawEnergy[sampleCount] = 0;
         sampleCount++;
 
       }
@@ -96,16 +98,19 @@ class MyWelder : public PollingComponent, public BinarySensor  {
 
 
       // calc preweld steps, ADC takes 123µsec, needed two times, so one interval is 250µsec
+      uint16_t weldEnergyTarget01Joule = (uint16_t) (id(my_weld_energy_target_intern) * 10); //rescale to 01
 
- 
+      // calculate the raw equivalent E = U * I * time
+      uint32_t energyTargetRaw = ( id(my_weld_voltref_adj_10v) * id(my_weld_currref_adj_10a) * weldEnergyTarget01Joule ) /10 /10; // rescale back use 10V scaling prelim
+      uint32_t energyWeldRaw  = 0;
 
       for (int i = 0; i< preweld_intervalpause_count  && sampleCount < coutPreWeldLoop
            &&  micros() - time_usec_start < time_usec_pause_target; i++){
 
         raw_curr[sampleCount] = adc1_get_raw((adc1_channel_t)  ADC_CHANNEL_CURR);
         raw_Uplus[sampleCount] = adc1_get_raw((adc1_channel_t)  ADC_CHANNEL_PROBE_PLUS );
+        rawEnergy[sampleCount] = 0;
         sampleCount++;
-
       }
 
       if (sampleCount >= (coutPreWeldLoop -1)){
@@ -125,16 +130,36 @@ class MyWelder : public PollingComponent, public BinarySensor  {
 
 
       time_usec_start = micros();
+      time_weldstep = time_usec_start;
+      
+      // Weld ON "hard" IO operation, avoid esphome interaction, HAL and so on. Way too slow!
+      REG_WRITE(GPIO_OUT_W1TS_REG, BIT27);
+      
+      while  ( sampleCount < coutPreWeldLoop && energyWeldRaw < energyTargetRaw) {
 
       
+        raw_curr[sampleCount] = adc1_get_raw((adc1_channel_t)  ADC_CHANNEL_CURR);
+        raw_Uplus[sampleCount] = adc1_get_raw((adc1_channel_t)  ADC_CHANNEL_PROBE_PLUS );
+
+        // get timediff
+        // get power RAW and multiply timeframe
+        // integrate 
+        uint32_t timeSample = micros();
+        uint32_t timeDiff = timeSample - time_weldstep;
+        time_weldstep = timeSample;
+        rawEnergy[sampleCount] =  (uint16_t)( (uint32_t) raw_curr[sampleCount] * (uint32_t) raw_Uplus[sampleCount] * timeDiff / 1000000);
+        energyWeldRaw += rawEnergy[sampleCount];
+
+        sampleCount++;          
 
 
+      }
 
-      
-      raw_curr[sampleCount] = adc1_get_raw((adc1_channel_t)  ADC_CHANNEL_CURR);
-      raw_Uplus[sampleCount] = adc1_get_raw((adc1_channel_t)  ADC_CHANNEL_PROBE_PLUS );
-      raw_Uneg[sampleCount] = adc1_get_raw((adc1_channel_t)  ADC_CHANNEL_PROBE_NEG );
-      sampleCount++;
+  
+      // Weld OFF "hard" IO operation, avoid esphome interaction, HAL and so on. Way too slow!
+      REG_WRITE(GPIO_OUT_W1TC_REG, BIT27);
+
+
   
 
 
@@ -147,11 +172,14 @@ class MyWelder : public PollingComponent, public BinarySensor  {
 
 
       
-        ESP_LOGI("custom", "I_raw: %d   + %d  ",  raw_curr[i], raw_Uplus[i]);
+        ESP_LOGI("custom", "E_raw: %d I_raw: %d   U_raw: %d  ", rawEnergy[i], raw_curr[i], raw_Uplus[i]);
 
       }
 
-      ESP_LOGI("custom", "Preweld raw : %d   count: %d",   (time_usec_preweld), preweld_interval_count);
+
+      ESP_LOGI("custom", "slope:  U %d   I: %d",   id(my_weld_voltref_adj_10v), id(my_weld_currref_adj_10a));
+      ESP_LOGI("custom", "energyTargetRaw: %d   total count: %d",   (energyTargetRaw), sampleCount);
+      //ESP_LOGI("custom", "targetE : %1.f   target01: %d",   (id(my_weld_energy_target_intern)), weldEnergyTarget01Joule);
 
       ESP_LOGI("custom", "Preweld: %.1f pause: %.1f weld: %.1f", (float) (time_usec_preweld)/1000
       , (float) (time_usec_pause)/1000, (float) (time_use_weld)/1000 );
