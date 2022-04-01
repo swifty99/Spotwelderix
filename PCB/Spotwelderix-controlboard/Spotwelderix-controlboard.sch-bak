@@ -5,8 +5,8 @@ $Descr A4 11693 8268
 encoding utf-8
 Sheet 1 1
 Title "Spotwelderix Controlboard"
-Date "2021-01-29"
-Rev "v01"
+Date "2021-09-01"
+Rev "v02"
 Comp ""
 Comment1 ""
 Comment2 "mail: engineering at kippings.de"
@@ -830,7 +830,7 @@ L Arduino_Spot_Welderparts:R R17
 U 1 1 60368C6B
 P 8700 2600
 F 0 "R17" H 8770 2646 50  0000 L CNN
-F 1 "100" H 8770 2555 50  0000 L CNN
+F 1 "10k" H 8770 2555 50  0000 L CNN
 F 2 "Resistor_SMD:R_0805_2012Metric" H 8770 2509 50  0001 L CNN
 F 3 "" H 8700 2600 50  0001 C CNN
 	1    8700 2600

@@ -6,7 +6,7 @@ encoding utf-8
 Sheet 1 1
 Title "Spotwelderix Controlboard"
 Date "2021-09-01"
-Rev "v02"
+Rev "v03"
 Comp ""
 Comment1 ""
 Comment2 "mail: engineering at kippings.de"
@@ -157,27 +157,25 @@ F 3 "" H 10150 3900 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	10150 3900 10150 3800
-Text GLabel 8450 4850 0    50   Input ~ 0
+Text GLabel 7450 4900 0    50   Input ~ 0
 Dallas
-Text GLabel 8650 5350 0    50   Input ~ 0
+Text GLabel 7650 5400 0    50   Input ~ 0
 Shuntvoltage
 $Comp
 L Spotwelderix-controlboard-rescue:GND-power #PWR029
 U 1 1 601723B2
-P 8700 5500
-F 0 "#PWR029" H 8700 5250 50  0001 C CNN
-F 1 "GND" H 8705 5327 50  0000 C CNN
-F 2 "" H 8700 5500 50  0001 C CNN
-F 3 "" H 8700 5500 50  0001 C CNN
-	1    8700 5500
+P 7700 5550
+F 0 "#PWR029" H 7700 5300 50  0001 C CNN
+F 1 "GND" H 7705 5377 50  0000 C CNN
+F 2 "" H 7700 5550 50  0001 C CNN
+F 3 "" H 7700 5550 50  0001 C CNN
+	1    7700 5550
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	8700 5500 8700 5450
-Text GLabel 8450 5050 0    50   Input ~ 0
+	7700 5550 7700 5500
+Text GLabel 7450 5100 0    50   Input ~ 0
 Gate_logic
-Wire Wire Line
-	7950 4800 7950 4850
 $Comp
 L Spotwelderix-controlboard-rescue:+5V-power #PWR09
 U 1 1 6018DFE6
@@ -617,48 +615,48 @@ Wire Wire Line
 $Comp
 L Spotwelderix-controlboard-rescue:Conn_01x03_Male-Connector J1
 U 1 1 6018AA6E
-P 7450 5150
-F 0 "J1" H 7422 5174 50  0000 R CNN
-F 1 "LEDs" H 7422 5083 50  0000 R CNN
-F 2 "Connector_JST:JST_XH_B3B-XH-A_1x03_P2.50mm_Vertical" H 7450 5150 50  0001 C CNN
-F 3 "~" H 7450 5150 50  0001 C CNN
-	1    7450 5150
+P 11000 5700
+F 0 "J1" H 10972 5724 50  0000 R CNN
+F 1 "LEDs" H 10972 5633 50  0000 R CNN
+F 2 "Connector_JST:JST_XH_B3B-XH-A_1x03_P2.50mm_Vertical" H 11000 5700 50  0001 C CNN
+F 3 "~" H 11000 5700 50  0001 C CNN
+	1    11000 5700
 	-1   0    0    -1  
 $EndComp
 $Comp
 L Spotwelderix-controlboard-rescue:GND-power #PWR021
 U 1 1 60191D79
-P 6800 5150
-F 0 "#PWR021" H 6800 4900 50  0001 C CNN
-F 1 "GND" H 6805 4977 50  0000 C CNN
-F 2 "" H 6800 5150 50  0001 C CNN
-F 3 "" H 6800 5150 50  0001 C CNN
-	1    6800 5150
+P 10350 5700
+F 0 "#PWR021" H 10350 5450 50  0001 C CNN
+F 1 "GND" H 10355 5527 50  0000 C CNN
+F 2 "" H 10350 5700 50  0001 C CNN
+F 3 "" H 10350 5700 50  0001 C CNN
+	1    10350 5700
 	1    0    0    -1  
 $EndComp
 $Comp
 L Spotwelderix-controlboard-rescue:+5V-power #PWR020
 U 1 1 60197CCB
-P 6800 5000
-F 0 "#PWR020" H 6800 4850 50  0001 C CNN
-F 1 "+5V" H 6815 5173 50  0000 C CNN
-F 2 "" H 6800 5000 50  0001 C CNN
-F 3 "" H 6800 5000 50  0001 C CNN
-	1    6800 5000
+P 10350 5550
+F 0 "#PWR020" H 10350 5400 50  0001 C CNN
+F 1 "+5V" H 10365 5723 50  0000 C CNN
+F 2 "" H 10350 5550 50  0001 C CNN
+F 3 "" H 10350 5550 50  0001 C CNN
+	1    10350 5550
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	6800 5000 6800 5050
+	10350 5550 10350 5600
 Wire Wire Line
-	6800 5050 7250 5050
+	10350 5600 10800 5600
 Wire Wire Line
-	6800 5150 7250 5150
-Text GLabel 7000 5500 0    50   Input ~ 0
+	10350 5700 10800 5700
+Text GLabel 10550 6050 0    50   Input ~ 0
 LED
 Wire Wire Line
-	7000 5500 7250 5500
+	10550 6050 10800 6050
 Wire Wire Line
-	7250 5500 7250 5250
+	10800 6050 10800 5800
 Text GLabel 1750 4800 0    50   Input ~ 0
 LED
 Wire Wire Line
@@ -701,7 +699,7 @@ ExtConn: Ext+, Ext-,Fan+, Fan-,\n
 Wire Wire Line
 	7900 1600 8500 1600
 Wire Wire Line
-	7450 4550 7450 4650
+	6450 4600 6450 4700
 Text GLabel 7650 1150 0    50   Input ~ 0
 ExtPower
 Wire Wire Line
@@ -767,36 +765,34 @@ F 3 "" H 1800 4450 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	8650 5150 8950 5150
+	7650 5200 7950 5200
 Wire Wire Line
-	8550 4750 8950 4750
+	7550 4800 7950 4800
 Wire Wire Line
-	8450 5050 8950 5050
+	7450 5100 7950 5100
 Wire Wire Line
-	8700 5450 8950 5450
+	7700 5500 7950 5500
 $Comp
 L Spotwelderix-controlboard-rescue:Conn_01x09_Male-Connector P2
 U 1 1 6015F832
-P 9150 5050
-F 0 "P2" H 9067 4475 50  0000 C CNN
-F 1 "CONN_01X08" H 9067 4566 50  0000 C CNN
-F 2 "Connector_JST:JST_XH_B9B-XH-A_1x09_P2.50mm_Vertical" H 9150 5050 50  0001 C CNN
-F 3 "" H 9150 5050 50  0000 C CNN
-	1    9150 5050
+P 8150 5100
+F 0 "P2" H 8067 4525 50  0000 C CNN
+F 1 "CONN_01X08" H 8067 4616 50  0000 C CNN
+F 2 "Connector_JST:JST_XH_B9B-XH-A_1x09_P2.50mm_Vertical" H 8150 5100 50  0001 C CNN
+F 3 "" H 8150 5100 50  0000 C CNN
+	1    8150 5100
 	-1   0    0    1   
 $EndComp
 Wire Wire Line
-	8650 5350 8950 5350
-Text GLabel 8650 5150 0    50   Input ~ 0
+	7650 5400 7950 5400
+Text GLabel 7650 5200 0    50   Input ~ 0
 EnableSupply
-Text GLabel 8500 5250 0    50   Input ~ 0
-Vbat_ADC
 Text GLabel 1750 4100 0    50   Input ~ 0
 ProbeADC
 Text GLabel 1750 4200 0    50   Input ~ 0
 VCC_ADC
 Text GLabel 1750 4000 0    50   Input ~ 0
-Vbat_ADC
+Probe_diff
 Text GLabel 1750 4300 0    50   Input ~ 0
 Shuntvoltage
 Wire Wire Line
@@ -959,7 +955,7 @@ Wire Wire Line
 	9250 1100 9250 1300
 Connection ~ 9250 1300
 Wire Wire Line
-	8500 5250 8950 5250
+	6400 5300 6600 5300
 Text GLabel 6800 1000 0    50   Input ~ 0
 ExtPower
 Text GLabel 6150 1950 0    50   Input ~ 0
@@ -1057,87 +1053,76 @@ Wire Wire Line
 $Comp
 L Spotwelderix-controlboard-rescue:VCC-power #PWR023
 U 1 1 602C9F87
-P 7450 4550
-F 0 "#PWR023" H 7450 4400 50  0001 C CNN
-F 1 "VCC" H 7465 4723 50  0000 C CNN
-F 2 "" H 7450 4550 50  0001 C CNN
-F 3 "" H 7450 4550 50  0001 C CNN
-	1    7450 4550
+P 6450 4600
+F 0 "#PWR023" H 6450 4450 50  0001 C CNN
+F 1 "VCC" H 6465 4773 50  0000 C CNN
+F 2 "" H 6450 4600 50  0001 C CNN
+F 3 "" H 6450 4600 50  0001 C CNN
+	1    6450 4600
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	7450 4650 7850 4650
-Connection ~ 7850 4650
+	6450 4700 6850 4700
+Connection ~ 6850 4700
 Wire Wire Line
-	7850 4550 7850 4650
+	6850 4600 6850 4700
 $Comp
 L Spotwelderix-controlboard-rescue:PWR_FLAG-power #FLG02
 U 1 1 602C3C21
-P 7850 4550
-F 0 "#FLG02" H 7850 4625 50  0001 C CNN
-F 1 "PWR_FLAG" H 7850 4723 50  0000 C CNN
-F 2 "" H 7850 4550 50  0001 C CNN
-F 3 "~" H 7850 4550 50  0001 C CNN
-	1    7850 4550
-	1    0    0    -1  
-$EndComp
-$Comp
-L Spotwelderix-controlboard-rescue:+3V3-power #PWR025
-U 1 1 61300BA5
-P 7950 4900
-F 0 "#PWR025" H 7950 4750 50  0001 C CNN
-F 1 "+3V3" H 7965 5073 50  0000 C CNN
-F 2 "" H 7950 4900 50  0001 C CNN
-F 3 "" H 7950 4900 50  0001 C CNN
-	1    7950 4900
+P 6850 4600
+F 0 "#FLG02" H 6850 4675 50  0001 C CNN
+F 1 "PWR_FLAG" H 6850 4773 50  0000 C CNN
+F 2 "" H 6850 4600 50  0001 C CNN
+F 3 "~" H 6850 4600 50  0001 C CNN
+	1    6850 4600
 	1    0    0    -1  
 $EndComp
 $Comp
 L Connector:Conn_01x09_Female J4
 U 1 1 61345D7A
-P 9800 5050
-F 0 "J4" H 9828 5076 50  0000 L CNN
-F 1 "Testpin" H 9828 4985 50  0000 L CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x09_P2.54mm_Vertical" H 9800 5050 50  0001 C CNN
-F 3 "~" H 9800 5050 50  0001 C CNN
-	1    9800 5050
+P 8800 5100
+F 0 "J4" H 8828 5126 50  0000 L CNN
+F 1 "Testpin" H 8828 5035 50  0000 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x09_P2.54mm_Vertical" H 8800 5100 50  0001 C CNN
+F 3 "~" H 8800 5100 50  0001 C CNN
+	1    8800 5100
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	7850 4650 8950 4650
-Connection ~ 8950 4650
+	6850 4700 7950 4700
+Connection ~ 7950 4700
 Wire Wire Line
-	8950 4650 9600 4650
+	7950 4700 8600 4700
 Wire Wire Line
-	8950 4750 9600 4750
-Connection ~ 8950 4750
+	7950 4800 8600 4800
+Connection ~ 7950 4800
 Wire Wire Line
-	9600 4850 8950 4850
+	8600 4900 7950 4900
 Wire Wire Line
-	8950 4950 9600 4950
-Connection ~ 8950 4950
+	7950 5000 8600 5000
+Connection ~ 7950 5000
 Wire Wire Line
-	9600 5050 8950 5050
-Connection ~ 8950 5050
+	8600 5100 7950 5100
+Connection ~ 7950 5100
 Wire Wire Line
-	8950 5150 9600 5150
-Connection ~ 8950 5150
+	7950 5200 8600 5200
+Connection ~ 7950 5200
 Wire Wire Line
-	8950 5250 9600 5250
-Connection ~ 8950 5250
+	7950 5300 8600 5300
+Connection ~ 7950 5300
 Wire Wire Line
-	9600 5350 8950 5350
-Connection ~ 8950 5350
+	8600 5400 7950 5400
+Connection ~ 7950 5400
 Wire Wire Line
-	8950 5450 9600 5450
-Connection ~ 8950 5450
+	7950 5500 8600 5500
+Connection ~ 7950 5500
 Wire Wire Line
-	7950 4900 7950 4950
+	6950 4950 6950 5000
 Wire Wire Line
-	7950 4950 8950 4950
+	6950 5000 7950 5000
 Wire Wire Line
-	8450 4850 8950 4850
-Connection ~ 8950 4850
+	7450 4900 7950 4900
+Connection ~ 7950 4900
 $Comp
 L Arduino_Spot_Welderparts:R R2
 U 1 1 6139E65D
@@ -1403,7 +1388,7 @@ Wire Wire Line
 Connection ~ 3800 1150
 Wire Wire Line
 	3800 1150 3700 1150
-Text GLabel 8550 4750 0    50   Input ~ 0
+Text GLabel 7550 4800 0    50   Input ~ 0
 ProbeADC
 $Comp
 L Arduino_Spot_Welderparts:R R12
@@ -1455,4 +1440,48 @@ Wire Wire Line
 	5650 2200 5850 2200
 Wire Wire Line
 	9300 1600 9750 1600
+Text GLabel 6400 5300 0    50   Input ~ 0
+Probe_diff
+Text Notes 2650 7050 0    50   ~ 0
+v3:\n5V supply to powerboard\nSchutzdioden dallas, gatelogic\nvbat adc als diffvolt, jetut\n\nYET TO BE DONE! v2 is active\n
+$Comp
+L Spotwelderix-controlboard-rescue:+5V-power #PWR025
+U 1 1 62405CB9
+P 6950 4950
+F 0 "#PWR025" H 6950 4800 50  0001 C CNN
+F 1 "+5V" H 6965 5123 50  0000 C CNN
+F 2 "" H 6950 4950 50  0001 C CNN
+F 3 "" H 6950 4950 50  0001 C CNN
+	1    6950 4950
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:D_Schottky D3
+U 1 1 62443536
+P 6600 5500
+F 0 "D3" V 6646 5420 50  0000 R CNN
+F 1 "D_Schottky" V 6555 5420 50  0000 R CNN
+F 2 "Diode_SMD:D_SMA_Handsoldering" H 6600 5500 50  0001 C CNN
+F 3 "~" H 6600 5500 50  0001 C CNN
+	1    6600 5500
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Spotwelderix-controlboard-rescue:+3V3-power #PWR017
+U 1 1 62444B82
+P 6600 5750
+F 0 "#PWR017" H 6600 5600 50  0001 C CNN
+F 1 "+3V3" H 6615 5923 50  0000 C CNN
+F 2 "" H 6600 5750 50  0001 C CNN
+F 3 "" H 6600 5750 50  0001 C CNN
+	1    6600 5750
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	6600 5750 6600 5650
+Wire Wire Line
+	6600 5350 6600 5300
+Connection ~ 6600 5300
+Wire Wire Line
+	6600 5300 7950 5300
 $EndSCHEMATC

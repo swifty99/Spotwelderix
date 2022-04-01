@@ -134,11 +134,11 @@ globals:
     initial_value: '1234'
 
     
-  - id: my_weld_voltref_adj_1v
+  - id: my_weld_voltref_adj_0v
     type: int
     restore_value: yes   
 
-  - id: my_weld_voltref_adj_10v
+  - id: my_weld_voltref_adj_0_1v
     type: int
     restore_value: yes
 
@@ -270,7 +270,7 @@ sensor:
 
 
   - platform: dallas
-    address: 0x880315A4D71EFF28
+    address: 0xcb0d4c2608430028
     name: "PCB Temperature"
     id: mytempsens
 
@@ -287,25 +287,28 @@ sensor:
     id: supply_volt
     name: "Supply Voltage"
     attenuation: 11db
-    update_interval: 510ms
+    update_interval: 80ms
     filters:
-      # convert back to raw, do const adjust and number adjust. do same in weld.h
-      - lambda: return x  ;
+
+      - multiply: 7.866
       # * id(my_weld_voltref_adj); 
       - sliding_window_moving_average:
           window_size: 4
-          send_every: 2
+          send_every: 2        
+      - or:
+        - delta: 0.3
+        - throttle: 10sec  
 
 
 
   - platform: adc
     pin: 35
     id: probe_minus
-    name: "Probe ground volt"
+    name: "Probe volt neg pole"
     attenuation: 11db
     update_interval: 200ms
     filters:
-      - multiply: 7.8
+      - multiply: 6.35
       - sliding_window_moving_average:
           window_size: 3
           send_every: 2
@@ -324,22 +327,24 @@ sensor:
 
 
   - platform: template
-    id: batt_volt
-    name: "Battery Voltage"
+    id: batt_volt_diff
+    name: "Probe Voltage Diff"
     lambda: |-
       float raw_adc_avg = (float) ( adc1_get_raw((adc1_channel_t)  ${ADC_CHANNEL_PROBE_PLUS} ) 
       + adc1_get_raw((adc1_channel_t)  ${ADC_CHANNEL_PROBE_PLUS} ) 
       + adc1_get_raw((adc1_channel_t)  ${ADC_CHANNEL_PROBE_PLUS} ) )/3;
+      //ESP_LOGI("custom", "Voldiff raw U: %f ",  raw_adc_avg );
       
-      float p1 = 1;
-      float p2 = 10;
-      if (id(my_weld_voltref_adj_10v) - id(my_weld_voltref_adj_1v) == 0){
+      float p1 = 0;
+      float p2 = 0.1;
+      if (id(my_weld_voltref_adj_0_1v) - id(my_weld_voltref_adj_0v) == 0){
         ESP_LOGE("custom", "Invalid calibration of Battery Voltage" );
         return 0;
       }
-      float slope = (p2 - p1) / (id(my_weld_voltref_adj_10v) - id(my_weld_voltref_adj_1v))  ;
-      float offset = p1- id(my_weld_voltref_adj_1v) * slope;
+      float slope = (p2 - p1) / (id(my_weld_voltref_adj_0_1v) - id(my_weld_voltref_adj_0v))  ;
+      float offset = p1- id(my_weld_voltref_adj_0v) * slope;
       //ESP_LOGI("custom", "slope U: %f , offset: %f",  slope, offset );
+      //ESP_LOGI("custom", "voltdiff : %f",   raw_adc_avg * slope + offset );
 
       return raw_adc_avg * slope + offset;
       
@@ -353,6 +358,7 @@ sensor:
       float raw_adc_avg = (float) ( adc1_get_raw((adc1_channel_t)  ${ADCa_CHANNEL_CURR} ) 
       + adc1_get_raw((adc1_channel_t)  ${ADCa_CHANNEL_CURR} ) 
       + adc1_get_raw((adc1_channel_t)  ${ADCa_CHANNEL_CURR} ) )/3;
+      ESP_LOGI("custom", "Current raw A: %f ",  raw_adc_avg );
       
       float p1 = 0;
       float p2 = 10;
@@ -362,7 +368,7 @@ sensor:
       
       float slope = (p2 - p1) / (id(my_weld_currref_adj_10a) )  ;
       float offset = 0 * slope;
-      //ESP_LOGI("custom", "slope I: %f , offset: %f",  slope, offset );
+      ESP_LOGI("custom", "slope I: %f , offset: %f",  slope, offset );
 
       return raw_adc_avg * slope + offset;
       
@@ -434,40 +440,31 @@ binary_sensor:
 
 
 
-switch:
+button:
 
   # Calibration "buttons to adjust ADC values"
   - platform: template
-    name: "Spannung auf 1V gesetzt"
-    id: calibrate_volt_1v
-    optimistic: true
-    turn_on_action:
+    name: "Probe shorted"
+    id: calibrate_volt_0v
+    on_press:
       - lambda: |-
-          id(my_weld_voltref_adj_1v) = ( adc1_get_raw((adc1_channel_t)   ${ADC_CHANNEL_PROBE_PLUS} ) 
+          id(my_weld_voltref_adj_0v) = ( adc1_get_raw((adc1_channel_t)   ${ADC_CHANNEL_PROBE_PLUS} ) 
           + adc1_get_raw((adc1_channel_t)   ${ADC_CHANNEL_PROBE_PLUS} ) 
           +adc1_get_raw((adc1_channel_t)   ${ADC_CHANNEL_PROBE_PLUS} ) )/3;
-          ESP_LOGI("custom", "Raw ADC voltage 1V set to: %d",  id(my_weld_voltref_adj_1v) );
+          ESP_LOGI("custom", "Raw ADC voltage 1V set to: %d",  id(my_weld_voltref_adj_0v) );
 
-      - switch.turn_off: calibrate_volt_1v
-      - switch.template.publish:
-          id: calibrate_volt_1v
-          state: OFF      
+
 
   - platform: template
-    name: "Spannung auf 10V gesetzt"
-    id: calibrate_volt_10v
-    optimistic: true
-    turn_on_action:
+    name: "voltage on probe 0.1"
+    id: calibrate_volt_01v
+    on_press:
       - lambda: |-
-          id(my_weld_voltref_adj_10v) = ( adc1_get_raw((adc1_channel_t)   ${ADC_CHANNEL_PROBE_PLUS} ) 
+          id(my_weld_voltref_adj_0_1v) = ( adc1_get_raw((adc1_channel_t)   ${ADC_CHANNEL_PROBE_PLUS} ) 
           + adc1_get_raw((adc1_channel_t)   ${ADC_CHANNEL_PROBE_PLUS} ) 
           +adc1_get_raw((adc1_channel_t)   ${ADC_CHANNEL_PROBE_PLUS} ) )/3;
-          ESP_LOGW("custom", "Raw ADC voltage 10V set to: %d",  id(my_weld_voltref_adj_10v) );
+          ESP_LOGW("custom", "Raw ADC voltage 0.1V set to: %d",  id(my_weld_voltref_adj_0_1v) );
 
-      - switch.turn_off: calibrate_volt_10v
-      - switch.template.publish:
-          id: calibrate_volt_10v
-          state: OFF
 
 
 
@@ -475,35 +472,30 @@ switch:
   - platform: template
     name: "Current set to 10A"
     id: calibrate_amps_10a
-    optimistic: true
-    turn_on_action:
+    on_press:
       - lambda: |-
           // reconfigure ADC to get more accurate 10A reading
-          adc1_config_channel_atten((adc1_channel_t) ${ADCa_CHANNEL_CURR}, (adc_atten_t) 0);
           id(my_weld_currref_adj_10a) = ( adc1_get_raw((adc1_channel_t)   ${ADCa_CHANNEL_CURR} ) 
           + adc1_get_raw((adc1_channel_t)   ${ADCa_CHANNEL_CURR} ) 
-          +adc1_get_raw((adc1_channel_t)   ${ADCa_CHANNEL_CURR} ) )/3/3.55;  // compensate lower attenuation
-          adc1_config_channel_atten((adc1_channel_t) ${ADCa_CHANNEL_CURR}, (adc_atten_t) 3);
+          +adc1_get_raw((adc1_channel_t)   ${ADCa_CHANNEL_CURR} ) )/3;  
           ESP_LOGW("custom", "Raw ADC current 10A set to: %d",  id(my_weld_currref_adj_10a) );
 
-      - delay: 1s
-      - switch.turn_off: calibrate_amps_10a
-      - switch.template.publish:
-          id: calibrate_amps_10a
-          state: OFF
 
 
 
 
 
 
+  - platform: template
+    #inverted: True
+    id: weld
+    name: "Weld it!"  
+      
 
-  # - platform: gpio
-  #   pin: 19
-  #   #inverted: True
-  #   id: reset_dos
-  #   name: "rest disp"  
 
+
+
+switch:
 
   - platform: gpio
     pin: 22
@@ -512,12 +504,6 @@ switch:
     name: "Power"  
 
 
-  - platform: gpio
-    pin: 27
-    #inverted: True
-    id: weld
-    name: "Weld it!"  
-      
 
 output:
   - platform: ledc
@@ -571,7 +557,7 @@ display:
       // draw the power curve
       
       // bottom row Temp / Batt_
-      it.printf(0, it.get_height() - 20, id(dosis_sb_20),  "%.1f°C  %.1f V",  id(mytempsens).state,   id(batt_volt).state);
+      it.printf(0, it.get_height() - 20, id(dosis_sb_20),  "%.1f°C  %.1f V",  id(mytempsens).state,   id(supply_volt).state);
       it.printf(it.get_width(), it.get_height() - 20, id(dosis_sb_20), TextAlign::RIGHT , "weld %d",   id(my_weld_count));
   
   

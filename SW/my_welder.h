@@ -101,7 +101,7 @@ class MyWelder : public PollingComponent, public BinarySensor  {
       uint16_t weldEnergyTarget01Joule = (uint16_t) (id(my_weld_energy_target_intern) * 10); //rescale to 01
 
       // calculate the raw equivalent E = U * I * time
-      uint32_t energyTargetRaw = ( id(my_weld_voltref_adj_10v) * id(my_weld_currref_adj_10a) * weldEnergyTarget01Joule ) /10 /10; // rescale back use 10V scaling prelim
+      uint32_t energyTargetRaw = ( id(my_weld_voltref_adj_0_1v) * id(my_weld_currref_adj_10a) * weldEnergyTarget01Joule ) /10 /10; // rescale back use 10V scaling prelim
       uint32_t energyWeldRaw  = 0;
 
       for (int i = 0; i< preweld_intervalpause_count  && sampleCount < coutPreWeldLoop
@@ -177,7 +177,7 @@ class MyWelder : public PollingComponent, public BinarySensor  {
       }
 
 
-      ESP_LOGI("custom", "slope:  U %d   I: %d",   id(my_weld_voltref_adj_10v), id(my_weld_currref_adj_10a));
+      ESP_LOGI("custom", "slope:  U %d   I: %d",   id(my_weld_voltref_adj_0_1v), id(my_weld_currref_adj_10a));
       ESP_LOGI("custom", "energyTargetRaw: %d   total count: %d",   (energyTargetRaw), sampleCount);
       //ESP_LOGI("custom", "targetE : %1.f   target01: %d",   (id(my_weld_energy_target_intern)), weldEnergyTarget01Joule);
 
