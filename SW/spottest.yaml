@@ -14,29 +14,13 @@ esphome:
   platform: ESP32
   board: nodemcu-32s  
   on_boot:
-    priority: 200 #switches available
+    priority: 750 #switches available
     then:
-      - rtttl.play:
-          rtttl: "two short:d=4,o=5,b=100:16e6,16e6"
       - switch.turn_on: power_on 
-      - delay: 0.1sec    
-      #- switch.turn_off: disp_reset
-      
-
-      #- rtttl.play:
-      #    rtttl: "two short:d=4,o=5,b=100:16e6,16e6"
-      - number.set:
-          id: energy_target
-          value: 42
-
-      # remove display dirt, bad workaround, shoulb be better
-      - delay: 0.2sec    
-      #- switch.turn_on: disp_reset
-      
-      - delay: 20sec    
       - lambda:  id(my_preweld_time_usec) = id(my_preweld_time_usec_number).state;  
       - lambda: id(my_preweldpause_time_usec) = id(my_preweldpause_time_usec_number).state;
-      - component.update: my_display 
+      - rtttl.play:
+          rtttl: "two short:d=4,o=5,b=100:16e6,16e6"
 
 
   includes:
@@ -108,9 +92,9 @@ globals:
     # Weld.h stuff:
     
   - id: my_weld_time
-    type: unsigned int
+    type: float
     restore_value: no
-    initial_value: '42'
+    initial_value: '0'
 
   - id: my_preweld_time_usec
     type: unsigned int
@@ -124,9 +108,9 @@ globals:
 
   - id: my_weld_max_p
     # peak power
-    type: unsigned int
+    type: float
     restore_value: no
-    initial_value: '1234'
+    initial_value: '0'
 
 
 
@@ -136,9 +120,9 @@ globals:
     initial_value: '0'
 
   - id: my_weld_energy
-    type: unsigned int
+    type: float
     restore_value: no
-    initial_value: '123'
+    initial_value: '0'
 
   - id: my_weld_energy_target_intern
     type: float
@@ -186,6 +170,7 @@ number:
     max_value: 20
     step: 0.1
     optimistic: true
+    restore_value: yes   
     name: "Energy Target"
     on_value:
       then:
@@ -322,11 +307,17 @@ sensor:
                   ESP_LOGI("custom", "Initiation Auto Weld" );
               - rtttl.play:
                   rtttl: "two short:d=4,o=5,b=100:16e6,16e6"
+              # wait until buzzer finished
+              - while:
+                  condition:
+                    rtttl.is_playing      
+                  then:
+                  - delay: 0.05s
+
               - lambda: id(my_weld_request) = 1;
                   
-  
-  
 
+                
 
           
   - platform: adc
@@ -500,17 +491,17 @@ display:
     busy_pin: 21
     reset_pin: 19
     model: 1.54inv2
-    full_update_every: 20
+    full_update_every: 10
     rotation: 90
-    update_interval: 30 sec
+    update_interval: 10 sec
     lambda: |-
       // api disc https://esphome.io/api/display__buffer_8h.html
       // Topr Row_ Peek P and time  my_weld_time
-      it.printf(0, -4, id(dosis_sb_20),  "Peak: %dW",   id(my_weld_max_p));
-      it.printf(it.get_width(), -4, id(dosis_sb_20), TextAlign::TOP_RIGHT , "%d ms",   id(my_weld_time));
+      it.printf(0, -4, id(dosis_sb_20),  "Peak: %.0fW",   id(my_weld_max_p));
+      it.printf(it.get_width(), -4, id(dosis_sb_20), TextAlign::TOP_RIGHT , "%.1f ms",   id(my_weld_time));
 
       // show energy and target
-      it.printf(it.get_width()/2 +40, it.get_height()/2 +48, id(dosis_sb_48), TextAlign::BOTTOM_RIGHT , "%d",  id(my_weld_energy) );
+      it.printf(it.get_width()/2 +40, it.get_height()/2 +48, id(dosis_sb_48), TextAlign::BOTTOM_RIGHT , "%.1f",  id(my_weld_energy) );
       it.printf(it.get_width()/2 + 48, it.get_height()/2 +48 -10, id(dosis_sb_20), TextAlign::BOTTOM_LEFT , "J");
       
       it.printf(it.get_width()/2 +20, it.get_height()/2 +40, id(dosis_sb_20), TextAlign::CENTER_HORIZONTAL  , "Target E: %.1f J",   id(energy_target).state);
@@ -518,7 +509,7 @@ display:
       // draw the power curve
       
       // bottom row Temp / Batt_
-      it.printf(0, it.get_height() - 20, id(dosis_sb_20),  "%.1f°C  %.1f V",  id(mytempsens).state,   id(supply_volt).state);
+      it.printf(0, it.get_height() - 20, id(dosis_sb_20),  "%.1f°C  %.1f V",  id(mytempsens).state,   id(batt_plus_voltage).state);
       it.printf(it.get_width(), it.get_height() - 20, id(dosis_sb_20), TextAlign::RIGHT , "weld %d",   id(my_weld_count));
   
   
