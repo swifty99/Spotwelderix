@@ -10,14 +10,14 @@ esphome:
   name: ${plug_name}
   project:
     name: "kipping.spotwelderix"
-    version: "0.1.0"
+    version: "0.3.3"
   platform: ESP32
   board: nodemcu-32s  
   on_boot:
-    priority: 700 #switches available
+    priority: 200 #switches available
     then:
-      #- rtttl.play:
-      #    rtttl: "two short:d=4,o=5,b=100:16e6,16e6"
+      - rtttl.play:
+          rtttl: "two short:d=4,o=5,b=100:16e6,16e6"
       - switch.turn_on: power_on 
       - delay: 0.1sec    
       #- switch.turn_off: disp_reset
@@ -37,13 +37,7 @@ esphome:
       - lambda:  id(my_preweld_time_usec) = id(my_preweld_time_usec_number).state;  
       - lambda: id(my_preweldpause_time_usec) = id(my_preweldpause_time_usec_number).state;
       - component.update: my_display 
-      - delay: 100ms
-      - component.update: my_display 
-      - delay: 100ms
-      - component.update: my_display 
-      - delay: 100ms
-      - component.update: my_display 
-      - delay: 100ms
+
 
   includes:
     - my_welder.h
@@ -121,34 +115,20 @@ globals:
   - id: my_preweld_time_usec
     type: unsigned int
     restore_value: no
-    initial_value: '1000'
+    initial_value: '500'
 
   - id: my_preweldpause_time_usec
     type: unsigned int
     restore_value: no
-    initial_value: '800'
+    initial_value: '500'
 
   - id: my_weld_max_p
+    # peak power
     type: unsigned int
     restore_value: no
     initial_value: '1234'
 
-    
-  - id: my_weld_voltref_adj_0v
-    type: int
-    restore_value: yes   
 
-  - id: my_weld_voltref_adj_0_1v
-    type: int
-    restore_value: yes
-
-  - id: my_weld_currref_adj_1a
-    type: int
-    restore_value: yes   
-
-  - id: my_weld_currref_adj_10a
-    type: int
-    restore_value: yes
 
   - id: my_weld_count
     type: unsigned int
@@ -175,10 +155,28 @@ globals:
     type: int[30]
     restore_value: no
 
+  - id: raw_to_voltage_factor
+    type: float
+    restore_value: yes
+    initial_value: '0.005'
+
 
   # UI vars
 
 number:
+
+          
+  - platform: template
+    id:  measured_voltage
+    min_value: 11
+    max_value: 13
+    step: 0.1
+    optimistic: true
+    name: "Measured battery voltage (adjust to)"
+    on_value:
+      then:
+        #copy number to global to access it in my_welder.h
+        lambda:  id(raw_to_voltage_factor) = id(measured_voltage).state / id(probe_plus_voltage_raw).state;
 
 
         
@@ -198,8 +196,8 @@ number:
   - platform: template
     id:  my_preweld_time_usec_number
     min_value: 0
-    max_value: 25000
-    step: 250
+    max_value: 500
+    step: 10
     optimistic: true
     
     restore_value: yes   
@@ -285,7 +283,7 @@ sensor:
   - platform: adc
     pin: 32
     id: supply_volt
-    name: "Supply Voltage"
+    name: "Supply voltage"
     attenuation: 11db
     update_interval: 80ms
     filters:
@@ -293,7 +291,7 @@ sensor:
       - multiply: 7.866
       # * id(my_weld_voltref_adj); 
       - sliding_window_moving_average:
-          window_size: 4
+          window_size: 2
           send_every: 2        
       - or:
         - delta: 0.3
@@ -307,72 +305,62 @@ sensor:
     name: "Probe volt neg pole"
     attenuation: 11db
     update_interval: 200ms
+    unit_of_measurement: "V"
     filters:
-      - multiply: 6.35
+      - multiply: 6.44
       - sliding_window_moving_average:
           window_size: 3
           send_every: 2
-
-# configured only to set attenuation
-  - platform: adc
-    pin: 34
-    id: battadc
-    attenuation: 11db
-  - platform: adc
-    pin: 33
-    id: curradc
-    attenuation: 11db
-
+    on_value_range:
+      above: 10
+      then:
+        - if:
+            condition:
+              lambda: 'return id(auto_weld_enable).state;'
+            then:         
+              - lambda:  !lambda |-
+                  ESP_LOGI("custom", "Initiation Auto Weld" );
+              - rtttl.play:
+                  rtttl: "two short:d=4,o=5,b=100:16e6,16e6"
+              - lambda: id(my_weld_request) = 1;
+                  
+  
   
 
 
-  - platform: template
-    id: batt_volt_diff
-    name: "Probe Voltage Diff"
-    lambda: |-
-      float raw_adc_avg = (float) ( adc1_get_raw((adc1_channel_t)  ${ADC_CHANNEL_PROBE_PLUS} ) 
-      + adc1_get_raw((adc1_channel_t)  ${ADC_CHANNEL_PROBE_PLUS} ) 
-      + adc1_get_raw((adc1_channel_t)  ${ADC_CHANNEL_PROBE_PLUS} ) )/3;
-      //ESP_LOGI("custom", "Voldiff raw U: %f ",  raw_adc_avg );
-      
-      float p1 = 0;
-      float p2 = 0.1;
-      if (id(my_weld_voltref_adj_0_1v) - id(my_weld_voltref_adj_0v) == 0){
-        ESP_LOGE("custom", "Invalid calibration of Battery Voltage" );
-        return 0;
-      }
-      float slope = (p2 - p1) / (id(my_weld_voltref_adj_0_1v) - id(my_weld_voltref_adj_0v))  ;
-      float offset = p1- id(my_weld_voltref_adj_0v) * slope;
-      //ESP_LOGI("custom", "slope U: %f , offset: %f",  slope, offset );
-      //ESP_LOGI("custom", "voltdiff : %f",   raw_adc_avg * slope + offset );
-
-      return raw_adc_avg * slope + offset;
-      
-    update_interval: 2s
+          
+  - platform: adc
+    pin: 34
+    id: probe_plus_voltage_raw
+    #name: "Probe Voltage + RAW"
+    raw: true
+    attenuation: 11db    
+    update_interval: 1s
+    unit_of_measurement: "V"
 
   - platform: template
-    id: current
-    name: "current"
+    id: batt_plus_voltage
+    name: "Probe Voltage +"
     lambda: |-
+      return id(raw_to_voltage_factor)  * id(probe_plus_voltage_raw).state  ;
+      
+    update_interval: 1s
+    unit_of_measurement: "V"
 
-      float raw_adc_avg = (float) ( adc1_get_raw((adc1_channel_t)  ${ADCa_CHANNEL_CURR} ) 
-      + adc1_get_raw((adc1_channel_t)  ${ADCa_CHANNEL_CURR} ) 
-      + adc1_get_raw((adc1_channel_t)  ${ADCa_CHANNEL_CURR} ) )/3;
-      ESP_LOGI("custom", "Current raw A: %f ",  raw_adc_avg );
-      
-      float p1 = 0;
-      float p2 = 10;
-      if (id(my_weld_currref_adj_10a)  == 0){
-        ESP_LOGE("custom", "Invalid calibration of Battery Current" );
-        return 0;}
-      
-      float slope = (p2 - p1) / (id(my_weld_currref_adj_10a) )  ;
-      float offset = 0 * slope;
-      ESP_LOGI("custom", "slope I: %f , offset: %f",  slope, offset );
 
-      return raw_adc_avg * slope + offset;
-      
+# configured only to set attenuation
+  - platform: adc
+    pin: 33
+    id: curradc
+    name: current
+    attenuation: 11db
+    raw: true
+    unit_of_measurement: "A"
+    filters:
+      - multiply: 0.3382
     update_interval: 2s
+  
+
 
 
 
@@ -443,65 +431,38 @@ binary_sensor:
 button:
 
   # Calibration "buttons to adjust ADC values"
-  - platform: template
-    name: "Probe shorted"
-    id: calibrate_volt_0v
-    on_press:
-      - lambda: |-
-          id(my_weld_voltref_adj_0v) = ( adc1_get_raw((adc1_channel_t)   ${ADC_CHANNEL_PROBE_PLUS} ) 
-          + adc1_get_raw((adc1_channel_t)   ${ADC_CHANNEL_PROBE_PLUS} ) 
-          +adc1_get_raw((adc1_channel_t)   ${ADC_CHANNEL_PROBE_PLUS} ) )/3;
-          ESP_LOGI("custom", "Raw ADC voltage 1V set to: %d",  id(my_weld_voltref_adj_0v) );
-
-
-
-  - platform: template
-    name: "voltage on probe 0.1"
-    id: calibrate_volt_01v
-    on_press:
-      - lambda: |-
-          id(my_weld_voltref_adj_0_1v) = ( adc1_get_raw((adc1_channel_t)   ${ADC_CHANNEL_PROBE_PLUS} ) 
-          + adc1_get_raw((adc1_channel_t)   ${ADC_CHANNEL_PROBE_PLUS} ) 
-          +adc1_get_raw((adc1_channel_t)   ${ADC_CHANNEL_PROBE_PLUS} ) )/3;
-          ESP_LOGW("custom", "Raw ADC voltage 0.1V set to: %d",  id(my_weld_voltref_adj_0_1v) );
-
-
-
-
-
-  - platform: template
-    name: "Current set to 10A"
-    id: calibrate_amps_10a
-    on_press:
-      - lambda: |-
-          // reconfigure ADC to get more accurate 10A reading
-          id(my_weld_currref_adj_10a) = ( adc1_get_raw((adc1_channel_t)   ${ADCa_CHANNEL_CURR} ) 
-          + adc1_get_raw((adc1_channel_t)   ${ADCa_CHANNEL_CURR} ) 
-          +adc1_get_raw((adc1_channel_t)   ${ADCa_CHANNEL_CURR} ) )/3;  
-          ESP_LOGW("custom", "Raw ADC current 10A set to: %d",  id(my_weld_currref_adj_10a) );
-
-
-
-
-
-
+#  - platform: template
+#    name: "Calibrate Step 1: Probe Shorted"
+#    id: calibrate_volt_0v
 
   - platform: template
     #inverted: True
-    id: weld
-    name: "Weld it!"  
+    id: welder
+    name: "Weld Now!"  
+    on_press:
+      lambda: id(my_weld_request) = 1;
       
 
 
-
-
 switch:
-
   - platform: gpio
     pin: 22
     #inverted: True
     id: power_on
     name: "Power"  
+
+  - platform: gpio
+    pin: 27
+    #inverted: True
+    id: weld_raw
+    #name: "Weld it! RAW!!!"  
+    # do not remove, needed to set pin27 as output
+
+  - platform: template
+    name: "Auto Weld"
+    optimistic: true
+    id: auto_weld_enable
+
 
 
 
@@ -539,7 +500,7 @@ display:
     busy_pin: 21
     reset_pin: 19
     model: 1.54inv2
-    full_update_every: 5
+    full_update_every: 20
     rotation: 90
     update_interval: 30 sec
     lambda: |-

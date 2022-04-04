@@ -1,6 +1,8 @@
 #include "esphome.h"
 
 
+
+
 #include "esphome/core/component.h"
 //#include "esphome/core/esphal.h"
 #include "esphome/core/defines.h"
@@ -10,7 +12,7 @@
 const int ADC_CHANNEL_CURR = 5;
 const int ADC_CHANNEL_PROBE_PLUS = 6;
 const int ADC_CHANNEL_PROBE_NEG = 7;
-
+const float RAW2AMPS = 0.3382;  // raw 170 is 57,5 A
 class MyWelder : public PollingComponent, public BinarySensor  {
  public:
 
@@ -27,8 +29,11 @@ class MyWelder : public PollingComponent, public BinarySensor  {
 
     const int coutPreWeldLoop = 100;
 
-    uint32_t time_usec_preweld, time_usec_pause, time_use_weld, time_usec_start, time_weldstep;
+    uint32_t time_usec_preweld, time_usec_pause, time_use_weld, time_usec_start, time_weldstep, timeWeldStepIntervall;
+    timeWeldStepIntervall = 0;
 
+    float raw2VoltNeg = id(raw_to_voltage_factor) ;
+    float raw2VoltPos = id(raw_to_voltage_factor) ;
 
     int raw_curr[coutPreWeldLoop]; 
     int raw_Uplus[coutPreWeldLoop]; 
@@ -61,6 +66,8 @@ class MyWelder : public PollingComponent, public BinarySensor  {
 
       raw_curr[sampleCount] = adc1_get_raw((adc1_channel_t)  ADC_CHANNEL_CURR);
       raw_Uplus[sampleCount] = adc1_get_raw((adc1_channel_t)  ADC_CHANNEL_PROBE_PLUS );
+      raw_Uneg[sampleCount] = adc1_get_raw((adc1_channel_t)  ADC_CHANNEL_PROBE_NEG );
+      
       sampleCount++;
 
 
@@ -80,6 +87,7 @@ class MyWelder : public PollingComponent, public BinarySensor  {
 
         raw_curr[sampleCount] = adc1_get_raw((adc1_channel_t)  ADC_CHANNEL_CURR);
         raw_Uplus[sampleCount] = adc1_get_raw((adc1_channel_t)  ADC_CHANNEL_PROBE_PLUS );
+        raw_Uneg[sampleCount] = adc1_get_raw((adc1_channel_t)  ADC_CHANNEL_PROBE_NEG );
         rawEnergy[sampleCount] = 0;
         sampleCount++;
 
@@ -101,14 +109,17 @@ class MyWelder : public PollingComponent, public BinarySensor  {
       uint16_t weldEnergyTarget01Joule = (uint16_t) (id(my_weld_energy_target_intern) * 10); //rescale to 01
 
       // calculate the raw equivalent E = U * I * time
-      uint32_t energyTargetRaw = ( id(my_weld_voltref_adj_0_1v) * id(my_weld_currref_adj_10a) * weldEnergyTarget01Joule ) /10 /10; // rescale back use 10V scaling prelim
+      //uint32_t energyTargetRaw = ( id(my_weld_voltref_adj_0_1v) * id(my_weld_currref_adj_10a) * weldEnergyTarget01Joule ) /10 /10; // rescale back use 10V scaling prelim
+      uint32_t energyTargetRaw = (uint32_t) ( (float) id(my_weld_energy_target_intern) / RAW2AMPS / raw2VoltNeg ); // rescale to raw target
       uint32_t energyWeldRaw  = 0;
+
 
       for (int i = 0; i< preweld_intervalpause_count  && sampleCount < coutPreWeldLoop
            &&  micros() - time_usec_start < time_usec_pause_target; i++){
 
         raw_curr[sampleCount] = adc1_get_raw((adc1_channel_t)  ADC_CHANNEL_CURR);
         raw_Uplus[sampleCount] = adc1_get_raw((adc1_channel_t)  ADC_CHANNEL_PROBE_PLUS );
+        raw_Uneg[sampleCount] = adc1_get_raw((adc1_channel_t)  ADC_CHANNEL_PROBE_NEG );
         rawEnergy[sampleCount] = 0;
         sampleCount++;
       }
@@ -140,14 +151,15 @@ class MyWelder : public PollingComponent, public BinarySensor  {
       
         raw_curr[sampleCount] = adc1_get_raw((adc1_channel_t)  ADC_CHANNEL_CURR);
         raw_Uplus[sampleCount] = adc1_get_raw((adc1_channel_t)  ADC_CHANNEL_PROBE_PLUS );
+        raw_Uneg[sampleCount] = adc1_get_raw((adc1_channel_t)  ADC_CHANNEL_PROBE_NEG );
 
-        // get timediff
+        // get timeWeldStepIntervall
         // get power RAW and multiply timeframe
         // integrate 
         uint32_t timeSample = micros();
-        uint32_t timeDiff = timeSample - time_weldstep;
+        timeWeldStepIntervall = timeSample - time_weldstep;
         time_weldstep = timeSample;
-        rawEnergy[sampleCount] =  (uint16_t)( (uint32_t) raw_curr[sampleCount] * (uint32_t) raw_Uplus[sampleCount] * timeDiff / 1000000);
+        rawEnergy[sampleCount] =  (uint16_t)( (uint32_t) raw_curr[sampleCount] * (uint32_t) raw_Uplus[sampleCount] * timeWeldStepIntervall / 1000000);
         energyWeldRaw += rawEnergy[sampleCount];
 
         sampleCount++;          
@@ -166,23 +178,22 @@ class MyWelder : public PollingComponent, public BinarySensor  {
 
       time_use_weld = micros() - time_usec_start ;
 
-
+      
 
       for (int i = 0; i< sampleCount ; i++){
 
 
       
-        ESP_LOGI("custom", "E_raw: %d I_raw: %d   U_raw: %d  ", rawEnergy[i], raw_curr[i], raw_Uplus[i]);
+        //ESP_LOGI("custom", "E_raw: %d I_raw: %d   U_raw: %d  ", rawEnergy[i], raw_curr[i], raw_Uplus[i]);
+        ESP_LOGI("custom", "Amps: %.1f   U probe+: %.2f , U probe-: %.2f ", (float)raw_curr[i] * RAW2AMPS, (float) raw_Uplus[i] * raw2VoltNeg,  (float) raw_Uneg[i] * raw2VoltPos );
 
       }
 
-
-      ESP_LOGI("custom", "slope:  U %d   I: %d",   id(my_weld_voltref_adj_0_1v), id(my_weld_currref_adj_10a));
-      ESP_LOGI("custom", "energyTargetRaw: %d   total count: %d",   (energyTargetRaw), sampleCount);
+      ESP_LOGI("custom", "energyTargetRaw: %d , energyWeldRaw: %d ,   total count: %d",   (energyTargetRaw), energyWeldRaw, sampleCount);
       //ESP_LOGI("custom", "targetE : %1.f   target01: %d",   (id(my_weld_energy_target_intern)), weldEnergyTarget01Joule);
 
-      ESP_LOGI("custom", "Preweld: %.1f pause: %.1f weld: %.1f", (float) (time_usec_preweld)/1000
-      , (float) (time_usec_pause)/1000, (float) (time_use_weld)/1000 );
+      ESP_LOGI("custom", "Preweld: %.1f pause: %.1f weld: %.1f , stepduration: %d ", (float) (time_usec_preweld)/1000
+      , (float) (time_usec_pause)/1000, (float) (time_use_weld)/1000, timeWeldStepIntervall );
 
  
       // ESP_LOGI("custom", "Value of my number: %f", (float) my_global_weld_powerflow->value()[2] );
