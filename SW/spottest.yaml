@@ -23,6 +23,7 @@ esphome:
           rtttl: "two short:d=4,o=5,b=100:16e6,16e6"
 
 
+
   includes:
     - my_welder.h
 
@@ -73,6 +74,11 @@ time:
     # servers:
     #   - 0.de.pool.ntp.org
     #   - 3.de.pool.ntp.org
+    on_time:
+      # Every 5 minutes
+      - seconds: /2
+        then:
+          - script.execute: error_handler
 
 dallas:
   - pin: 13
@@ -112,7 +118,11 @@ globals:
     restore_value: no
     initial_value: '0'
 
-
+  - id: my_test
+    # peak power
+    type: float
+    restore_value: yes
+    initial_value: '0'
 
   - id: my_weld_count
     type: unsigned int
@@ -144,6 +154,29 @@ globals:
     restore_value: yes
     initial_value: '0.005'
 
+
+  - id: error_handler_update_req
+    type: int
+
+  - id: error_handler_error_active
+    type: int[100]
+    
+
+    # writes the most prior error to text me
+script:
+  - id: error_handler
+    then:
+      - lambda: |-
+          // only update text if something happende
+          if (id(error_handler_update_req) == 0) return;
+
+          // check individual errors
+          if (id(error_handler_error_active)[0] == 1)  id(error_handler_text).publish_state("E: Calibrate Voltage");
+          else
+            id(error_handler_text).publish_state("No Error");
+          id(error_handler_update_req) =0;
+
+    
 
   # UI vars
 
@@ -213,21 +246,6 @@ number:
 
 
 
-  - platform: template
-    id:  my_ui_update_rq
-    min_value: 0
-    max_value: 1
-    step: 1
-    optimistic: true
-    name: "Update UI Now"   
-    on_value_range:
-      above: 0
-      then:
-        - component.update: my_display 
-        - number.set:
-            id: my_ui_update_rq
-            value: 0
-        - logger.log: update rq reset
 
         
 
@@ -333,6 +351,11 @@ sensor:
     id: batt_plus_voltage
     name: "Probe Voltage +"
     lambda: |-
+      // if nan and not already set run it
+      if (isnan(id(raw_to_voltage_factor)) && id(error_handler_error_active)[0]  ==0) {
+        id(error_handler_error_active)[0]  =1;
+        id(error_handler_update_req) = 1;
+      }
       return id(raw_to_voltage_factor)  * id(probe_plus_voltage_raw).state  ;
       
     update_interval: 1s
@@ -466,7 +489,12 @@ output:
 rtttl:
   output: rtttl_out
 
-
+text_sensor:
+  - platform: template
+    id: error_handler_text
+    name: "Error message"
+    on_value:         
+      - component.update: my_display 
 
   
 font:
@@ -500,6 +528,8 @@ display:
       it.printf(0, -4, id(dosis_sb_20),  "Peak: %.0fW",   id(my_weld_max_p));
       it.printf(it.get_width(), -4, id(dosis_sb_20), TextAlign::TOP_RIGHT , "%.1f ms",   id(my_weld_time));
 
+
+
       // show energy and target
       it.printf(it.get_width()/2 +40, it.get_height()/2 +48, id(dosis_sb_48), TextAlign::BOTTOM_RIGHT , "%.1f",  id(my_weld_energy) );
       it.printf(it.get_width()/2 + 48, it.get_height()/2 +48 -10, id(dosis_sb_20), TextAlign::BOTTOM_LEFT , "J");
@@ -512,6 +542,9 @@ display:
       it.printf(0, it.get_height() - 20, id(dosis_sb_20),  "%.1f°C  %.1f V",  id(mytempsens).state,   id(batt_plus_voltage).state);
       it.printf(it.get_width(), it.get_height() - 20, id(dosis_sb_20), TextAlign::RIGHT , "weld %d",   id(my_weld_count));
   
-  
+      // optinal print error message 
+      std::string val = id(error_handler_text).state;
+      it.printf(it.get_width()/2, 40, id(dosis_sb_20), TextAlign::CENTER , "%s",  val.c_str() );
+      
 
 
