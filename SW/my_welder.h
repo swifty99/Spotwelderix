@@ -2,7 +2,6 @@
 
 
 
-
 #include "esphome/core/component.h"
 //#include "esphome/core/esphal.h"
 #include "esphome/core/defines.h"
@@ -27,7 +26,7 @@ class MyWelder : public PollingComponent, public BinarySensor  {
   }
   void update() override {
 
-    const int coutPreWeldLoop = 100;
+    const int countWeldLoop = 250;
 
     uint32_t time_usec_preweld, time_usec_pause, time_use_weld, time_usec_start, time_weldstep, timeWeldStepIntervall;
     timeWeldStepIntervall = 0;
@@ -35,10 +34,10 @@ class MyWelder : public PollingComponent, public BinarySensor  {
     float raw2VoltNeg = id(raw_to_voltage_factor) ;
     float raw2VoltPos = id(raw_to_voltage_factor) ;
 
-    int raw_curr[coutPreWeldLoop]; 
-    int raw_Uplus[coutPreWeldLoop]; 
-    int raw_Uneg[coutPreWeldLoop]; 
-    uint16_t rawEnergy[coutPreWeldLoop]; 
+    int raw_curr[countWeldLoop]; 
+    int raw_Uplus[countWeldLoop]; 
+    int raw_Uneg[countWeldLoop]; 
+    uint16_t rawEnergy[countWeldLoop]; 
 
     bool state = false;
     if (my_weld_request->value() == 1)
@@ -82,7 +81,7 @@ class MyWelder : public PollingComponent, public BinarySensor  {
 
       // count as safetey measure
 
-      for (int i = 0; i< preweld_interval_count && sampleCount < coutPreWeldLoop 
+      for (int i = 0; i< preweld_interval_count && sampleCount < countWeldLoop 
            &&  micros() - time_usec_start < time_usec_preweld_target; i++){
 
         raw_curr[sampleCount] = adc1_get_raw((adc1_channel_t)  ADC_CHANNEL_CURR);
@@ -99,6 +98,16 @@ class MyWelder : public PollingComponent, public BinarySensor  {
     
       time_usec_preweld = micros() - time_usec_start ;
       
+      // calculate resistance ,average last three dI/dU, mOhms
+      if (sampleCount > 4 && ((float)raw_curr[sampleCount-2] + (float)raw_curr[sampleCount-3] +(float)raw_curr[sampleCount-1])){
+        id(my_preweld_resistance) =
+              (((float)raw_Uplus[sampleCount-2] + (float)raw_Uplus[sampleCount-3] + (float)raw_Uplus[sampleCount-1]) * raw2VoltNeg /
+              (((float)raw_curr[sampleCount-2] + (float)raw_curr[sampleCount-3] +(float)raw_curr[sampleCount-1]) * RAW2AMPS)
+               *1000) - id(my_probe_resistance);
+
+      } else{
+        id(my_preweld_resistance) = 100;
+      }
 
       // ----------------------  pause   --------------------
 
@@ -110,7 +119,7 @@ class MyWelder : public PollingComponent, public BinarySensor  {
       float energyWeldRaw  = 0;
 
 
-      for (int i = 0; i< preweld_intervalpause_count  && sampleCount < coutPreWeldLoop
+      for (int i = 0; i< preweld_intervalpause_count  && sampleCount < countWeldLoop
            &&  micros() - time_usec_start < time_usec_pause_target; i++){
 
         raw_curr[sampleCount] = adc1_get_raw((adc1_channel_t)  ADC_CHANNEL_CURR);
@@ -120,7 +129,7 @@ class MyWelder : public PollingComponent, public BinarySensor  {
         sampleCount++;
       }
 
-      if (sampleCount >= (coutPreWeldLoop -1)){
+      if (sampleCount >= (countWeldLoop -1)){
 
         ESP_LOGE("custom", "Max time overflow");
         
@@ -142,7 +151,7 @@ class MyWelder : public PollingComponent, public BinarySensor  {
       // Weld ON "hard" IO operation, avoid esphome interaction, HAL and so on. Way too slow!
       REG_WRITE(GPIO_OUT_W1TS_REG, BIT27);
       
-      while  ( sampleCount < coutPreWeldLoop && energyWeldRaw < energyTargetRaw) {
+      while  ( sampleCount < countWeldLoop && energyWeldRaw < energyTargetRaw) {
 
       
         raw_curr[sampleCount] = adc1_get_raw((adc1_channel_t)  ADC_CHANNEL_CURR);
@@ -168,13 +177,24 @@ class MyWelder : public PollingComponent, public BinarySensor  {
       REG_WRITE(GPIO_OUT_W1TC_REG, BIT27);
 
 
-  
-
-
 
       time_use_weld = micros() - time_usec_start ;
 
-      
+      // calculate resistance ,average last three dI/dU, mOhms
+      if (sampleCount > 4 && ((float)raw_curr[sampleCount-2] + (float)raw_curr[sampleCount-3] +(float)raw_curr[sampleCount-1])){
+        id(my_weld_resistance) =
+              (((float)raw_Uplus[sampleCount-2] + (float)raw_Uplus[sampleCount-3] + (float)raw_Uplus[sampleCount-1]) * raw2VoltNeg /
+              (((float)raw_curr[sampleCount-2] + (float)raw_curr[sampleCount-3] +(float)raw_curr[sampleCount-1]) * RAW2AMPS)
+               *1000) - id(my_probe_resistance);
+
+      } else{
+        id(my_weld_resistance) = 100;
+      }
+
+      // let supply settle 1msec
+      delay(1);
+
+
       // find max P
       uint32_t max_p_raw =0;
 
@@ -189,9 +209,11 @@ class MyWelder : public PollingComponent, public BinarySensor  {
 
       }
       
+
+      
       
       my_weld_max_p->value() = (float) max_p_raw *  RAW2AMPS  * raw2VoltNeg;
-      ESP_LOGI("custom", "Max Power: %.1f",  my_weld_max_p->value() );
+      ESP_LOGI("custom", "Max Power: %.1f , Rpreweld: %.1f, Rweld: %.1f",  my_weld_max_p->value(), id(my_preweld_resistance), id(my_weld_resistance) );
       ESP_LOGI("custom", "last Power: %.1f",  (float)raw_curr[sampleCount] * RAW2AMPS *(float) raw_Uplus[sampleCount] * raw2VoltNeg );
 
       ESP_LOGI("custom", "energyTargetRaw: %.1f , energyWeldRaw: %.3f ,   total count: %d",   (energyTargetRaw), energyWeldRaw, sampleCount);

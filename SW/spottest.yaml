@@ -133,6 +133,21 @@ globals:
     type: float
     restore_value: no
     initial_value: '0'
+    
+  - id: my_preweld_resistance
+    type: float
+    restore_value: no
+    initial_value: '0'
+
+  - id: my_weld_resistance
+    type: float
+    restore_value: no
+    initial_value: '0'
+
+  - id: my_probe_resistance
+    type: float
+    restore_value: no
+    initial_value: '4'
 
   - id: my_weld_energy_target_intern
     type: float
@@ -165,6 +180,7 @@ globals:
     # writes the most prior error to text me
 script:
   - id: error_handler
+  
     then:
       - lambda: |-
           // only update text if something happende
@@ -176,7 +192,12 @@ script:
             id(error_handler_text).publish_state("No Error");
           id(error_handler_update_req) =0;
 
-    
+  - id: shutdown_script
+    then:
+      - delay: 1 sec
+      # display goodbye
+      - switch.turn_off: power_on 
+      - button.press: shutdown_button     
 
   # UI vars
 
@@ -199,9 +220,9 @@ number:
         
   - platform: template
     id:  energy_target
-    min_value: 0.1
-    max_value: 20
-    step: 0.1
+    min_value: 1
+    max_value: 100
+    step: 1
     optimistic: true
     restore_value: yes   
     name: "Energy Target"
@@ -214,8 +235,8 @@ number:
   - platform: template
     id:  my_preweld_time_usec_number
     min_value: 0
-    max_value: 500
-    step: 10
+    max_value: 2000
+    step: 100
     optimistic: true
     
     restore_value: yes   
@@ -455,7 +476,15 @@ button:
     name: "Weld Now!"  
     on_press:
       lambda: id(my_weld_request) = 1;
-      
+
+  - platform: shutdown
+    id: shutdown_button
+    on_press:
+      - switch.turn_off: power_on
+
+  - platform: template
+    name: "Shutdown Spotwelderix"
+    id: shutdown_template    
 
 
 switch:
@@ -464,6 +493,8 @@ switch:
     #inverted: True
     id: power_on
     name: "Power"  
+    on_turn_off:
+      - button.press: shutdown_button
 
   - platform: gpio
     pin: 27
